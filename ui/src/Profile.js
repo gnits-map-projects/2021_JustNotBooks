@@ -136,7 +136,7 @@ class Profile extends Component {
 
         
         <input type="submit" value="Edit Details" onClick={this.handleEdit}></input>
-        <input type="submit" value="Edit Password" onClick={this.handleEditPassword}></input>
+        <input type="submit" value="Change Password" onClick={this.handleEditPassword}></input>
         <input type="submit" value="Upload" onClick={this.handleUpload}></input>
       </div>
       </div>);
