@@ -77,7 +77,7 @@ public class JPAItemRepository implements ItemRepository {
 
         String t=today.toString();
         //System.out.println("Today's Local date : " + t);
-        List<Item> items = em.createQuery("select i from Item i where status=:s and not owner=:owner and category=:cat and fromDate<=: t and toDate>=: t", Item.class).setParameter("t",t).setParameter("s",s).setParameter("owner",owner).setParameter("cat",cat).getResultList();
+        List<Item> items = em.createQuery("select i from Item i where status=:s and not owner=:owner and category=:cat and toDate>=: t", Item.class).setParameter("t",t).setParameter("s",s).setParameter("owner",owner).setParameter("cat",cat).getResultList();
         return items.stream();
     }
     @Override
