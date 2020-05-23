@@ -139,7 +139,7 @@ class Seller extends React.Component {
                     <td>{item.category}</td>
                     <td >{item.address}</td>
                     <td >{item.status}</td>
-                    <td><button onClick={() => this.handleDelete(sessionStorage.getItem("name"),item.id)} > Delete </button></td><td></td>
+                    <td></td><td></td>
                      </tr>
             );
             }
@@ -165,13 +165,13 @@ class Seller extends React.Component {
         var date2 = new Date(toDate); 
   
 // To calculate the time difference of two dates 
-        var Difference_In_Time = date2.getTime() - date1.getTime(); 
+        var Difference_In_Time = date1.getTime() - date2.getTime(); 
   
 // To calculate the no. of days between two dates 
         var pay = Difference_In_Time / (1000 * 3600 * 24);
         var body=
         {
-          customerNote:"You are charged with penalty of "+pay*10+" because of late return",
+          customerNote:"You are charged with penalty of Rs."+pay*10+" because of late return",
           ownerNote:"Please confirm Payment",
           owner:owner,
           customer:customer
@@ -408,7 +408,7 @@ class Seller extends React.Component {
               <div class="admin">
                 <Nav/>
               
-            <h1>Items Uploaded</h1>
+            <h1><b>Items Uploaded</b></h1>
             <div className="uploadTable">
                    
                    <div>
@@ -429,7 +429,7 @@ class Seller extends React.Component {
                 </div>
                 <br></br>
                 <br></br>
-                <h1>Items Taken</h1>
+                <h1><b>Items Taken</b></h1>
                   <div className="uploadTable">
                     
                     <table id="product" class="w3-table-all">
