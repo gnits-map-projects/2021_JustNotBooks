@@ -119,6 +119,7 @@ export class Login extends React.Component {
 				</form>
 
 				<a href ="/">Create an account</a>
+        <div><a href ="/forgot" >Forgot Password?</a></div>
 			</div>
 		);
 	}

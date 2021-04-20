@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import { Slide } from 'react-slideshow-image'
-import slide1 from './images/prooo3.jpg';
-//import slide2 from './ven-2.jpeg';
+import slide1 from './images/exc.jpeg';
+import slide2 from './images/ed1.jpg';
 import "./Home.css"
-import slide2 from './images/image1.png'
+
+import slide3 from './images/bg3.jpeg'
+import slide4 from './images/all.png'
+import slide5 from './images/calcu.jpeg'
+
 import "./index.css"
 import Nav from "./Nav.js"
 
@@ -12,7 +16,7 @@ const properties = {
   transitionDuration: 500,
   infinite: true,
   indicators: true,
-  arrows: true
+  arrows: false
 }
 
 
@@ -20,23 +24,34 @@ const Home= () => {
   return (
     <div>
     <Nav/>
-      <div className="containerSlide">
+      <div className="containerSlide" id="a">
           <Slide {...properties}>
-              <div  className="slideshow">
+          <div  className="slideshow">
+                  <div><img src={slide1} /></div>
+              </div>
+          <div  className="slideshow">
                   <div><img src={slide2} /></div>
               </div>
+              
               <div className="slideshow" >
-                  <div><img src={slide1}/></div>
+                  <div><img src={slide3}/></div>
+              </div>
+              
+              <div className="slideshow" >
+                  <div><img src={slide4}/></div>
+              </div>
+              
+              <div className="slideshow" >
+                  <div><img src={slide5}/></div>
               </div>
           </Slide>
-          <div className="about"><b><h2>About</h2></b>
+        </div>
+        <div className="about" id="b"><b><h2>About</h2></b>
           <p>JustNotBooks marketplace is a platform for buying, selling, borrowing and donating services and goods such as electronics, items,
 
           Every academic year, a lot of things (books, notes, drafters, mobile and computer accessories, etc) gets exchanged among students within different colleges and schools.
           Extending the sharing phenomenon to happen across different institutions in the city. 
             </p></div>
-
-      </div>
       </div>
   )
 }

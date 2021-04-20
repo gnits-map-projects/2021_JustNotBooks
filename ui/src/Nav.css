@@ -1,46 +1,43 @@
 .notification {
-    background-color: black;
-    color: black;
-    text-decoration: none;
-    padding: 15px 26px;
-    position: relative;
-    display: inline-block;
-    border-radius: 2px;
-    float:right;
-    opacity: 1;
-  }
-  
-  .notification:hover {
-    /* background-color:grey;
-    color:black; */
-    opacity: 0.5;
+  background-color:rgb(243, 230, 159);
+  color: black;
+  text-decoration: none;
+  padding: 15px 26px;
+  position: relative;
+  display: inline-block;
+  border-radius: 2px;
+  float:right;
+  opacity: 1;
+}
 
-
-  }
-  a{
-    opacity: 1;
-  }
-  a:hover{
-    /* background-color:grey;
-    color:black; */
-    opacity: 0.2;
-  }
+.notification:hover {
+  /* background-color:grey;
+  color:black; */
+  opacity: 0.5;
  
-  .notification .badge {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    padding: 5px 10px;
-    border-radius: 50%;
-    background: red;
-    color: black;
-  }
-  .btnstyle2{
-    padding: 0px;
-    font-size: 15px;
-    text-align: center;
-    cursor: pointer;
-    color: black;
-    background-color: darkgrey;
-    border-radius: 0px;
-  }
+}
+img 
+ {
+     height:21px;
+     width:21px;
+ }
+a{
+  opacity: 1;
+}
+a:hover{
+  background-color:white;
+  color:black;
+  
+  /*opacity: 0.2*/;
+}
+
+
+.notification .badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background: red;
+  color: black;
+}

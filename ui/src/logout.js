@@ -9,9 +9,15 @@ class logout extends React.Component{
         //UserProfile.clear();
     }
     render(){
-        return(
-            <Redirect to="/login"/>
-        );
-    }
+        var ans = window.confirm("Are you sure to logout? ");
+        if (ans==true)
+            return(<Redirect to="/login"/>);
+        else
+            return(<Redirect to="/home"/>);
+                          
+        }
+       
 }
-export default logout
+
+export default logout;
+

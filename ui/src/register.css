@@ -1,8 +1,8 @@
 .register{
-    margin-top:8%;
-    margin-left:40%;
-    background-color: lightgray;
-    padding:  20px;
+    margin-left: 5%;
+    margin-right:50%;
+    background-color: rgb(243, 222, 196);
+    padding:  10px;
     box-shadow: 5px 5px 5px grey;
     opacity: 0.9;
 }

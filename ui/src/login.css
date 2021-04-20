@@ -1,8 +1,11 @@
 .login{
-    margin-top:10%;
-    margin-left:40%;
-    background-color:lightgray;
-    padding:  20px;
-    box-shadow: 5px 5px 5px grey;
-    opacity: 0.9; 
-}
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 5%;
+    margin-right:50%;
+     background-color:rgb(243, 222, 196);
+     padding:  20px;
+     box-shadow: 5px 5px 5px grey;
+     opacity: 0.9; 
+ }
+ 
