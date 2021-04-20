@@ -36,3 +36,13 @@ button{
    
    transform: scale(1.01) ;
 }
+
+
+.btnstyle{
+  width:100%;
+  display: block;
+  border: none;
+  padding: 14px 28px;
+  font-size: 16px;
+  text-align: center;
+}

@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-//import { Container } from "react-bootstrap";
-//import Col from 'react-bootstrap/Col'
-//import Row from 'react-bootstrap/Row'
+import { Col, Row, Container } from "react-bootstrap";
 //import UserProfile from "./UserProfile";
 import Nav from "./Nav.js"
 import "./Buyer.css"
@@ -31,7 +29,11 @@ class Buyer extends React.Component {
            data:[],
            st:'buy',
            takenAt:'',
+           disabled1: true,
+           disabled2: false,
+           disabled3: false,
          }
+         
         var today;
         today=new Date();
         var dd = today.getDate(); 
@@ -46,7 +48,7 @@ class Buyer extends React.Component {
         } 
         this.state.takenAt = yyyy+'-'+mm+'-'+dd; 
        }
-   
+       
     handleBuy(customer,id){
 
       var s=this.state.s;
@@ -156,7 +158,7 @@ class Buyer extends React.Component {
   
   
     }
-    
+   
     renderResultRows(){
       
         let s=this.state.s
@@ -189,12 +191,18 @@ class Buyer extends React.Component {
             <div class="admin">
             <Nav/>
       
-
-        <button onClick={()=>{this.setState({st:"buy"})}} > Buy </button>
-        <button onClick={()=>{this.setState({st:"borrow"})}} > Borrow </button>
-        <button onClick={()=>{this.setState({st:"donate"})}} > Donation </button>
-              
-              <h1>Buy</h1>
+            <Row>
+						    <Col lg='4'>
+                    <button className="btnstyle" onClick={()=>{this.setState({st:"buy",disabled1:true,disabled2:false,disabled3:false})}} style={{"color": this.state.disabled1 ? "white":"black",backgroundColor:this.state.disabled1 ? "darkorange":"coral"}}> <b>Buy</b> </button>
+						    </Col>
+						    <Col lg='4'>
+						        <button className="btnstyle" onClick={()=>{this.setState({st:"borrow",disabled1:false,disabled2:true,disabled3:false})}} style={{"color": this.state.disabled2 ? "white":"black",backgroundColor:this.state.disabled2 ? "darkorange":"coral"}}> <b>Borrow</b> </button>
+						    </Col>
+						    <Col lg='4'>
+                    <button className="btnstyle" onClick={()=>{this.setState({st:"donate",disabled1:false,disabled2:false,disabled3:true})}} style={{"color": this.state.disabled3 ? "white":"black",backgroundColor:this.state.disabled3 ? "darkorange":"coral"}}><b>Donation</b> </button>
+						      </Col>
+						</Row><br></br>
+  
                    <div className='Table'>
                    <table id="product" class="w3-table-all">
                       <th>Name</th>
@@ -220,11 +228,19 @@ class Buyer extends React.Component {
         <div class="admin">
         <Nav/>
     
-    <button onClick={()=>{this.setState({st:"buy"})}} > Buy </button>
-    <button onClick={()=>{this.setState({st:"borrow"})}} > Borrow </button>
-    <button onClick={()=>{this.setState({st:"donate"})}} > Donation </button>
+        <Row>
+						    <Col lg='4'>
+                    <button className="btnstyle" onClick={()=>{this.setState({st:"buy",disabled1:true,disabled2:false,disabled3:false})}} style={{"color": this.state.disabled1 ? "white":"black",backgroundColor:this.state.disabled1 ? "darkorange":"coral"}}> <b>Buy</b> </button>
+						    </Col>
+						    <Col lg='4'>
+						        <button className="btnstyle" onClick={()=>{this.setState({st:"borrow",disabled1:false,disabled2:true,disabled3:false})}} style={{"color": this.state.disabled2 ? "white":"black",backgroundColor:this.state.disabled2 ? "darkorange":"coral"}}> <b>Borrow</b> </button>
+						    </Col>
+						    <Col lg='4'>
+                    <button className="btnstyle" onClick={()=>{this.setState({st:"donate",disabled1:false,disabled2:false,disabled3:true})}} style={{"color": this.state.disabled3 ? "white":"black",backgroundColor:this.state.disabled3 ? "darkorange":"coral"}}><b>Donation</b> </button>
+						      </Col>
+						</Row><br></br>
           
-          <h1>Borrow</h1>
+          
            <div className='Table'>
            <table id="product" class="w3-table-all">
                 <th>Name</th>
@@ -283,12 +299,18 @@ class Buyer extends React.Component {
             <Nav/>
          
 
-        <button onClick={()=>{this.setState({st:"buy"})}} > Buy </button>
-        <button onClick={()=>{this.setState({st:"borrow"})}} > Borrow </button>
-        <button onClick={()=>{this.setState({st:"donate"})}} > Donation </button>
-              
-              
-              <h1>Donation</h1>
+            <Row>
+						    <Col lg='4'>
+                    <button className="btnstyle" onClick={()=>{this.setState({st:"buy",disabled1:true,disabled2:false,disabled3:false})}} style={{"color": this.state.disabled1 ? "white":"black",backgroundColor:this.state.disabled1 ? "darkorange":"coral"}}> <b>Buy</b> </button>
+						    </Col>
+						    <Col lg='4'>
+						        <button className="btnstyle" onClick={()=>{this.setState({st:"borrow",disabled1:false,disabled2:true,disabled3:false})}} style={{"color": this.state.disabled2 ? "white":"black",backgroundColor:this.state.disabled2 ? "darkorange":"coral"}}> <b>Borrow</b> </button>
+						    </Col>
+						    <Col lg='4'>
+                    <button className="btnstyle" onClick={()=>{this.setState({st:"donate",disabled1:false,disabled2:false,disabled3:true})}} style={{"color": this.state.disabled3 ? "white":"black",backgroundColor:this.state.disabled3 ? "darkorange":"coral"}}><b>Donation</b> </button>
+						      </Col>
+						</Row><br></br>
+
               <div className='Table'>
               <table id="product" class="w3-table-all">
                     <th>Name</th>

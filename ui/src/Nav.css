@@ -35,3 +35,12 @@
     background: red;
     color: black;
   }
+  .btnstyle2{
+    padding: 0px;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+    color: black;
+    background-color: darkgrey;
+    border-radius: 0px;
+  }
