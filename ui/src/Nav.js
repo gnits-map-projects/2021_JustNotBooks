@@ -36,14 +36,14 @@ class Nav extends React.Component {
           <div>
             <h1>JustNotBooks-Buy.Borrow.Rent</h1>
             <ul className="header">
-              <li><a href="/home"><img src={h}/></a></li>
+              <li><a href="/home"><img src={h} /></a></li>
               <li><a href="/buyer">Exchanges</a></li>
               <li><a href="/seller">Transaction</a></li>
               <li>
                 <input type="search" placeholder="Search for an item" width="500px" value={this.state.search} onChange={this.handleChange} name="search" />
-                <button className="btnstyle2" onClick={this.handleSubmit}><img src={search} alt="Logo" width="25px" height="28px" /></button>
+                <button className="btnstyle2" onClick={this.handleSubmit}><img src={search} alt="Logo" width="25px" height="25px" /></button>
               </li>
-              <li>< a class="p" href="/logout"><img src={ic}/></a></li>
+              <li>< a class="p" href="/logout"><img src={ic} /></a></li>
               <li><a class="p" href="/profile">{sessionStorage.getItem("name")}'s Profile</a></li>
               <li><a href="/notification" class="notification"><span>Notifications</span><span class="badge">{sessionStorage.getItem("l")}</span></a></li>
             </ul>
