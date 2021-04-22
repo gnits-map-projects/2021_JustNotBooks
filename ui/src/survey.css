@@ -1,0 +1,9 @@
+.bg{
+  margin: auto;
+  width: 40%;
+  border: 3px solid gray;
+  height: 500px;
+  background-color: whitesmoke;
+  align-content: center;
+  padding:20px;
+}

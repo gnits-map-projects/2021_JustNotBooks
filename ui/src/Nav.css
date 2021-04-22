@@ -41,3 +41,8 @@ a:hover{
   background: red;
   color: black;
 }
+.btnstyle2{
+  padding: 3px;
+  border-radius: 0px;
+  background-color: lightgray;
+}
