@@ -2,6 +2,10 @@ import React from "react";
 import "./upload.css"
 import Nav from "./Nav.js"
 import swal from 'sweetalert'
+import emailjs from 'emailjs-com'
+import{ init } from 'emailjs-com';
+
+init("user_eQuTDdOKVg6qHspQzBx7u");
 
 var image1;
 export class Upload extends React.Component {
@@ -171,6 +175,13 @@ export class Upload extends React.Component {
  //alert('Item uploaded');
  swal("Good job!",'Item uploaded',"success");
  this.props.history.push("./profile");
+ emailjs.send("service_vclyh4x","template_9ghmwb3",
+            {
+             your_name: sessionStorage.getItem("name"),
+             from_name: "JustNotBooks",
+             message: "Thanks for uploading your product on JustNotBooks.",
+             email:sessionStorage.getItem("uemail"),
+             });
  
   }
 }

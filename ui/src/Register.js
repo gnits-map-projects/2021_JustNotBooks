@@ -1,7 +1,10 @@
 import React from "react";
 import "./register.css";
 import swal from 'sweetalert'
+import emailjs from 'emailjs-com';
+import{ init } from 'emailjs-com';
 
+init("user_eQuTDdOKVg6qHspQzBx7u");
 const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
 const validMobileRegex = RegExp(/^[6-9]{1}[0-9]{9}$/);
 
@@ -156,6 +159,13 @@ else if(this.state.pswd==""){
         //this.fun.bind(this);
         this.props.history.push("/login");
             //window.location.href="/main";
+            emailjs.send("service_vclyh4x","template_9ghmwb3",
+            {
+             your_name:this.state.name,
+             from_name: "JustNotBooks",
+             message: "Thanks for registering",
+             email:this.state.email,
+             });
       }
       else {
 

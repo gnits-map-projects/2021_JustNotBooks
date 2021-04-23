@@ -2,7 +2,10 @@ import React from "react";
 import "./edit.css"
 import Nav from "./Nav.js"
 import swal from "sweetalert";
+import emailjs from 'emailjs-com'
+import{ init } from 'emailjs-com';
 
+init("user_eQuTDdOKVg6qHspQzBx7u");
 
 
 export class EditItem extends React.Component {
@@ -85,11 +88,16 @@ export class EditItem extends React.Component {
             body: JSON.stringify(body)
             })
             .then(response => {if(response.ok){
-                const templateId = 'template_Ne4ypnOa';
-                this.sendFeedback(templateId, {message_html: "Your Password has been changed", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
-                //alert("Password Changed")
-                swal("Good Job!","Password Changed Successfully!","success")
+                
+                 swal("Good Job!","Password Changed Successfully!","success")
                  this.props.history.push("/profile");
+                 emailjs.send("service_vclyh4x","template_9ghmwb3",
+            {
+             your_name: sessionStorage.getItem("name"),
+             from_name: "JustNotBooks",
+             message: "Your password is successfully reset",
+             email:sessionStorage.getItem("uemail"),
+             });
           
                 
                 }
@@ -100,16 +108,6 @@ export class EditItem extends React.Component {
            })
 
     }
-    sendFeedback (templateId, variables) {
-        window.emailjs.send(
-          'gmail', templateId,
-          variables
-          ).then(res => {
-            console.log('Email successfully sent!')
-          })
-          // Handle errors here however you like, or use a React error boundary
-          .catch(err => console.error('Oh well, you failed. Here some thoughts on the error that occured:', err))
-        }
   
 
     
