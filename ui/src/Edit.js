@@ -2,6 +2,10 @@ import React from "react";
 import "./edit.css"
 import Nav from "./Nav.js"
 import swal from 'sweetalert'
+import emailjs from 'emailjs-com'
+import{ init } from 'emailjs-com';
+
+init("user_eQuTDdOKVg6qHspQzBx7u");
 
 const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
 const validMobileRegex = RegExp(/^[6-9]{1}[0-9]{9}$/);
@@ -128,6 +132,13 @@ export class Edit extends React.Component {
         //alert('Details are updated successful');
         swal({title:"Good job!",text:'Details are updated successfully',icon:"success",timer:3000,closeOnClickOutside: false,});
               this.props.history.push("./profile");
+              emailjs.send("service_vclyh4x","template_9ghmwb3",
+            {
+             your_name: sessionStorage.getItem("name"),
+             from_name: "JustNotBooks",
+             message: "Your Details are updated",
+             email:this.state.email,
+             });
             
         
 

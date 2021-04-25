@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import search from './images/search.jpg';
 import ic from './images/log.png'
 import h from './images/ho.png'
+import bell from './images/bellll.png'
 import "./Nav.css"
 import {
   Route,
@@ -45,7 +46,7 @@ class Nav extends React.Component {
               </li>
               <li>< a class="p" href="/survey"><img src={ic} /></a></li>
               <li><a class="p" href="/profile">{sessionStorage.getItem("name")}'s Profile</a></li>
-              <li><a href="/notification" class="notification"><span>Notifications</span><span class="badge">{sessionStorage.getItem("l")}</span></a></li>
+              <li><a href="/notification" class="notification"><span><img src={bell}/></span><span class="badge">{sessionStorage.getItem("l")}</span></a></li>
             </ul>
           </div>
         </HashRouter>
