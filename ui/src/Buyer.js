@@ -1,9 +1,10 @@
-import React, { Component } from "react";
-import { Col, Row, Container } from "react-bootstrap";
-//import UserProfile from "./UserProfile";
+import React from "react";
+import { Col, Row } from "react-bootstrap";
 import Nav from "./Nav.js"
 import "./Buyer.css"
 import swal from 'sweetalert'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSortDown, faSortUp } from '@fortawesome/free-solid-svg-icons'
 
 const admin = {
   width: '100%',
@@ -32,7 +33,13 @@ class Buyer extends React.Component {
       disabled1: true,
       disabled2: false,
       disabled3: false,
+      sortBy: {
+        'price': 'desc',
+        'rating': 'desc'
+      }
     }
+
+    this.handleSort = this.handleSort.bind(this);
 
     var today;
     today = new Date();
@@ -47,6 +54,36 @@ class Buyer extends React.Component {
       mm = '0' + mm;
     }
     this.state.takenAt = yyyy + '-' + mm + '-' + dd;
+  }
+
+  handleSort(event, colId) {
+    const sortOrder = this.state.sortBy[colId] == 'asc' ? 'desc' : 'asc';
+    const sortedData = this.state.s.sort(this.compare(colId, sortOrder));
+    console.log('sortedData >>', sortedData);
+    if (colId == 'price') {
+      this.setState({ 'sortBy': { ...this.state.sortBy, 'price': sortOrder }, 's': sortedData });
+    }
+  }
+
+  compare(key, sortOrder) {
+    return ((a, b) => {
+      if (sortOrder == 'asc') {
+        if (a[key] < b[key]) {
+          return -1;
+        }
+        if (a[key] > b[key]) {
+          return 1;
+        }
+      } else if (sortOrder == 'desc') {
+        if (a[key] < b[key]) {
+          return 1;
+        }
+        if (a[key] > b[key]) {
+          return -1;
+        }
+      }
+      return 0;
+    })
   }
 
   handleBuy(customer, id) {
@@ -210,7 +247,11 @@ class Buyer extends React.Component {
           <table id="product" class="w3-table-all">
             <th>Name</th>
             <th>Image</th>
-            <th>Price</th>
+            <th>Price
+            <span className="sortIcon" onClick={(e) => this.handleSort(e, 'price')}>
+                {this.state.sortBy['price'] == 'asc' ? <FontAwesomeIcon icon={faSortUp} /> : <FontAwesomeIcon icon={faSortDown} />}
+              </span>
+            </th>
             <th>Description</th>
             <th>Owner</th>
             <th>Category</th>
@@ -248,7 +289,11 @@ class Buyer extends React.Component {
           <table id="product" class="w3-table-all">
             <th>Name</th>
             <th>Image</th>
-            <th>Price</th>
+            <th>Price
+            <span className="sortIcon" onClick={(e) => this.handleSort(e, 'price')}>
+                {this.state.sortBy['price'] == 'asc' ? <FontAwesomeIcon icon={faSortUp} /> : <FontAwesomeIcon icon={faSortDown} />}
+              </span>
+            </th>
             <th>Description</th>
             <th>Owner</th>
             <th>From</th>
@@ -318,7 +363,11 @@ class Buyer extends React.Component {
           <table id="product" class="w3-table-all">
             <th>Name</th>
             <th>Image</th>
-            <th>Price</th>
+            <th>Price
+            <span className="sortIcon" onClick={(e) => this.handleSort(e, 'price')}>
+                {this.state.sortBy['price'] == 'asc' ? <FontAwesomeIcon icon={faSortUp} /> : <FontAwesomeIcon icon={faSortDown} />}
+              </span>
+            </th>
             <th>Description</th>
             <th>Owner</th>
             <th>Category</th>
