@@ -13,14 +13,14 @@ const admin = {
     width: '100%',
     height: '100%',
     backgroundRepeat: 'no-repeat',
-    backgroundSize: '100% 100%', 
+    backgroundSize: '100% 100%',
 }
 
 const table = {
     top:'20%',
     left:'40%'
 }
-      
+
 class Seller extends React.Component {
 
     constructor(props) {
@@ -35,19 +35,19 @@ class Seller extends React.Component {
            }
         var today;
         today=new Date();
-        var dd = today.getDate(); 
-        var mm = today.getMonth() + 1; 
-  
-        var yyyy = today.getFullYear(); 
-        if (dd < 10) { 
-            dd = '0' + dd; 
-        } 
-        if (mm < 10) { 
-            mm = '0' + mm; 
-        } 
-        this.state.returnedAt = yyyy+'-'+mm+'-'+dd; 
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+        this.state.returnedAt = yyyy+'-'+mm+'-'+dd;
     }
-      
+
        handleDelete(owner,id){
 
         var s=this.state.s;
@@ -57,15 +57,15 @@ class Seller extends React.Component {
       }
         const url = 'http://localhost:9000/delete'
           let headers = new Headers();
-    
+
           headers.append('Content-Type', 'application/json');
           headers.append('Accept', 'application/json');
-    
+
           headers.append('Access-Control-Allow-origin', url);
           headers.append('Access-Control-Allow-Credentials', 'true');
-    
+
           headers.append('GET','POST');
-    
+
           fetch(url,{
               headers: headers,
               method: 'POST',
@@ -74,24 +74,24 @@ class Seller extends React.Component {
           .then(response => {
             if(response.ok){
               //alert("Item deleted Successfully!!")
-              
+
               //   swal("Good job!","Item deleted successfully!","success");
               //   //swal({title:"Good job!",text:"Item deleted successfully!",type:"success",timer:3000});
 
               // window.location.reload(false)
-              swal({title: "Good job", text: "Item deleted successfully!", icon: 
-                  "success"}).then(function(){ 
+              swal({title: "Good job", text: "Item deleted successfully!", icon:
+                  "success"}).then(function(){
                     window.location.reload();
                     }
                   );
             }
-          }) 
-    
-    
+          })
+
+
       }
-    
+
     renderResultRows(){
-      
+
         let s=this.state.s
         let n
         sessionStorage.setItem("price",this.state.s.price);
@@ -99,7 +99,7 @@ class Seller extends React.Component {
         sessionStorage.setItem("description",this.state.s.description);
         sessionStorage.setItem("category",this.state.s.category);
         sessionStorage.setItem("id",this.state.s.id);
-       
+
         return s.map((item,id) => {
            //console.log(i,typeof(i))
            if(item.customer==null){
@@ -107,7 +107,7 @@ class Seller extends React.Component {
             return (
 
                 <tr id={id} class="tr">
-                    
+
                     <td >{item.itemName}</td>
                     <td><img src={img} width="200px" height="200px" /></td>
                     <td >{item.price}</td>
@@ -122,13 +122,13 @@ class Seller extends React.Component {
                     <td><button onClick={() => window.location.href="./editItem/"+parseInt(item.id)} > Edit </button></td>
                      </tr>
             );
-    
+
             }
             else{
               let img="/pictures/"+item.image
               return (
                 <tr id={id} class="tr">
-                    
+
                     <td >{item.itemName}</td>
                     <td><img src={img} width="200px" height="200px" /></td>
                     <td >{item.price}</td>
@@ -143,8 +143,8 @@ class Seller extends React.Component {
                      </tr>
             );
             }
-        });  
-      
+        });
+
     }
     sendFeedback (templateId, variables) {
       window.emailjs.send(
@@ -161,13 +161,13 @@ class Seller extends React.Component {
       if(this.state.returnedAt>toDate)
       {
         //var pay=parseInt(this.state.returnedAt)-parseInt(toDate);
-        var date1 = new Date(this.state.returnedAt); 
-        var date2 = new Date(toDate); 
-  
-// To calculate the time difference of two dates 
-        var Difference_In_Time = date1.getTime() - date2.getTime(); 
-  
-// To calculate the no. of days between two dates 
+        var date1 = new Date(this.state.returnedAt);
+        var date2 = new Date(toDate);
+
+// To calculate the time difference of two dates
+        var Difference_In_Time = date1.getTime() - date2.getTime();
+
+// To calculate the no. of days between two dates
         var pay = Difference_In_Time / (1000 * 3600 * 24);
         var body=
         {
@@ -176,18 +176,18 @@ class Seller extends React.Component {
           owner:owner,
           customer:customer
         }
-        
+
         const url = 'http://localhost:9000/notification'
         let headers = new Headers();
-  
+
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');
-  
+
         headers.append('Access-Control-Allow-origin', url);
         headers.append('Access-Control-Allow-Credentials', 'true');
-  
+
         headers.append('GET','POST');
-  
+
         fetch(url,{
             headers: headers,
             method: 'POST',
@@ -199,10 +199,10 @@ class Seller extends React.Component {
             var msg="You are charged with penalty because of late return, Please check your account for more information";
             this.sendFeedback(templateId, {message_html: msg, from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
             //alert("Notified  Successfully!!")
-           
+
             //window.location.reload(false)
           }
-        }) 
+        })
         {
           var s=this.state.s;
         var body = {
@@ -212,15 +212,15 @@ class Seller extends React.Component {
           }
         const url = 'http://localhost:9000/itemReturn'
           let headers = new Headers();
-    
+
           headers.append('Content-Type', 'application/json');
           headers.append('Accept', 'application/json');
-    
+
           headers.append('Access-Control-Allow-origin', url);
           headers.append('Access-Control-Allow-Credentials', 'true');
-    
+
           headers.append('GET','POST');
-    
+
           fetch(url,{
               headers: headers,
               method: 'POST',
@@ -233,14 +233,14 @@ class Seller extends React.Component {
               //alert("Item returned Successfully!!")
               // swal("Good job!","Item returned successfully!","success");
               // window.location.reload(false)
-              swal({title: "Good job", text: "Item returned successfully!", icon: 
-                  "success"}).then(function(){ 
+              swal({title: "Good job", text: "Item returned successfully!", icon:
+                  "success"}).then(function(){
                     window.location.reload();
                     }
                   );
             }
-          }) 
-        
+          })
+
         }
         }
         else{
@@ -252,15 +252,15 @@ class Seller extends React.Component {
             }
           const url = 'http://localhost:9000/itemReturn'
             let headers = new Headers();
-      
+
             headers.append('Content-Type', 'application/json');
             headers.append('Accept', 'application/json');
-      
+
             headers.append('Access-Control-Allow-origin', url);
             headers.append('Access-Control-Allow-Credentials', 'true');
-      
+
             headers.append('GET','POST');
-      
+
             fetch(url,{
                 headers: headers,
                 method: 'POST',
@@ -274,22 +274,22 @@ class Seller extends React.Component {
                 // swal("Good job!","Item returned successfully!","success");
                 // //swal({title:"Good job!",text:"Item returned successfully!",type:"success",timer:5000});
                 // window.location.reload(false)
-                swal({title: "Good job", text: "Item returned successfully!", icon: 
-                  "success"}).then(function(){ 
+                swal({title: "Good job", text: "Item returned successfully!", icon:
+                  "success"}).then(function(){
                     window.location.reload();
                     }
                   );
               }
-            }) 
-          
+            })
+
         }
-      
+
     }
     renderResultTaken(){
-      
+
       let t=this.state.t
       let n
-     
+
       return t.map((item,id) => {
          //console.log(i,typeof(i))
          let img="/pictures/"+item.image
@@ -297,7 +297,7 @@ class Seller extends React.Component {
          {
           return (
             <tr id={id} class="tr">
-                
+
                 <td >{item.itemName}</td>
                 <td><img src={img} width="200px" height="200px" /></td>
                 <td >{item.price}</td>
@@ -308,16 +308,17 @@ class Seller extends React.Component {
                 <td>{item.category}</td>
                 <td >{item.address}</td>
                 <td >{item.status}</td>
+                <td><button onClick={event =>  window.location.href='./Feedback'} > Feedback</button></td>
                 <td><button onClick={() => this.handleReturn(sessionStorage.getItem("name"),item.owner,item.id,item.toDate)} > Return </button></td><td></td>
                  </tr>
           );
          }
-          
+
           else
           {
             return (
               <tr id={id} class="tr">
-                  
+
                   <td >{item.itemName}</td>
                   <td><img src={img} width="200px" height="200px" /></td>
                   <td >{item.price}</td>
@@ -332,8 +333,8 @@ class Seller extends React.Component {
                    </tr>
           );
           }
-      });  
-      
+      });
+
 
   }
   taken(){
@@ -350,20 +351,20 @@ class Seller extends React.Component {
     headers.append('Access-Control-Allow-Credentials','true');
 
     headers.append('POST','GET');
-    
+
      fetch(url,{
         headers:headers,
         method: 'POST',
         body:JSON.stringify(body)
         })
-        .then(response=>{                
+        .then(response=>{
             return response.json()
         }).then(res=>{this.setState({t:res})
-        //console.log(this.state.t) 
+        //console.log(this.state.t)
     })
-        
-        
-                
+
+
+
 }
 
     items(){
@@ -380,37 +381,37 @@ class Seller extends React.Component {
       headers.append('Access-Control-Allow-Credentials','true');
 
       headers.append('POST','GET');
-      
+
        fetch(url,{
           headers:headers,
           method: 'POST',
           body:JSON.stringify(body)
           })
-          .then(response=>{                
+          .then(response=>{
               return response.json()
           }).then(res=>{this.setState({s:res})
-      
+
       })
-          
-          
+
+
     }
         componentDidMount(){
           this.items()
           this.taken()
         }
-    
+
         render() {
-        
-      
+
+
             return (
               <div>
-             
+
               <div class="admin">
                 <Nav/>
-              
+
             <h1><b>Items Uploaded</b></h1>
             <div className="uploadTable">
-                   
+
                    <div>
                     <table id="product" class="w3-table-all">
                         <th>Name</th>
@@ -431,7 +432,7 @@ class Seller extends React.Component {
                 <br></br>
                 <h1><b>Items Taken</b></h1>
                   <div className="uploadTable">
-                    
+
                     <table id="product" class="w3-table-all">
                         <th>Name</th>
                         <th>Image</th>
@@ -443,10 +444,11 @@ class Seller extends React.Component {
                         <th>Category</th>
                         <th>Address</th>
                         <th>Status</th>
+                        <th>Feedback</th>
                      <tbody> {this.renderResultTaken()} </tbody>
                     </table>
                     </div>
-        
+
                 </div>
                 </div>
             )

@@ -194,7 +194,8 @@ else if(this.state.pswd==""){
 		<div className="register">
 				<form onSubmit={this.displayLogin}>
 					<h2>Register</h2>
-
+					<p><b>Already Registered?</b></p>
+                       <a href ="/login">Login here!</a>
 					<div className="name">
 						<input
 							type="text"
@@ -253,7 +254,7 @@ else if(this.state.pswd==""){
           <input type="submit" value="Cancel" onClick={this.handleCancel}/>
 				</form>
 
-				<a href ="/login">Login here</a>
+
 			</div>
       
     );
