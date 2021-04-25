@@ -68,12 +68,6 @@ class Seller extends React.Component {
           })
           .then(response => {
             if(response.ok){
-              //alert("Item deleted Successfully!!")
-
-              //   swal("Good job!","Item deleted successfully!","success");
-              //   //swal({title:"Good job!",text:"Item deleted successfully!",type:"success",timer:3000});
-
-              // window.location.reload(false)
               swal({title: "Good job", text: "Item deleted successfully!", icon:
                   "success"}).then(function(){
                     window.location.reload();

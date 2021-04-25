@@ -42,10 +42,11 @@ class App extends React.Component {
           <Route path="/logout" component={Logout} />
           <Route path="/editItem/:id" component={EditItem} />
           <Route path="/search" component={Search} />
+          <Route path="/Feedback" component={Feedback} />
           <Route path="/notification" component={Notification} />
           <Route path="/editPswd" component={EditPswd} />
           <Route path="/survey" component={Survey} />
-          <Route path="/Feedback" component={Feedback} />
+
 
 
 

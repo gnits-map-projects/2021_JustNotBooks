@@ -168,8 +168,6 @@ export class Upload extends React.Component {
  })
  .catch(()=> console.log("can't access " + url + " response. "))
 
-
- //alert('Item uploaded');
  swal("Good job!",'Item uploaded',"success");
  this.props.history.push("./profile");
 

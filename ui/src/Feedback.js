@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ReactStars from "react-rating-stars-component";
 import "./feedback.css"
-import "./Seller.js"
 import Nav from "./Nav.js"
 import item from "./Seller.js"
 
