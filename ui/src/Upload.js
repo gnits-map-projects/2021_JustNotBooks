@@ -2,8 +2,9 @@ import React from "react";
 import "./upload.css"
 import Nav from "./Nav.js"
 import swal from 'sweetalert'
-
 var image1;
+
+
 export class Upload extends React.Component {
 
   constructor(props) {

@@ -4,8 +4,6 @@ import "./feedback.css"
 import "./Seller.js"
 import Nav from "./Nav.js"
 import item from "./Seller.js"
-import EditItem from "./EditItem"
-import swal from 'sweetalert'
 
 class Feedback extends React.Component {
 

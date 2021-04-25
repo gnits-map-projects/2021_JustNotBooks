@@ -1,13 +1,8 @@
 import React, { Component } from "react";
-//import { Container } from "react-bootstrap";
-//import Col from 'react-bootstrap/Col'
-//import Row from 'react-bootstrap/Row'
-//import UserProfile from "./UserProfile";
 import Nav from "./Nav.js"
 import "./Buyer.css"
 import "./Seller.css"
 import EditItem from "./EditItem"
-//<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 import swal from 'sweetalert'
 const admin = {
     width: '100%',
@@ -297,7 +292,6 @@ class Seller extends React.Component {
          {
           return (
             <tr id={id} class="tr">
-
                 <td >{item.itemName}</td>
                 <td><img src={img} width="200px" height="200px" /></td>
                 <td >{item.price}</td>
