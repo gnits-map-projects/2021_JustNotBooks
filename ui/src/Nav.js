@@ -35,7 +35,7 @@ class Nav extends React.Component {
       <div>
         <HashRouter>
           <div>
-            <h1>JustNotBooks-Buy.Borrow.Rent</h1>
+            <center><h1>JustNotBooks-Buy.Borrow.Rent</h1></center>
             <ul className="header">
               <li><a href="/home"><img src={h} /></a></li>
               <li><a href="/buyer">Exchanges</a></li>

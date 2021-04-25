@@ -1,9 +1,12 @@
 .upload{
-    
+        font-style: italic;
         margin-left:30%;
         margin-right: 30%;
-        background-color: lightgray;
+        background-color:#FAFAD2;
         padding:  20px;
-        box-shadow: 5px 5px 5px grey; 
+        box-shadow: 5px 5px 5px grey;
         opacity: 0.9;
+}
+input {
+  text-align: center;
 }
