@@ -41,11 +41,7 @@ class Nav extends React.Component {
               <li><a href="/seller">Transaction</a></li>
               <li>
                 <input type="search" placeholder="Search for an item" width="500px" value={this.state.search} onChange={this.handleChange} name="search" />
-<<<<<<< HEAD
-                <button className="btnstyle2" onClick={this.handleSubmit}><img src={search}/></button>
-=======
                 <button className="btnstyle2" onClick={this.handleSubmit}><img src={search} alt="Logo" width="25px" height="25px" /></button>
->>>>>>> ff352ee62521d4ed7ce6c00d2147df2fb8d6185a
               </li>
               <li>< a class="p" href="/survey"><img src={ic} /></a></li>
               <li><a class="p" href="/profile">{sessionStorage.getItem("name")}'s Profile</a></li>
