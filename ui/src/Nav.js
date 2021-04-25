@@ -9,6 +9,8 @@ import {
   NavLink,
   HashRouter
 } from "react-router-dom";
+import SearchField from "react-search-field";
+import './Nav.css';
 
 
 class Nav extends React.Component {
@@ -19,16 +21,20 @@ class Nav extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.onEnter = this.onEnter.bind(this);
 
   }
-  handleChange(event) {
+  handleChange(value, event) {
     this.setState({
-      search: event.target.value
+      search: value
     });
-    sessionStorage.setItem("search", this.state.search);
+    sessionStorage.setItem("search", value);
   }
   handleSubmit() {
     window.location.href = "./search";
+  }
+  onEnter(value, event) {
+    this.handleSubmit();
   }
   render() {
     return (
@@ -41,12 +47,17 @@ class Nav extends React.Component {
               <li><a href="/buyer">Exchanges</a></li>
               <li><a href="/seller">Transaction</a></li>
               <li>
-                <input type="search" placeholder="Search for an item" width="500px" value={this.state.search} onChange={this.handleChange} name="search" />
-                <button className="btnstyle2" onClick={this.handleSubmit}><img src={search} alt="Logo" width="25px" height="25px" /></button>
+                <SearchField
+                  placeholder="Search for an item"
+                  onChange={this.handleChange}
+                  onSearchClick={this.handleSubmit}
+                  onEnter={this.onEnter}
+                  classNames="searchBar"
+                />
               </li>
               <li>< a class="p" href="/survey"><img src={ic} /></a></li>
               <li><a class="p" href="/profile">{sessionStorage.getItem("name")}'s Profile</a></li>
-              <li><a href="/notification" class="notification"><span><img src={bell}/></span><span class="badge">{sessionStorage.getItem("l")}</span></a></li>
+              <li><a href="/notification" class="notification"><span><img src={bell} /></span><span class="badge">{sessionStorage.getItem("l")}</span></a></li>
             </ul>
           </div>
         </HashRouter>
