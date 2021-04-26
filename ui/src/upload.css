@@ -1,11 +1,10 @@
 .upload{
-        font-style: italic;
-        margin-left:30%;
-        margin-right: 30%;
-        background-color:#FAFAD2;
-        padding:  20px;
-        box-shadow: 5px 5px 5px grey;
-        opacity: 0.9;
+  margin-left:30%;
+  margin-right: 30%;
+  background-color: rgb(243, 222, 196);
+  padding:  20px;
+  box-shadow: 5px 5px 5px grey;
+  opacity: 0.9;
 }
 input {
   text-align: center;

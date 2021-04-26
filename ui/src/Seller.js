@@ -2,8 +2,14 @@ import React, { Component } from "react";
 import Nav from "./Nav.js"
 import "./Buyer.css"
 import "./Seller.css"
-import EditItem from "./EditItem"
+
 import swal from 'sweetalert'
+import emailjs from 'emailjs-com';
+import{ init } from 'emailjs-com';
+
+init("user_eQuTDdOKVg6qHspQzBx7u");
+
+
 const admin = {
     width: '100%',
     height: '100%',
@@ -16,7 +22,7 @@ const table = {
     left:'40%'
 }
 
-class Seller extends React.Component {
+class Seller extends Component {
 
     constructor(props) {
         super(props);
@@ -184,6 +190,13 @@ class Seller extends React.Component {
         })
         .then(response => {
           if(response.ok){
+            emailjs.send("service_vclyh4x","template_9ghmwb3",
+          {
+           your_name: sessionStorage.getItem("name"),
+           from_name: "JustNotBooks",
+           message: "You are charged with penalty because of late return, Please check your account for more information",
+           email:sessionStorage.getItem("uemail"),
+           });
             const templateId = 'template_Ne4ypnOa';
             var msg="You are charged with penalty because of late return, Please check your account for more information";
             this.sendFeedback(templateId, {message_html: msg, from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
@@ -217,6 +230,13 @@ class Seller extends React.Component {
           })
           .then(response => {
             if(response.ok){
+              emailjs.send("service_vclyh4x","template_9ghmwb3",
+          {
+           your_name: sessionStorage.getItem("name"),
+           from_name: "JustNotBooks",
+           message: "Thanks for Returning",
+           email:sessionStorage.getItem("uemail"),
+           });
               const templateId = 'template_Ne4ypnOa';
               //this.sendFeedback(templateId, {message_html: "Thanks for Returning", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
               //alert("Item returned Successfully!!")
@@ -443,4 +463,4 @@ class Seller extends React.Component {
         }
 }
 
-export default Seller
+export default Seller;
