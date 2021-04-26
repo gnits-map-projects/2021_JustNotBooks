@@ -1,5 +1,5 @@
 .notification {
-  background-color:rgb(243, 230, 159);
+  background-color:rgb(247, 242, 242);
   color: black;
   text-decoration: none;
   padding: 15px 26px;
@@ -18,8 +18,8 @@
 }
 img 
  {
-     height:21px;
-     width:21px;
+     height:23px;
+     width:23px;
  }
 a{
   opacity: 1;
