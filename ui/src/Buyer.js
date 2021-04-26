@@ -5,6 +5,10 @@ import "./Buyer.css"
 import swal from 'sweetalert'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSortDown, faSortUp } from '@fortawesome/free-solid-svg-icons'
+import emailjs from 'emailjs-com';
+import{ init } from 'emailjs-com';
+
+init("user_eQuTDdOKVg6qHspQzBx7u");
 
 const admin = {
   width: '100%',
@@ -112,9 +116,15 @@ class Buyer extends React.Component {
     })
       .then(response => {
         if (response.ok) {
-
-          const templateId = 'template_Ne4ypnOa';
-          this.sendFeedback(templateId, { message_html: "Thank you for purchasing!!", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail") })
+          emailjs.send("service_vclyh4x","template_9ghmwb3",
+          {
+           your_name: sessionStorage.getItem("name"),
+           from_name: "JustNotBooks",
+           message: "Thank you for purchasing",
+           email:sessionStorage.getItem("uemail"),
+           });
+          
+          
           var note = "Thank you for purchasing!!"
           sessionStorage.setItem("notification", note)
           //alert("Thank you for purchasing!!")
@@ -125,6 +135,7 @@ class Buyer extends React.Component {
             title: "Thanks!", text: "Thank you for purchasing!", icon:
               "success"
           }).then(function () {
+            
             window.location.reload();
           }
           );
@@ -135,16 +146,7 @@ class Buyer extends React.Component {
 
   }
 
-  sendFeedback(templateId, variables) {
-    window.emailjs.send(
-      'gmail', templateId,
-      variables
-    ).then(res => {
-      console.log('Email successfully sent!')
-    })
-      // Handle errors here however you like, or use a React error boundary
-      .catch(err => console.error('Oh well, you failed. Here some thoughts on the error that occured:', err))
-  }
+
 
   handleBorrow(customer, id, fromDate) {
 
@@ -251,6 +253,7 @@ class Buyer extends React.Component {
             <span className="sortIcon" onClick={(e) => this.handleSort(e, 'price')}>
                 {this.state.sortBy['price'] == 'asc' ? <FontAwesomeIcon icon={faSortUp} /> : <FontAwesomeIcon icon={faSortDown} />}
               </span>
+          
             </th>
             <th>Description</th>
             <th>Owner</th>
