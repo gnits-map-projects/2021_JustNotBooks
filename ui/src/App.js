@@ -16,8 +16,13 @@ import Search from "./Search";
 import Notification from "./Notification"
 import EditPswd from "./EditPswd"
 import Survey from "./survey"
+<<<<<<< HEAD
 import Forgot from "./Forgot"
 import ResetPassword from "./ResetPassword"
+=======
+import Feedback from "./Feedback"
+
+>>>>>>> 78fff02e56dbd8d78fc8f7fa0f4e41559ef37ac5
 
 
 class App extends React.Component {
@@ -42,11 +47,13 @@ class App extends React.Component {
           <Route path="/logout" component={Logout} />
           <Route path="/editItem/:id" component={EditItem} />
           <Route path="/search" component={Search} />
+          <Route path="/Feedback" component={Feedback} />
           <Route path="/notification" component={Notification} />
           <Route path="/editPswd" component={EditPswd} />
           <Route path="/survey" component={Survey} />
           <Route path="/forgot" component={Forgot}/>
           <Route path="/resetPassword" component={ResetPassword}/>
+
 
 
 

@@ -27,8 +27,6 @@ a{
 a:hover{
   background-color:white;
   color:black;
-  
-  /*opacity: 0.2*/;
 }
 
 
@@ -41,8 +39,9 @@ a:hover{
   background: red;
   color: black;
 }
-.btnstyle2{
-  padding: 3px;
-  border-radius: 0px;
-  background-color: lightgray;
+.searchBar{
+  border-radius: 5px;
+}
+.searchBar > button {
+  border-radius: 5px;
 }
