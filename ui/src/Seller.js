@@ -4,8 +4,12 @@ import "./Buyer.css"
 import "./Seller.css"
 
 import swal from 'sweetalert'
+import emailjs from 'emailjs-com'
+import{ init } from 'emailjs-com';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSortDown, faSortUp } from '@fortawesome/free-solid-svg-icons'
+init("user_eQuTDdOKVg6qHspQzBx7u");
+
 const admin = {
   width: '100%',
   height: '100%',
