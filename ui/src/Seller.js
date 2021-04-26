@@ -199,7 +199,7 @@ class Seller extends Component {
            });
             const templateId = 'template_Ne4ypnOa';
             var msg="You are charged with penalty because of late return, Please check your account for more information";
-            this.sendFeedback(templateId, {message_html: msg, from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
+            //this.sendFeedback(templateId, {message_html: msg, from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
             //alert("Notified  Successfully!!")
 
             //window.location.reload(false)
@@ -237,7 +237,7 @@ class Seller extends Component {
            message: "Thanks for Returning",
            email:sessionStorage.getItem("uemail"),
            });
-              const templateId = 'template_Ne4ypnOa';
+             // const templateId = 'template_Ne4ypnOa';
               //this.sendFeedback(templateId, {message_html: "Thanks for Returning", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
               //alert("Item returned Successfully!!")
               // swal("Good job!","Item returned successfully!","success");
@@ -277,8 +277,15 @@ class Seller extends Component {
             })
             .then(response => {
               if(response.ok){
-                const templateId = 'template_Ne4ypnOa';
-                this.sendFeedback(templateId, {message_html: "Thanks for Returning", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
+                emailjs.send("service_vclyh4x","template_9ghmwb3",
+          {
+           your_name: sessionStorage.getItem("name"),
+           from_name: "JustNotBooks",
+           message: "Thanks for Returning",
+           email:sessionStorage.getItem("uemail"),
+           });
+                //const templateId = 'template_Ne4ypnOa';
+                //this.sendFeedback(templateId, {message_html: "Thanks for Returning", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
                 //alert("Item returned Successfully!!")
                 // swal("Good job!","Item returned successfully!","success");
                 // //swal({title:"Good job!",text:"Item returned successfully!",type:"success",timer:5000});
