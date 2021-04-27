@@ -46,8 +46,17 @@ class Nav extends React.Component {
               <li><a href="/home"><img src={h} /></a></li>
               <li><a href="/buyer">Exchanges</a></li>
               <li><a href="/seller">Transaction</a></li>
+              <li><a>  </a></li>
+              <li><a>  </a></li>
+              <li><a>  </a></li>
+              <li><a>  </a></li>
+              <li><a>  </a></li>
+              <li><a>  </a></li>
+              
+              
               <li>
                 <SearchField
+                 
                   placeholder="Search for an item"
                   onChange={this.handleChange}
                   onSearchClick={this.handleSubmit}
