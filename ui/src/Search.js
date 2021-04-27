@@ -32,8 +32,8 @@ class Search extends React.Component {
       s: [],
       takenAt: '',
       sortBy: {
-        'price': 'desc',
-        'rating': 'desc'
+        'price': 'asc',
+        'rating': 'asc'
       }
     }
     this.state.takenAt = Date();
@@ -298,7 +298,7 @@ class Search extends React.Component {
               <th>Image</th>
               <th>Price
               <span className="sortIcon" onClick={(e) => this.handleSort(e, 'price')}>
-                  {this.state.sortBy['price'] == 'asc' ? <FontAwesomeIcon icon={faSortUp} /> : <FontAwesomeIcon icon={faSortDown} />}
+                  {this.state.sortBy['price'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
                 </span>
               </th>
               <th>Description</th>
