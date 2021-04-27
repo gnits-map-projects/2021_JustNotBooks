@@ -19,6 +19,7 @@ import Survey from "./survey"
 import Forgot from "./Forgot"
 import ResetPassword from "./ResetPassword"
 import Feedback from "./Feedback"
+import Review from "./Review"
 
 
 
@@ -48,8 +49,8 @@ class App extends React.Component {
           <Route path="/notification" component={Notification} />
           <Route path="/editPswd" component={EditPswd} />
           <Route path="/survey" component={Survey} />
-          <Route path="/forgot" component={Forgot}/>
-          <Route path="/resetPassword" component={ResetPassword}/>
+          <Route path="/Review" component={Review} />
+
 
 
 

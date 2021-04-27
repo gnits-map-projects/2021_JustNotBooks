@@ -5,7 +5,7 @@ import "./Seller.css"
 
 import swal from 'sweetalert'
 import emailjs from 'emailjs-com'
-import{ init } from 'emailjs-com';
+import { init } from 'emailjs-com';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSortDown, faSortUp } from '@fortawesome/free-solid-svg-icons'
 init("user_eQuTDdOKVg6qHspQzBx7u");
@@ -232,16 +232,16 @@ class Seller extends Component {
         body: JSON.stringify(body)
       })
         .then(response => {
-          if(response.ok){
-            emailjs.send("service_vclyh4x","template_9ghmwb3",
-          {
-           your_name: sessionStorage.getItem("name"),
-           from_name: "JustNotBooks",
-           message: "You are charged with penalty because of late return, Please check your account for more information",
-           email:sessionStorage.getItem("uemail"),
-           });
+          if (response.ok) {
+            emailjs.send("service_vclyh4x", "template_9ghmwb3",
+              {
+                your_name: sessionStorage.getItem("name"),
+                from_name: "JustNotBooks",
+                message: "You are charged with penalty because of late return, Please check your account for more information",
+                email: sessionStorage.getItem("uemail"),
+              });
             const templateId = 'template_Ne4ypnOa';
-            var msg="You are charged with penalty because of late return, Please check your account for more information";
+            var msg = "You are charged with penalty because of late return, Please check your account for more information";
             //this.sendFeedback(templateId, {message_html: msg, from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
             //alert("Notified  Successfully!!")
 
@@ -272,15 +272,15 @@ class Seller extends Component {
           body: JSON.stringify(body)
         })
           .then(response => {
-            if(response.ok){
-              emailjs.send("service_vclyh4x","template_9ghmwb3",
-          {
-           your_name: sessionStorage.getItem("name"),
-           from_name: "JustNotBooks",
-           message: "Thanks for Returning",
-           email:sessionStorage.getItem("uemail"),
-           });
-             // const templateId = 'template_Ne4ypnOa';
+            if (response.ok) {
+              emailjs.send("service_vclyh4x", "template_9ghmwb3",
+                {
+                  your_name: sessionStorage.getItem("name"),
+                  from_name: "JustNotBooks",
+                  message: "Thanks for Returning",
+                  email: sessionStorage.getItem("uemail"),
+                });
+              // const templateId = 'template_Ne4ypnOa';
               //this.sendFeedback(templateId, {message_html: "Thanks for Returning", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
               //alert("Item returned Successfully!!")
               // swal("Good job!","Item returned successfully!","success");
@@ -315,33 +315,35 @@ class Seller extends Component {
 
             headers.append('GET','POST');
 
-            fetch(url,{
-                headers: headers,
-                method: 'POST',
-                body:JSON.stringify(body)
-            })
-            .then(response => {
-              if(response.ok){
-                emailjs.send("service_vclyh4x","template_9ghmwb3",
-          {
-           your_name: sessionStorage.getItem("name"),
-           from_name: "JustNotBooks",
-           message: "Thanks for Returning",
-           email:sessionStorage.getItem("uemail"),
-           });
-                //const templateId = 'template_Ne4ypnOa';
-                //this.sendFeedback(templateId, {message_html: "Thanks for Returning", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
-                //alert("Item returned Successfully!!")
-                // swal("Good job!","Item returned successfully!","success");
-                // //swal({title:"Good job!",text:"Item returned successfully!",type:"success",timer:5000});
-                // window.location.reload(false)
-                swal({title: "Good job", text: "Item returned successfully!", icon:
-                  "success"}).then(function(){
-                    window.location.reload();
-                    }
-                  );
-              }
-            })
+      fetch(url, {
+        headers: headers,
+        method: 'POST',
+        body: JSON.stringify(body)
+      })
+        .then(response => {
+          if (response.ok) {
+            emailjs.send("service_vclyh4x", "template_9ghmwb3",
+              {
+                your_name: sessionStorage.getItem("name"),
+                from_name: "JustNotBooks",
+                message: "Thanks for Returning",
+                email: sessionStorage.getItem("uemail"),
+              });
+            //const templateId = 'template_Ne4ypnOa';
+            //this.sendFeedback(templateId, {message_html: "Thanks for Returning", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
+            //alert("Item returned Successfully!!")
+            // swal("Good job!","Item returned successfully!","success");
+            // //swal({title:"Good job!",text:"Item returned successfully!",type:"success",timer:5000});
+            // window.location.reload(false)
+            swal({
+              title: "Good job", text: "Item returned successfully!", icon:
+                "success"
+            }).then(function () {
+              window.location.reload();
+            }
+            );
+          }
+        })
 
       headers.append('Content-Type', 'application/json');
       headers.append('Accept', 'application/json');
@@ -360,10 +362,6 @@ class Seller extends Component {
           if (response.ok) {
             const templateId = 'template_Ne4ypnOa';
             this.sendFeedback(templateId, { message_html: "Thanks for Returning", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail") })
-            //alert("Item returned Successfully!!")
-            // swal("Good job!","Item returned successfully!","success");
-            // //swal({title:"Good job!",text:"Item returned successfully!",type:"success",timer:5000});
-            // window.location.reload(false)
             swal({
               title: "Good job", text: "Item returned successfully!", icon:
                 "success"
@@ -417,7 +415,9 @@ class Seller extends Component {
             <td >{item.owner}</td>
             <td>{item.category}</td>
             <td >{item.address}</td>
-            <td >{item.status}</td><td></td><td></td>
+            <td >{item.status}</td>
+            <td><button onClick={event => window.location.href = './Feedback'} > Feedback</button></td>
+            <td></td>
 
           </tr>
         );

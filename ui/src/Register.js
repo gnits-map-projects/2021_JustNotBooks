@@ -67,7 +67,7 @@ export class Register extends React.Component {
     errors.mobile = 
     (validMobileRegex.test(event.target.value))
       ? ''
-      : 'Enter a valid phone number!';
+      : ' Please Enter a valid phone number!';
    if(errors.mobile==  '')
     {
       this.setState({ph : true});
@@ -81,7 +81,7 @@ export class Register extends React.Component {
     let errors = this.state.errors;
     errors.password = 
     event.target.value.length < 8
-      ? 'Password must be 8 characters long!'
+      ? 'Password must be 8 characters long!!'
       : '';
     if(errors.password ==  '')
       {
@@ -96,7 +96,6 @@ export class Register extends React.Component {
   }
 
   handleCancel(){
-    //window.location.href="/home";
     window.location.reload();
   }
 
@@ -193,8 +192,7 @@ else if(this.state.pswd==""){
 		<div className="register">
 				<form onSubmit={this.displayLogin}>
 					<h2>Register</h2>
-					<p><b>Already Registered?</b></p>
-                       <a href ="/login">Login here!</a>
+					<p><b>Already Registered?  </b> <a href ="/login">Login here!</a></p>
 					<div className="name">
 						<input
 							type="text"

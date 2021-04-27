@@ -36,7 +36,6 @@ export class Upload extends React.Component {
     this.handleToChange=this.handleToChange.bind(this)
     this.handleSubmit=this.handleSubmit.bind(this)
     this.handleImage=this.handleImage.bind(this)
-    //this.DateEnabale=this.DateEnabale.bind(this)
     this.handleCancel=this.handleCancel.bind(this)
     this.state.owner = sessionStorage.getItem("name");
     this.state.uploadedAt=Date();
@@ -260,6 +259,8 @@ export class Upload extends React.Component {
                             onChange={this.handleFromChange} required
 
                         />
+                        <br/><br/>
+
                       To&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;<input
                             type="date"
                             placeholder="To Date"
@@ -271,14 +272,16 @@ export class Upload extends React.Component {
                             onChange={this.handleToChange} required
 
                         />
-                        <br></br><br></br><br></br>
+                        <br />
+                        <br />
+
                     <div class="fileimages">
                         <input type="file" onInput={this.handleImage} required/>
                             <div class="imgfile">
                             <img class="upload1" src={this.state.file2}/>
                              </div>
                            </div><br/><br/><br/>
-                    <br></br><br></br><br></br><br></br>
+                    <br></br><br></br><br></br><br/>
 
 
 

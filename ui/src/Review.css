@@ -1,8 +1,9 @@
-.feedback{
-  margin: auto;
+.Review{
+  margin-left:30%;
+  margin-right: 27%;
   width: 40%;
   border: 3px solid gray;
-  height: 600px;
+  height: 400px;
   background-color: #FAFAD2;
   align-content: center;
   padding:20px;
