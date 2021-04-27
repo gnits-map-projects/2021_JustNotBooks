@@ -17,6 +17,7 @@ import Notification from "./Notification"
 import EditPswd from "./EditPswd"
 import Survey from "./survey"
 import Feedback from "./Feedback"
+import Review from "./Review"
 
 
 
@@ -46,6 +47,7 @@ class App extends React.Component {
           <Route path="/notification" component={Notification} />
           <Route path="/editPswd" component={EditPswd} />
           <Route path="/survey" component={Survey} />
+          <Route path="/Review" component={Review} />
 
 
 

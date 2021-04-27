@@ -33,7 +33,7 @@ class Feedback extends React.Component {
                  <h5>Rate the Item</h5>
                 <ReactStars
                     count={5}
-                    size={50}
+                    size={60}
                     activeColor="#ffd700"
                     isHalf={true}
                         emptyIcon={<i className="far fa-star"></i>}
@@ -44,7 +44,7 @@ class Feedback extends React.Component {
                 <h5>Rate Your Seller</h5>
                                 <ReactStars
                                     count={5}
-                                    size={50}
+                                    size={60}
                                     activeColor="#ffd700"
                                     isHalf={true}
                                         emptyIcon={<i className="far fa-star"></i>}

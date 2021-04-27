@@ -193,8 +193,7 @@ else if(this.state.pswd==""){
 		<div className="register">
 				<form onSubmit={this.displayLogin}>
 					<h2>Register</h2>
-					<p><b>Already Registered?</b></p>
-                       <a href ="/login">Login here!</a>
+					<p><b>Already Registered?  </b> <a href ="/login">Login here!</a></p>
 					<div className="name">
 						<input
 							type="text"

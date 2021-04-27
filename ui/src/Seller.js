@@ -316,7 +316,9 @@ class Seller extends React.Component {
                   <td >{item.owner}</td>
                   <td>{item.category}</td>
                   <td >{item.address}</td>
-                  <td >{item.status}</td><td></td><td></td>
+                   <td >{item.status}</td>
+                  <td><button onClick={event =>  window.location.href='./Feedback'} > Feedback</button></td>
+                  <td></td>
 
                    </tr>
           );
@@ -431,7 +433,7 @@ class Seller extends React.Component {
                         <th>Owner</th>
                         <th>Category</th>
                         <th>Address</th>
-                        <th>Status</th>
+                         <th>Stauts</th>
                         <th>Feedback</th>
                      <tbody> {this.renderResultTaken()} </tbody>
                     </table>

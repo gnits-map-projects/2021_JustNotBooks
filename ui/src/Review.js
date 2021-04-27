@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ReactStars from "react-rating-stars-component";
 import "./Review.css"
 import Nav from "./Nav.js"
-import item from "./Seller.js"
 
 class Feedback extends React.Component {
 
@@ -20,7 +19,7 @@ class Feedback extends React.Component {
     render() {
         return (
             <div className="Review" >
-                 <h2> <center>Reviews</center></h2>
+                 <center><h2> Reviews</h2>
                                  <textarea
 
                                      value={this.state.textAreaValue}
@@ -28,6 +27,7 @@ class Feedback extends React.Component {
                                      rows={5}
                                      cols={50}
                                  />
+                                 </center>
                   <br />
                   <br />
                   <br />
