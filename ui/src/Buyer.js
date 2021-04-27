@@ -5,6 +5,10 @@ import "./Buyer.css"
 import swal from 'sweetalert'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSortDown, faSortUp } from '@fortawesome/free-solid-svg-icons'
+import emailjs from 'emailjs-com';
+import{ init } from 'emailjs-com';
+
+init("user_eQuTDdOKVg6qHspQzBx7u");
 
 const admin = {
   width: '100%',
@@ -34,12 +38,14 @@ class Buyer extends React.Component {
       disabled2: false,
       disabled3: false,
       sortBy: {
-        'price': 'desc',
-        'rating': 'desc'
+        'price': 'asc',
+        'rating': 'asc'
       }
     }
 
-    this.handleSort = this.handleSort.bind(this);
+    this.handleSort1 = this.handleSort1.bind(this);
+    this.handleSort2 = this.handleSort2.bind(this);
+    this.handleSort3 = this.handleSort3.bind(this);
 
     var today;
     today = new Date();
@@ -56,12 +62,30 @@ class Buyer extends React.Component {
     this.state.takenAt = yyyy + '-' + mm + '-' + dd;
   }
 
-  handleSort(event, colId) {
+  handleSort1(event, colId) {
     const sortOrder = this.state.sortBy[colId] == 'asc' ? 'desc' : 'asc';
     const sortedData = this.state.s.sort(this.compare(colId, sortOrder));
     console.log('sortedData >>', sortedData);
     if (colId == 'price') {
       this.setState({ 'sortBy': { ...this.state.sortBy, 'price': sortOrder }, 's': sortedData });
+    }
+  }
+
+  handleSort2(event, colId) {
+    const sortOrder = this.state.sortBy[colId] == 'asc' ? 'desc' : 'asc';
+    const sortedData = this.state.b.sort(this.compare(colId, sortOrder));
+    console.log('sortedData >>', sortedData);
+    if (colId == 'price') {
+      this.setState({ 'sortBy': { ...this.state.sortBy, 'price': sortOrder }, 'b': sortedData });
+    }
+  }
+
+  handleSort3(event, colId) {
+    const sortOrder = this.state.sortBy[colId] == 'asc' ? 'desc' : 'asc';
+    const sortedData = this.state.d.sort(this.compare(colId, sortOrder));
+    console.log('sortedData >>', sortedData);
+    if (colId == 'price') {
+      this.setState({ 'sortBy': { ...this.state.sortBy, 'price': sortOrder }, 'd': sortedData });
     }
   }
 
@@ -112,15 +136,22 @@ class Buyer extends React.Component {
     })
       .then(response => {
         if (response.ok) {
-
-          const templateId = 'template_Ne4ypnOa';
-          this.sendFeedback(templateId, { message_html: "Thank you for purchasing!!", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail") })
+          emailjs.send("service_vclyh4x","template_9ghmwb3",
+          {
+           your_name: sessionStorage.getItem("name"),
+           from_name: "JustNotBooks",
+           message: "Thank you for purchasing",
+           email:sessionStorage.getItem("uemail"),
+           });
+          
+          
           var note = "Thank you for purchasing!!"
           sessionStorage.setItem("notification", note)
           swal({
             title: "Thanks!", text: "Thank you for purchasing!", icon:
               "success"
           }).then(function () {
+            
             window.location.reload();
           }
           );
@@ -131,16 +162,7 @@ class Buyer extends React.Component {
 
   }
 
-  sendFeedback(templateId, variables) {
-    window.emailjs.send(
-      'gmail', templateId,
-      variables
-    ).then(res => {
-      console.log('Email successfully sent!')
-    })
-      // Handle errors here however you like, or use a React error boundary
-      .catch(err => console.error('Oh well, you failed. Here some thoughts on the error that occured:', err))
-  }
+
 
   handleBorrow(customer, id, fromDate) {
 
@@ -246,9 +268,10 @@ class Buyer extends React.Component {
             <th>Name</th>
             <th>Image</th>
             <th>Price
-            <span className="sortIcon" onClick={(e) => this.handleSort(e, 'price')}>
-                {this.state.sortBy['price'] == 'asc' ? <FontAwesomeIcon icon={faSortUp} /> : <FontAwesomeIcon icon={faSortDown} />}
+            <span className="sortIcon" onClick={(e) => this.handleSort1(e, 'price')}>
+                {this.state.sortBy['price'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
               </span>
+          
             </th>
             <th>Description</th>
             <th>Owner</th>
@@ -290,8 +313,8 @@ class Buyer extends React.Component {
             <th>Name</th>
             <th>Image</th>
             <th>Price
-            <span className="sortIcon" onClick={(e) => this.handleSort(e, 'price')}>
-                {this.state.sortBy['price'] == 'asc' ? <FontAwesomeIcon icon={faSortUp} /> : <FontAwesomeIcon icon={faSortDown} />}
+            <span className="sortIcon" onClick={(e) => this.handleSort2(e, 'price')}>
+                {this.state.sortBy['price'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
               </span>
             </th>
             <th>Description</th>
@@ -368,8 +391,8 @@ class Buyer extends React.Component {
             <th>Name</th>
             <th>Image</th>
             <th>Price
-            <span className="sortIcon" onClick={(e) => this.handleSort(e, 'price')}>
-                {this.state.sortBy['price'] == 'asc' ? <FontAwesomeIcon icon={faSortUp} /> : <FontAwesomeIcon icon={faSortDown} />}
+            <span className="sortIcon" onClick={(e) => this.handleSort3(e, 'price')}>
+                {this.state.sortBy['price'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
               </span>
             </th>
             <th>Description</th>
