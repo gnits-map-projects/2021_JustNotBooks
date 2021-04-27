@@ -67,7 +67,7 @@ export class Register extends React.Component {
     errors.mobile = 
     (validMobileRegex.test(event.target.value))
       ? ''
-      : 'Enter a valid phone number!';
+      : ' Please Enter a valid phone number!';
    if(errors.mobile==  '')
     {
       this.setState({ph : true});

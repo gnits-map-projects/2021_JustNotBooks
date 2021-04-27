@@ -26,8 +26,8 @@ class Feedback extends React.Component {
                                      value={this.state.textAreaValue}
                                      onChange={this.handleChange}
                                      placeholder="Please provide your Feedback..."
-                                     rows={5}
-                                     cols={50}
+                                     rows={6}
+                                     cols={60}
                                  />
                   <br />
                  <h5>Rate the Item</h5>

@@ -419,7 +419,8 @@ class Seller extends Component {
             <td >{item.owner}</td>
             <td>{item.category}</td>
             <td >{item.address}</td>
-            <td >{item.status}</td><td></td><td></td>
+            <td >{item.status}</td>
+            <td> <td><button onClick={event => window.location.href = './Feedback'} > Feedback</button></td></td><td></td>
 
           </tr>
         );

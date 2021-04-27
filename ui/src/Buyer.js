@@ -323,6 +323,7 @@ class Buyer extends React.Component {
             <th>Status</th>
             <th>Rating</th>
              <th>Reviews</th>
+
             <tbody> {this.renderResultBorrow()} </tbody>
           </table>
 

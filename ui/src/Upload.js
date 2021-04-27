@@ -273,7 +273,8 @@ export class Upload extends React.Component {
                             onChange={this.handleToChange} required
 
                         />
-                        <br></br>
+                        <br />
+
                     <div class="fileimages">
                         <input type="file" onInput={this.handleImage} required/>
                             <div class="imgfile">
