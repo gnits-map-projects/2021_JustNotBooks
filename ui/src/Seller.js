@@ -362,10 +362,6 @@ class Seller extends Component {
           if (response.ok) {
             const templateId = 'template_Ne4ypnOa';
             this.sendFeedback(templateId, { message_html: "Thanks for Returning", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail") })
-            //alert("Item returned Successfully!!")
-            // swal("Good job!","Item returned successfully!","success");
-            // //swal({title:"Good job!",text:"Item returned successfully!",type:"success",timer:5000});
-            // window.location.reload(false)
             swal({
               title: "Good job", text: "Item returned successfully!", icon:
                 "success"

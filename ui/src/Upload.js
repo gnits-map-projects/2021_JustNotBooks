@@ -36,7 +36,6 @@ export class Upload extends React.Component {
     this.handleToChange=this.handleToChange.bind(this)
     this.handleSubmit=this.handleSubmit.bind(this)
     this.handleImage=this.handleImage.bind(this)
-    //this.DateEnabale=this.DateEnabale.bind(this)
     this.handleCancel=this.handleCancel.bind(this)
     this.state.owner = sessionStorage.getItem("name");
     this.state.uploadedAt=Date();

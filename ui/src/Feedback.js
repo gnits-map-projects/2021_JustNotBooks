@@ -29,7 +29,7 @@ class Feedback extends React.Component {
                                      rows={6}
                                      cols={60}
                                  />
-                  <br />
+                  <br></br>
                  <h5><b>Rate the Item</b></h5>
                 <ReactStars
                     count={5}

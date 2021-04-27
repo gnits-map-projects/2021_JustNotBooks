@@ -195,10 +195,6 @@ class Buyer extends React.Component {
         .then(response => {
           if (response.ok) {
             const templateId = 'template_Ne4ypnOa';
-          // this.sendFeedback(templateId, { message_html: "Thanks for Borrowing!! Return on time is appreciated..", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail") })
-            //alert("Thanks for Borrowing!! Return on time is appreciated..")
-            //  swal("Thanks!","Thanks for Borrowing!! Return on time is appreciated..","success")
-            // this.props.history.push("./seller");
             swal({
               title: "Thanks!", text: "Thanks for Borrowing!! Return on time is appreciated..", icon:
                 "success"

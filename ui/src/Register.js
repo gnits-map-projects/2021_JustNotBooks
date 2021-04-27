@@ -96,7 +96,6 @@ export class Register extends React.Component {
   }
 
   handleCancel(){
-    //window.location.href="/home";
     window.location.reload();
   }
 
