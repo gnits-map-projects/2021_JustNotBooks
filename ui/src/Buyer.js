@@ -200,8 +200,16 @@ class Buyer extends React.Component {
       })
         .then(response => {
           if (response.ok) {
-            const templateId = 'template_Ne4ypnOa';
-            this.sendFeedback(templateId, { message_html: "Thanks for Borrowing!! Return on time is appreciated..", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail") })
+            emailjs.send("service_vclyh4x","template_9ghmwb3",
+          {
+           your_name: sessionStorage.getItem("name"),
+           from_name: "JustNotBooks",
+           message: "Thanks for Borrowing!! Return on time is appreciated..",
+           email:sessionStorage.getItem("uemail"),
+           });
+
+            
+            //this.sendFeedback(templateId, { message_html: "Thanks for Borrowing!! Return on time is appreciated..", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail") })
             //alert("Thanks for Borrowing!! Return on time is appreciated..")
             //  swal("Thanks!","Thanks for Borrowing!! Return on time is appreciated..","success")
             // this.props.history.push("./seller");
