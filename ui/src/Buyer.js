@@ -117,10 +117,6 @@ class Buyer extends React.Component {
           this.sendFeedback(templateId, { message_html: "Thank you for purchasing!!", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail") })
           var note = "Thank you for purchasing!!"
           sessionStorage.setItem("notification", note)
-          //alert("Thank you for purchasing!!")
-          // swal("Thanks!","Thank you for purchasing!","success")
-
-          //  this.props.history.push("./seller");
           swal({
             title: "Thanks!", text: "Thank you for purchasing!", icon:
               "success"
@@ -218,6 +214,8 @@ class Buyer extends React.Component {
           <td>{item.category}</td>
           <td >{item.address}</td>
           <td >{item.status}</td>
+          <td>{item.rating}</td>
+          <td><button onClick={event =>  window.location.href='./Review'} > Reviews</button></td>
           <td><button onClick={() => this.handleBuy(sessionStorage.getItem("name"), item.id)} > Buy </button></td>
         </tr>
       );
@@ -257,6 +255,8 @@ class Buyer extends React.Component {
             <th>Category</th>
             <th>Address</th>
             <th>Status</th>
+            <th>Rating</th>
+            <th>Reviews</th>
             <tbody> {this.renderResultRows()} </tbody>
           </table>
         </div>
@@ -301,6 +301,8 @@ class Buyer extends React.Component {
             <th>Category</th>
             <th>Address</th>
             <th>Status</th>
+            <th>Rating</th>
+             <th>Reviews</th>
             <tbody> {this.renderResultBorrow()} </tbody>
           </table>
 
@@ -332,6 +334,8 @@ class Buyer extends React.Component {
           <td>{item.category}</td>
           <td >{item.address}</td>
           <td >{item.status}</td>
+          <td>{item.rating}</td>
+          <td><button onClick={event =>  window.location.href='./Review'} > Reviews</button></td>
           <td><button onClick={() => this.handleBorrow(sessionStorage.getItem("name"), item.id, item.fromDate)} > Borrow </button></td>
         </tr>
       );
@@ -373,6 +377,8 @@ class Buyer extends React.Component {
             <th>Category</th>
             <th>Address</th>
             <th>Status</th>
+            <th>Rating</th>
+            <th>Reviews</th>
             <tbody> {this.renderResultDonate()} </tbody>
           </table>
 
@@ -402,6 +408,8 @@ class Buyer extends React.Component {
           <td>{item.category}</td>
           <td >{item.address}</td>
           <td >{item.status}</td>
+          <td>{item.rating}</td>
+          <td><button onClick={event =>  window.location.href='./Review'} > Reviews</button></td>
           <td><button onClick={() => this.handleBuy(sessionStorage.getItem("name"), item.id)} > Take </button></td>
         </tr>
       );

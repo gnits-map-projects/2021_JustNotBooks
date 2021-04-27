@@ -29,9 +29,11 @@ class Feedback extends React.Component {
                                      rows={5}
                                      cols={50}
                                  />
+                  <br />
+                 <h5>Rate the Item</h5>
                 <ReactStars
                     count={5}
-                    size={100}
+                    size={50}
                     activeColor="#ffd700"
                     isHalf={true}
                         emptyIcon={<i className="far fa-star"></i>}
@@ -39,6 +41,17 @@ class Feedback extends React.Component {
                         fullIcon={<i className="fa fa-star"></i>}
 
                 />
+                <h5>Rate Your Seller</h5>
+                                <ReactStars
+                                    count={5}
+                                    size={50}
+                                    activeColor="#ffd700"
+                                    isHalf={true}
+                                        emptyIcon={<i className="far fa-star"></i>}
+                                        halfIcon={<i className="fa fa-star-half-alt"></i>}
+                                        fullIcon={<i className="fa fa-star"></i>}
+
+                                />
                 <br /><center>
                <button onClick={event =>  window.location.href='./seller'} > Submit </button>
                   </center>
