@@ -30,7 +30,7 @@ class Feedback extends React.Component {
                                      cols={60}
                                  />
                   <br />
-                 <h5>Rate the Item</h5>
+                 <h5><b>Rate the Item</b></h5>
                 <ReactStars
                     count={5}
                     size={60}
@@ -41,7 +41,7 @@ class Feedback extends React.Component {
                         fullIcon={<i className="fa fa-star"></i>}
 
                 />
-                <h5>Rate Your Seller</h5>
+                <h5><b>Rate Your Seller</b></h5>
                                 <ReactStars
                                     count={5}
                                     size={60}

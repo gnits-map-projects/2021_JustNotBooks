@@ -24,7 +24,7 @@ class Feedback extends React.Component {
 
                                      value={this.state.textAreaValue}
                                      onChange={this.handleChange}
-                                     rows={6}
+                                     rows={5}
                                      cols={50}
                                  />
                                  </center>

@@ -81,7 +81,7 @@ export class Register extends React.Component {
     let errors = this.state.errors;
     errors.password = 
     event.target.value.length < 8
-      ? 'Password must be 8 characters long!'
+      ? 'Password must be 8 characters long!!'
       : '';
     if(errors.password ==  '')
       {
