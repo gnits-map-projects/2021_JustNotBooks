@@ -1,6 +1,7 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import Nav from "./Nav.js"
+import emailjs from 'emailjs-com'
 import "./Buyer.css"
 import swal from 'sweetalert'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -198,15 +199,15 @@ class Buyer extends React.Component {
       })
         .then(response => {
           if (response.ok) {
-            emailjs.send("service_vclyh4x","template_9ghmwb3",
-          {
-           your_name: sessionStorage.getItem("name"),
-           from_name: "JustNotBooks",
-           message: "Thanks for Borrowing!! Return on time is appreciated..",
-           email:sessionStorage.getItem("uemail"),
-           });
+            emailjs.send("service_vclyh4x", "template_9ghmwb3",
+              {
+                your_name: sessionStorage.getItem("name"),
+                from_name: "JustNotBooks",
+                message: "Thanks for Borrowing!! Return on time is appreciated..",
+                email: sessionStorage.getItem("uemail"),
+              });
 
-            
+
             //this.sendFeedback(templateId, { message_html: "Thanks for Borrowing!! Return on time is appreciated..", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail") })
             //alert("Thanks for Borrowing!! Return on time is appreciated..")
             //  swal("Thanks!","Thanks for Borrowing!! Return on time is appreciated..","success")
@@ -247,7 +248,7 @@ class Buyer extends React.Component {
           <td >{item.address}</td>
           <td >{item.status}</td>
           <td>{item.rating}</td>
-          <td><button onClick={event =>  window.location.href='./Review'} > Reviews</button></td>
+          <td><button onClick={event => window.location.href = './Review'} > Reviews</button></td>
           <td><button onClick={() => this.handleBuy(sessionStorage.getItem("name"), item.id)} > Buy </button></td>
         </tr>
       );
@@ -334,7 +335,7 @@ class Buyer extends React.Component {
             <th>Address</th>
             <th>Status</th>
             <th>Rating</th>
-             <th>Reviews</th>
+            <th>Reviews</th>
             <tbody> {this.renderResultBorrow()} </tbody>
           </table>
 
@@ -367,7 +368,7 @@ class Buyer extends React.Component {
           <td >{item.address}</td>
           <td >{item.status}</td>
           <td>{item.rating}</td>
-          <td><button onClick={event =>  window.location.href='./Review'} > Reviews</button></td>
+          <td><button onClick={event => window.location.href = './Review'} > Reviews</button></td>
           <td><button onClick={() => this.handleBorrow(sessionStorage.getItem("name"), item.id, item.fromDate)} > Borrow </button></td>
         </tr>
       );
@@ -441,7 +442,7 @@ class Buyer extends React.Component {
           <td >{item.address}</td>
           <td >{item.status}</td>
           <td>{item.rating}</td>
-          <td><button onClick={event =>  window.location.href='./Review'} > Reviews</button></td>
+          <td><button onClick={event => window.location.href = './Review'} > Reviews</button></td>
           <td><button onClick={() => this.handleBuy(sessionStorage.getItem("name"), item.id)} > Take </button></td>
         </tr>
       );
