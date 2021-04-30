@@ -41,6 +41,8 @@ a:hover{
 }
 .searchBar{
   border-radius: 5px;
+  width: 9cm;
+  
 }
 .searchBar > button {
   border-radius: 5px;
