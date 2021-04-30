@@ -17,9 +17,10 @@ import Notification from "./Notification"
 import EditPswd from "./EditPswd"
 import Survey from "./survey"
 import Forgot from "./Forgot"
-import ResetPassword from "./ResetPassword"
+//import ResetPassword from "./reset"
 import Feedback from "./Feedback"
 import Review from "./Review"
+import ResetPassword from "./ResetPassword";
 
 
 
@@ -50,12 +51,9 @@ class App extends React.Component {
           <Route path="/editPswd" component={EditPswd} />
           <Route path="/survey" component={Survey} />
           <Route path="/Review" component={Review} />
-
-
-
-
-
-        </div>
+          <Route path="/forgot" component={Forgot} />
+          <Route path="/ResetPassword" component={ResetPassword}/>
+          </div>
       </BrowserRouter>
 
     );
