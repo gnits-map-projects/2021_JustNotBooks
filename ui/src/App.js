@@ -16,8 +16,8 @@ import Search from "./Search";
 import Notification from "./Notification"
 import EditPswd from "./EditPswd"
 import Survey from "./survey"
-import Forgot from "./Forgot"
-import ResetPassword from "./ResetPassword"
+
+
 import Feedback from "./Feedback"
 import Review from "./Review"
 
