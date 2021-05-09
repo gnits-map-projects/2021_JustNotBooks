@@ -16,7 +16,7 @@ import Search from "./Search";
 import Notification from "./Notification"
 import EditPswd from "./EditPswd"
 import Survey from "./survey"
-import Forgot from "./Forgot"
+
 //import ResetPassword from "./reset"
 
 
@@ -53,9 +53,9 @@ class App extends React.Component {
           <Route path="/editPswd" component={EditPswd} />
           <Route path="/survey" component={Survey} />
           <Route path="/Review" component={Review} />
-          <Route path="/forgot" component={Forgot} />
-          <Route path="/ResetPassword" component={ResetPassword}/>
-          </div>
+
+          <Route path="/ResetPassword" component={ResetPassword} />
+        </div>
       </BrowserRouter>
 
     );
