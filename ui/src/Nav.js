@@ -19,31 +19,15 @@ class Nav extends React.Component {
     super(props);
     this.state = {
       search: '',
+      items: []
     }
   }
-  searchText = "Search for an item"
+
   searchStyle = {
     width: '50%',
     backgroundColor: 'blue'
   }
-  items = [
-    {
-      id: 1,
-      name: 'apron'
-    },
-    {
-      id: 2,
-      name: 'drafter'
-    },
-    {
-      id: 3,
-      name: 'calculator'
-    },
-    {
-      id: 4,
-      name: 'book'
-    }
-  ]
+
   handleOnSearch = (string, results) => {
     // onSearch will have as the first callback parameter the string searched and for the second the results.
     this.setState({
@@ -56,6 +40,19 @@ class Nav extends React.Component {
     // the item selected
     window.location.href = "./search";
     console.log(item)
+  }
+  fetchItems = async () => {
+    const itemsfromDb = await fetch("http://localhost:9000/itemnames");
+    const response = await itemsfromDb.json();
+    let index = 0;
+    let tempItems = [];
+    response.forEach((item) => {
+      tempItems = [...tempItems, { 'id': index++, 'name': item }]
+    })
+    this.setState({ 'items': tempItems });
+  };
+  componentDidMount() {
+    this.fetchItems();
   }
   render() {
     return (
@@ -70,7 +67,7 @@ class Nav extends React.Component {
               <div style={{ width: "650px", display: "inline-block", verticalAlign: "middle", zIndex: "100" }}>
                 <li className="liSearch">
                   <ReactSearchAutocomplete
-                    items={this.items}
+                    items={this.state.items}
                     onSearch={this.handleOnSearch}
                     onSelect={this.handleOnSelect}
                     placeholder='Search for an item'
@@ -78,9 +75,9 @@ class Nav extends React.Component {
                   />
                 </li>
               </div>
-              <li>< a class="p" href="/survey"><img src={ic} /></a></li>
-              <li><a class="p" href="/profile">{sessionStorage.getItem("name")}'s Profile</a></li>
-              <li><a href="/notification" class="notification"><span><img src={bell} /></span><span class="badge">{sessionStorage.getItem("l")}</span></a></li>
+              <li>< a className="p" href="/survey"><img src={ic} /></a></li>
+              <li><a className="p" href="/profile">{sessionStorage.getItem("name")}'s Profile</a></li>
+              <li><a href="/notification" className="notification"><span><img src={bell} /></span><span className="badge">{sessionStorage.getItem("l")}</span></a></li>
             </ul>
           </div>
         </HashRouter>
