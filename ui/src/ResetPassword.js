@@ -1,18 +1,20 @@
 import React, { Component} from "react";
 import "./edit.css"
+
 import swal from 'sweetalert'
 import emailjs from 'emailjs-com'
 import{ init } from 'emailjs-com';
 
 init("user_eQuTDdOKVg6qHspQzBx7u");
 
-export class ResetPassword extends Component {
+export class ResetPassword extends React.Component {
     constructor(props) {
         super(props);
         this.state={
-      
+          
           oldPswd:'',
           newPswd:'',
+          name : '',
           errors: {
             password: '',
           }
@@ -22,10 +24,15 @@ export class ResetPassword extends Component {
         this.handleUpdate=this.handleUpdate.bind(this)
         this.handleNewPswdChange=this.handleNewPswdChange.bind(this)
         this.handleOldPswdChange=this.handleOldPswdChange.bind(this)
+        this.handleNameChange=this.handleNameChange.bind(this)
         
 
     }
-    
+    handleNameChange=event=>{
+      this.setState({
+        name : event.target.value
+      });
+    }
     handleNewPswdChange=event=>{
         const { name, value } = event.target;
         let errors = this.state.errors;
@@ -52,25 +59,13 @@ export class ResetPassword extends Component {
         
             event.preventDefault();
             console.log(this.state)
+            
             var body = {
               name:this.state.name,
               oldPswd:this.state.oldPswd,
               newPswd:this.state.newPswd
             }
             console.log(body);
-            if(this.state.oldPswd==""){
-              alert('Please enter the password')
-
-            }
-            else if (this.state.oldPswd==""){
-              alert('Please confirm the password')
-            }
-            else if(this.state.cpswd!=this.state.pswd){
-              alert('confirm password does not matched')
-            }
-            
-            else{
-    
                 const url = "http://localhost:9000/editPassword";
                 let headers = new Headers();
             
@@ -79,6 +74,7 @@ export class ResetPassword extends Component {
             
                 headers.append('Access-Control-Allow-origin',url);
                 headers.append('Access-Control-Allow-Credentials','true');
+                
             
                 headers.append('POST','GET');
             
@@ -87,30 +83,32 @@ export class ResetPassword extends Component {
                 method: 'POST',
                 body: JSON.stringify(body)
                 })
-                .then(response => {if(response.ok){
-                    const templateId = 'template_Ne4ypnOa';
-                    this.sendFeedback(templateId, {message_html: "Your Password has been changed", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail")})
-                    //alert("Password Changed")
+                .then(response => { if(response.ok){
+                    
                     swal("Good Job!","Password Changed Successfully!","success")
-                     this.props.history.push("/profile");
+                    this.props.history.push("/profile");
+                    emailjs.send("service_vclyh4x","template_9ghmwb3",
+                    {
+                        your_name: sessionStorage.getItem("name"),
+                        from_name: "JustNotBooks",
+                        message: "Your password is successfully reset",
+                        email:sessionStorage.getItem("uemail"),
+                    });
+                    return response.text()
+                    .then(res=> {
+                      console.log(res)
+                      window.location.href="/Login";
+                    })
+                    //return window here
+                   
                      }
                     else {
                       //alert("Old Password does not matched")
-                      swal("Good Job!","Password Changed Successfully! This window will be closed","success")
-                      
-                      emailjs.send("service_vclyh4x","template_9ghmwb3",
-            {
-             your_name: this.state.name,
-             from_name: "JustNotBooks",
-             message: "Your password is successfully reset",
-             email:this.state.email,
-             });
-                  
+                      swal("Sorry","Error occured while processing your request","error")
                   }
                })
-              }
-               
-        }
+              
+      }
   render(){
 
       return(
@@ -119,17 +117,26 @@ export class ResetPassword extends Component {
       
 				<form >
 					<h2>RESET Password</h2>
-          
+              <div className="name">
+						      <input
+							       type="text"
+							       placeholder="User Name"
+						         name="name"
+						       	value={this.state.name}
+                     onChange={this.handleNameChange} required
+							
+					        	/>
+				     	</div>
 					
 					
-                    <div className="oldPswd">
-                                    <input
-                                        type="password"
-                                        placeholder="Password"
-                                        name="oldPswd"
-                                        value={this.state.oldPswd}
-                                        onChange={this.handleOldPswdChange} required
-                                    />
+              <div className="oldPswd">
+                    <input
+                      type="password"
+                      placeholder="Password"
+                      name="oldPswd"
+                      value={this.state.oldPswd}
+                       onChange={this.handleOldPswdChange} required
+                />
                             
                     </div>
                     <div className="newPswd">
@@ -155,3 +162,8 @@ export class ResetPassword extends Component {
     }
 }
 export default ResetPassword;
+/*return response.text()
+                      .then(res=> {
+                        console.log(res)
+                        window.location.href="/Login";
+                    })*/

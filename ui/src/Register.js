@@ -95,11 +95,11 @@ export class Register extends React.Component {
     });
   }
 
-  handleCancel(){
+  handleCancel=event=>{
     window.location.reload();
   }
 
-  handleSubmit(event) {
+  handleSubmit=event=>{
     
     event.preventDefault();
     console.log(this.state)
@@ -130,7 +130,7 @@ else if(this.state.pswd==""){
     else{
     
 
-  const url = "http://localhost:9000/check";
+    const url = "http://localhost:9000/check";
     let headers = new Headers();
  
     headers.append('Content-Type','application/json');
@@ -192,7 +192,7 @@ else if(this.state.pswd==""){
 		<div className="register">
 				<form onSubmit={this.displayLogin}>
 					<h2>Register</h2>
-					<p><b>Already Registered?  </b> <a href ="/login">Login here!</a></p>
+					
 					<div className="name">
 						<input
 							type="text"
@@ -249,6 +249,7 @@ else if(this.state.pswd==""){
 
 					<input type="submit" value="Register" onClick={this.handleSubmit}/>
           <input type="submit" value="Cancel" onClick={this.handleCancel}/>
+          <p>Already Registered?   <a href ="/login">Login here!</a></p>
 				</form>
 
 
