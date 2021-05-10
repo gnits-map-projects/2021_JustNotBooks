@@ -19,7 +19,6 @@ class Nav extends React.Component {
     super(props);
     this.state = {
       search: '',
-
     }
   }
   searchText = "Search for an item"
@@ -69,7 +68,7 @@ class Nav extends React.Component {
               <li><a href="/buyer">Exchanges</a></li>
               <li><a href="/seller">Transaction</a></li>
               <div style={{ width: "650px", display: "inline-block", verticalAlign: "middle", zIndex: "100" }}>
-                <li>
+                <li className="liSearch">
                   <ReactSearchAutocomplete
                     items={this.items}
                     onSearch={this.handleOnSearch}
