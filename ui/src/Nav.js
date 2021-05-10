@@ -4,6 +4,7 @@ import ic from './images/log.png'
 import h from './images/ho.png'
 import bell from './images/bellll.png'
 import "./Nav.css"
+import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import {
   Route,
   NavLink,
@@ -17,24 +18,41 @@ class Nav extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      search: ''
+      search: '',
+      items: []
     }
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.onEnter = this.onEnter.bind(this);
+  }
 
+  searchStyle = {
+    width: '50%',
+    backgroundColor: 'blue'
   }
-  handleChange(value, event) {
+
+  handleOnSearch = (string, results) => {
+    // onSearch will have as the first callback parameter the string searched and for the second the results.
     this.setState({
-      search: value
+      search: string
     });
-    sessionStorage.setItem("search", value);
+    sessionStorage.setItem("search", string);
+    console.log(string, results)
   }
-  handleSubmit() {
+  handleOnSelect = (item) => {
+    // the item selected
     window.location.href = "./search";
+    console.log(item)
   }
-  onEnter(value, event) {
-    this.handleSubmit();
+  fetchItems = async () => {
+    const itemsfromDb = await fetch("http://localhost:9000/itemnames");
+    const response = await itemsfromDb.json();
+    let index = 0;
+    let tempItems = [];
+    response.forEach((item) => {
+      tempItems = [...tempItems, { 'id': index++, 'name': item }]
+    })
+    this.setState({ 'items': tempItems });
+  };
+  componentDidMount() {
+    this.fetchItems();
   }
   render() {
     return (
@@ -46,30 +64,26 @@ class Nav extends React.Component {
               <li><a href="/home"><img src={h} /></a></li>
               <li><a href="/buyer">Exchanges</a></li>
               <li><a href="/seller">Transaction</a></li>
-
-
-
-              <li>
-                <SearchField
-
-                  placeholder="Search for an item"
-                  onChange={this.handleChange}
-                  onSearchClick={this.handleSubmit}
-                  onEnter={this.onEnter}
-                  classNames="searchBar"
-                />
-              </li>
-              <li>< a class="p" href="/survey"><img src={ic} /></a></li>
-              <li><a class="p" href="/profile">{sessionStorage.getItem("name")}'s Profile</a></li>
-              <li><a href="/notification" class="notification"><span><img src={bell} /></span><span class="badge">{sessionStorage.getItem("l")}</span></a></li>
+              <div style={{ width: "650px", display: "inline-block", verticalAlign: "middle", zIndex: "100" }}>
+                <li className="liSearch">
+                  <ReactSearchAutocomplete
+                    items={this.state.items}
+                    onSearch={this.handleOnSearch}
+                    onSelect={this.handleOnSelect}
+                    placeholder='Search for an item'
+                    autoFocus
+                  />
+                </li>
+              </div>
+              <li>< a className="p" href="/survey"><img src={ic} /></a></li>
+              <li><a className="p" href="/profile">{sessionStorage.getItem("name")}'s Profile</a></li>
+              <li><a href="/notification" className="notification"><span><img src={bell} /></span><span className="badge">{sessionStorage.getItem("l")}</span></a></li>
             </ul>
           </div>
         </HashRouter>
-
       </div>
     )
   }
-
 }
 
 export default Nav;

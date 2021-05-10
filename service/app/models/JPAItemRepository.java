@@ -66,6 +66,17 @@ public class JPAItemRepository implements ItemRepository {
         List<Item> items = em.createQuery("select i from Item i where status=:s and not owner=:owner and category=:cat", Item.class).setParameter("s",s).setParameter("owner",owner).setParameter("cat",cat).getResultList();
         return items.stream();
     }
+
+    @Override
+    public CompletionStage<Stream<String>> listItemNames() {
+        return supplyAsync(() -> wrap(em -> listitemnames(em)), executionContext);
+    }
+    private Stream<String> listitemnames(EntityManager em) {
+        String s="Available";
+        List<String> items = em.createQuery("select distinct itemName from Item where status=:s", String.class).setParameter("s",s).getResultList();
+        return items.stream();
+    }
+
     @Override
     public CompletionStage<Stream<Item>> listBorrow(String owner) {
         return supplyAsync(() -> wrap(em -> listborrow(em,owner)), executionContext);

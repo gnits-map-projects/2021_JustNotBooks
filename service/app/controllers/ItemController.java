@@ -51,6 +51,12 @@ public class ItemController extends Controller {
             return ok(toJson(itemStream.collect(Collectors.toList())));
         }, ec.current());
     }
+    public CompletionStage<Result> getItemNames() {
+
+        return itemRepository.listItemNames().thenApplyAsync(itemStream -> {
+            return ok(toJson(itemStream.collect(Collectors.toList())));
+        }, ec.current());
+    }
     public CompletionStage<Result> getBorrowItems() {
         JsonNode js = request().body().asJson();
         String owner = js.get("owner").asText();

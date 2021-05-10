@@ -26,7 +26,7 @@ const Home = () => {
     <div>
       <Nav />
       <Marquee>
-        <b style={{ "white-space": "nowrap" }}>More than 500 exchanges among students of different schools and colleges happen through this platform every year.</b>
+        <b style={{ "whiteSpace": "nowrap" }}>More than 500 exchanges among students of different schools and colleges happen through this platform every year.</b>
       </Marquee>
       <div className="containerSlide" id="a">
         <Slide {...properties}>

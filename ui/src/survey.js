@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import ReactStars from "react-rating-stars-component";
 import "./survey.css"
+import swal from 'sweetalert'
 class Survey extends React.Component {
-    handleSubmit(event) {
-        alert('Thank you for your time!');
-        window.location.href = "./logout";
+    async handleSubmit(event) {
+        swal("Thanks for your time!", "", "success");
+
+
+        //window.location.href = "./logout";
     }
     constructor() {
         super();
@@ -16,6 +19,12 @@ class Survey extends React.Component {
 
     handleChange(event) {
         this.setState({ textAreaValue: event.target.value });
+    }
+    async handlelogOut(event) {
+
+        swal("Logged out successfully!!", "", "success");
+        await new Promise(r => setTimeout(r, 2000));
+        window.location.href = "./login";
     }
     render() {
         return (
@@ -34,8 +43,12 @@ class Survey extends React.Component {
                     cols={50}
                 />
                 <br /><br />
-                <button onClick={this.handleSubmit} style={{ "float": "left" }}>< a class="p" href="/logout">Submit</a></button>
-                <button style={{ "float": "right" }}> < a class="p" href="/logout">Logout</a></button>
+                <button onClick={this.handleSubmit} style={{ "float": "left" }}>Submit</button>
+                <button style={{ "float": "right" }} onClick={this.handlelogOut}>
+                   
+                        Logout
+                    
+                </button>
             </div>
         );
     }

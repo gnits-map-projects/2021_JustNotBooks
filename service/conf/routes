@@ -13,7 +13,7 @@ POST     /check                      controllers.PersonController.checkName()
 POST    /edit                       controllers.PersonController.editPerson()
 POST    /editPassword               controllers.PersonController.editPassword()
 
-
+GET     /itemnames                    controllers.ItemController.getItemNames()
 POST    /item                      controllers.ItemController.addItem()
 POST   /buy                      controllers.ItemController.buy()
 POST   /borrow                     controllers.ItemController.borrow()
