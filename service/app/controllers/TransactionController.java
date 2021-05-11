@@ -47,6 +47,12 @@ public class TransactionController extends Controller {
         return ok(views.html.index.render());
     }
 
+    public CompletionStage<Result> getTransac() {
+        return transactionRepository.getNumberOfTransac().thenApplyAsync(transactionStream -> {
+            return ok(toJson(transactionStream.collect(Collectors.toList())));
+        }, ec.current());
+
+    }
     public CompletionStage<Result> addTransaction(String trans) {
         //JsonNode js = request().body().asJson();
 //        ObjectMapper objectMapper = new ObjectMapper();

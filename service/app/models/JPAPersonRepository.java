@@ -42,6 +42,7 @@ public class JPAPersonRepository implements PersonRepository {
 
     @Override
     public CompletionStage<Stream<Person>> list() {
+
         return supplyAsync(() -> wrap(em -> list(em)), executionContext);
     }
 
@@ -59,8 +60,6 @@ public class JPAPersonRepository implements PersonRepository {
     public CompletionStage<Stream<Person>> listuser(String username, String password) {
         return supplyAsync(() -> wrap(em -> listuser(em, username, password)), executionContext);
     }
-
-
 
     private <T> T wrap(Function<EntityManager, T> function) {
         return jpaApi.withTransaction(function);
@@ -159,7 +158,22 @@ public class JPAPersonRepository implements PersonRepository {
         return supplyAsync(() -> wrap(em -> editPswd(em, name, oldPswd,newPswd)), executionContext);
     }
     private Person editPswd(EntityManager em, String name, String oldPswd, String newPswd) {
-        int i = em.createQuery("update Person SET pswd=:newPswd where name=:name and pswd=:oldPswd").setParameter("name", name).setParameter("newPswd", newPswd).setParameter("oldPswd",oldPswd).executeUpdate();
+        int i = em.createQuery("update Person SET pswd =: newPswd where name=:name").setParameter("name", name).setParameter("newPswd", newPswd).executeUpdate();
+        //int i=q.executeUpdate();
+        if (i != 0) {
+            Person persons = em.createQuery("select p from Person p where name=:name", Person.class).setParameter("name", name).getSingleResult();
+            return persons;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public CompletionStage<Person> resetPswd(String name,String newPswd) {
+        return supplyAsync(() -> wrap(em -> resetPswd(em,name,newPswd)), executionContext);
+    }
+    private Person resetPswd(EntityManager em, String name, String newPswd) {
+        int i = em.createQuery("update Person SET pswd =: newPswd where name=:name").setParameter("name", name).setParameter("newPswd", newPswd).executeUpdate();
         //int i=q.executeUpdate();
         if (i != 0) {
             Person persons = em.createQuery("select p from Person p where name=:name", Person.class).setParameter("name", name).getSingleResult();

@@ -67,6 +67,7 @@ public class JPAItemRepository implements ItemRepository {
         return items.stream();
     }
 
+
     @Override
     public CompletionStage<Stream<String>> listItemNames() {
         return supplyAsync(() -> wrap(em -> listitemnames(em)), executionContext);

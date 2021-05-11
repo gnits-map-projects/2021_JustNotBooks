@@ -33,7 +33,14 @@ public class JPATransactionRepository implements TransactionRepository {
         this.jpaApi = jpaApi;
         this.executionContext = executionContext;
     }
-
+    @Override
+    public CompletionStage<Stream<Long>> getNumberOfTransac() {
+        return supplyAsync(() -> wrap(em -> getNumberOfTransac(em)), executionContext);
+    }
+    private Stream<Long> getNumberOfTransac(EntityManager em) {
+        List<Long> transacCount = em.createQuery("select count(*) from Transaction", Long.class).getResultList();
+        return transacCount.stream();
+    }
     @Override
     public CompletionStage<Transaction> add(Transaction transaction) {
         return supplyAsync(() -> wrap(em -> insert(em, transaction)), executionContext);

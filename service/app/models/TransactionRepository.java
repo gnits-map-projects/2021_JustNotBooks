@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 @ImplementedBy(JPATransactionRepository.class)
 public interface TransactionRepository {
 
+    CompletionStage<Stream<Long>> getNumberOfTransac();
     CompletionStage<Transaction> add(Transaction transaction);
 
 }

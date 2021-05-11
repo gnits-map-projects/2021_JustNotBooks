@@ -144,6 +144,18 @@ public class PersonController extends Controller {
                 return badRequest("Cannot Change Password");
         }, ec.current());
     }
+    public CompletionStage<Result> ResetPassword() {
+        JsonNode j = request().body().asJson();
+        String name = j.get("name").asText();
+        //String oldPswd = j.get("oldPswd").asText();
+        String newPswd = j.get("newPswd").asText();
+        return personRepository.resetPswd(name,newPswd).thenApplyAsync(p -> {
+            if(p!=null)
+                return ok("Password Changed");
+            else
+                return badRequest("Cannot Change Password");
+        }, ec.current());
+    }
 
 }
 
