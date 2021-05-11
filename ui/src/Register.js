@@ -92,12 +92,12 @@ export class Register extends React.Component {
     });
   }
 
-  handleCancel() {
+  handleCancel=event=>{
     window.location.reload();
   }
 
-  handleSubmit(event) {
-
+  handleSubmit=event=>{
+    
     event.preventDefault();
     console.log(this.state)
     var body = {
@@ -111,59 +111,58 @@ export class Register extends React.Component {
       alert('Please enter the name')
 
     }
-    else if (this.state.email == "") {
-      alert('Please enter the email')
-    }
-    else if (this.state.phoneNumber == "") {
-      alert('Please enter the phone number')
-    }
-    else if (this.state.pswd == "") {
-      alert('Please enter the password')
-    }
-    else if (this.state.cpswd != this.state.pswd) {
-      alert('confirm password does not matched')
+  else if(this.state.email==""){
+    alert('Please enter the email')
+}
+else if(this.state.phoneNumber==""){
+  alert('Please enter the phone number')
+}
+else if(this.state.pswd==""){
+  alert('Please enter the password')
+}
+	else if(this.state.cpswd!=this.state.pswd){
+			alert('confirm password does not matched')
+	  
+		  }
+    else{
+    
 
-    }
-    else {
+    const url = "http://localhost:9000/check";
+    let headers = new Headers();
+ 
+    headers.append('Content-Type','application/json');
+    headers.append('Accept','application/json');
+ 
+    headers.append('Access-Control-Allow-origin',url);
+    headers.append('Access-Control-Allow-Credentials','true');
+ 
+    headers.append('POST','GET');
+ 
+    fetch(url, {
+       headers:headers,
+       method: 'POST',
+       body: JSON.stringify(body)
+    })
+  /*.then(response => response.json())
+    .then(contents => {console.log(contents); })*/
+ 
 
-
-      const url = "http://localhost:9000/check";
-      let headers = new Headers();
-
-      headers.append('Content-Type', 'application/json');
-      headers.append('Accept', 'application/json');
-
-      headers.append('Access-Control-Allow-origin', url);
-      headers.append('Access-Control-Allow-Credentials', 'true');
-
-      headers.append('POST', 'GET');
-
-      fetch(url, {
-        headers: headers,
-        method: 'POST',
-        body: JSON.stringify(body)
-      })
-        /*.then(response => response.json())
-          .then(contents => {console.log(contents); })*/
-
-
-        .then(response => {
-          if (response.ok) {
-
-            //alert('Details submitted successfully!!');
-            //swal({title:"Error",text:"Details submitted successfully!!",type:"success",timer:5000});
-            swal("Good Job!", "Details submitted successfully!!", "success")
-            //this.fun.bind(this);
-            this.props.history.push("/login");
+      .then(response => {if(response.ok){
+            
+        //alert('Details submitted successfully!!');
+        //swal({title:"Error",text:"Details submitted successfully!!",type:"success",timer:5000});
+        swal("Good Job!","Details submitted successfully!!","success")
+        //this.fun.bind(this);
+        this.props.history.push("/login");
             //window.location.href="/main";
-            emailjs.send("service_vclyh4x", "template_9ghmwb3",
-              {
-                your_name: this.state.name,
-                from_name: "JustNotBooks",
-                message: "Thanks for registering",
-                email: this.state.email,
-              });
-          }
+            emailjs.send("service_vclyh4x","template_9ghmwb3",
+            {
+             your_name:this.state.name,
+             from_name: "JustNotBooks",
+             message: "Thanks for registering",
+             email:this.state.email,
+             });
+      }
           else {
 
 
@@ -187,19 +186,19 @@ export class Register extends React.Component {
   render() {
     const { errors } = this.state;
     return (
-      <div className="register">
-        <form onSubmit={this.displayLogin}>
-          <h2>Register</h2>
-          <p><b>Already Registered?  </b> <a href="/login">Login here!</a></p>
-          <div className="name">
-            <input
-              type="text"
-              placeholder="User Name"
-              name="name"
-              value={this.state.name}
-              onChange={this.handleNameChange} required
-            />
-          </div>
+		<div className="register">
+				<form onSubmit={this.displayLogin}>
+					<h2>Register</h2>
+					
+					<div className="name">
+						<input
+							type="text"
+							placeholder="User Name"
+							name="name"
+							value={this.state.name}
+							onChange={this.handleNameChange} required
+						/>
+					</div>
           <div className="email">
             <input
               type="text"
@@ -245,10 +244,12 @@ export class Register extends React.Component {
 
 
 
-          <input type="submit" value="Register" onClick={this.handleSubmit} />
-          <input type="submit" value="Reset" onClick={this.handleCancel} />
-        </form>
+         
 
+					<input type="submit" value="Register" onClick={this.handleSubmit}/>
+          <input type="submit" value="Cancel" onClick={this.handleCancel}/>
+          <p>Already Registered?   <a href ="/login">Login here!</a></p>
+				</form>
 
       </div>
 

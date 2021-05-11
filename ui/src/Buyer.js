@@ -1,12 +1,12 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import Nav from "./Nav.js"
-import emailjs from 'emailjs-com'
+
 import "./Buyer.css"
 import swal from 'sweetalert'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSortDown, faSortUp } from '@fortawesome/free-solid-svg-icons'
-
+import emailjs from 'emailjs-com'
 import { init } from 'emailjs-com';
 
 init("user_eQuTDdOKVg6qHspQzBx7u");

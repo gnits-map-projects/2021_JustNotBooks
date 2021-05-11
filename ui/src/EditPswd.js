@@ -17,6 +17,7 @@ export class EditItem extends React.Component {
       
       oldPswd:'',
       newPswd:'',
+      name:'',
       errors: {
         password: '',
       }
@@ -26,13 +27,18 @@ export class EditItem extends React.Component {
    
     this.handleUpdate=this.handleUpdate.bind(this)
     //this.DateEnabale=this.DateEnabale.bind(this)
+    this.handleNameChange=this.handleNameChange.bind(this)
     this.handleNewPswdChange=this.handleNewPswdChange.bind(this)
     this.handleOldPswdChange=this.handleOldPswdChange.bind(this)
     this.handleCancel=this.handleCancel.bind(this)
 
     
   }
-  
+  handleNameChange=event=>{
+    this.setState({
+      name : event.target.value
+    });
+  }
   handleNewPswdChange=event=>{
     const { name, value } = event.target;
     let errors = this.state.errors;
@@ -63,15 +69,12 @@ export class EditItem extends React.Component {
         event.preventDefault();
         console.log(this.state)
         var body = {
-          name:sessionStorage.getItem("name"),
+          name:this.state.name,
           oldPswd:this.state.oldPswd,
           newPswd:this.state.newPswd
         }
         console.log(body);
-        
-  
-
-            const url = "http://localhost:9000/editPassword";
+        const url = "http://localhost:9000/editPassword";
             let headers = new Headers();
         
             headers.append('Content-Type','application/json');
@@ -108,18 +111,23 @@ export class EditItem extends React.Component {
            })
 
     }
-  
-
-    
-  
   render() {
     return (
       <div><Nav/>
 		<div className="edit">
       
-				<form onSubmit={this.displayLogin}>
+				<form>
 					<h2>Change Password</h2>
-
+          <div className="name">
+						      <input
+							       type="text"
+							       placeholder="User Name"
+						         name="name"
+						       	value={this.state.name}
+                     onChange={this.handleNameChange} required
+							
+					        	/>
+				     	</div>
 					
                     <div className="oldPswd">
                                     <input
