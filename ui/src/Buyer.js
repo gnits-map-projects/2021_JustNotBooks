@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import Nav from "./Nav.js"
-
+import emailjs from 'emailjs-com';
 import "./Buyer.css"
 import swal from 'sweetalert'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
