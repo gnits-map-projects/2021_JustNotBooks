@@ -36,13 +36,16 @@ const Home = () => {
         <b style={{ "whiteSpace": "nowrap" }}>More than 500 exchanges happen among students through this platform every academic year.You have exchanged {transac} items.</b>
       </Marquee>
       <div className="homepage">
-        <div className='about'><h2>About</h2>
+        <div className='about' id="a"><h2>About</h2>
           <p>
             JustNotBooks marketplace is a platform for buying, selling, borrowing and donating services and goods such as electronics, items,
             Every academic year, a lot of things (books, notes, drafters, mobile and computer accessories, etc) gets exchanged among students within different colleges and schools.
             Extending the sharing phenomenon to happen across different institutions in the city.
         </p></div>
-        <div className="pictures">
+        <div id="c"><p></p></div>
+        <div id="d"><p></p></div>
+        <div id="e"><p></p></div>
+        <div className="pictures" id="b">
           <Fade {...properties}>
             <div className="slideshow">
               <div><img src={slide1} /></div>
