@@ -2,6 +2,7 @@ import React from "react";
 import { Col, Row } from "react-bootstrap";
 import Nav from "./Nav.js"
 import "./Buyer.css"
+import emailjs from 'emailjs-com';
 import swal from 'sweetalert'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSortDown, faSortUp } from '@fortawesome/free-solid-svg-icons'
@@ -202,7 +203,7 @@ class Buyer extends React.Component {
            email:sessionStorage.getItem("uemail"),
            });
 
-            
+
             //this.sendFeedback(templateId, { message_html: "Thanks for Borrowing!! Return on time is appreciated..", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail") })
             //alert("Thanks for Borrowing!! Return on time is appreciated..")
             //  swal("Thanks!","Thanks for Borrowing!! Return on time is appreciated..","success")
@@ -235,7 +236,7 @@ class Buyer extends React.Component {
         <tr id={id} class="tr">
 
           <td >{item.itemName}</td>
-          <td><img src={img} width="200px" height="200px" /></td>
+          <td><img src={img} width="200px" height="500px" /></td>
           <td >{item.price}</td>
           <td >{item.description}</td>
           <td >{item.owner}</td>
@@ -353,7 +354,7 @@ class Buyer extends React.Component {
         <tr id={id} class="tr">
 
           <td >{item.itemName}</td>
-          <td><img src={img} width="200px" height="200px" /></td>
+          <td><img src={img} width="100px" height="65" /> </td>
           <td >{item.price}</td>
           <td >{item.description}</td>
           <td >{item.owner}</td>
@@ -470,7 +471,7 @@ class Buyer extends React.Component {
         return response.json()
       }).then(res => {
         this.setState({ s: res })
-        //console.log(this.state.s) 
+        //console.log(this.state.s)
       })
 
 
@@ -501,7 +502,7 @@ class Buyer extends React.Component {
         return response.json()
       }).then(res => {
         this.setState({ b: res })
-        //console.log(this.state.s) 
+        //console.log(this.state.s)
       })
 
 
@@ -532,7 +533,7 @@ class Buyer extends React.Component {
         return response.json()
       }).then(res => {
         this.setState({ d: res })
-        //console.log(this.state.s) 
+        //console.log(this.state.s)
       })
 
 

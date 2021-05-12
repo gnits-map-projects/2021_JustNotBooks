@@ -11,7 +11,22 @@ import {
 } from "react-router-dom";
 import SearchField from "react-search-field";
 import './Nav.css';
-
+class Popup extends React.Component {
+  render() {
+    return (
+      <div className='popup'>
+        <div className='popup_inner'>
+          <center><br/><br/>
+          <h3>YOU MAY HAVE NEW NOTIFICATIONS</h3>
+          <br/><br/>
+        <button onClick={event =>  window.location.href='./notification'} style={{ "float": "Center" }} > Show </button>
+        <br/><br/>
+        <button onClick={event =>  window.location.reload()} style={{ "float": "Center" }} > Cancel</button>
+        </center></div>
+      </div>
+    );
+  }
+}
 
 class Nav extends React.Component {
   constructor(props) {
@@ -36,6 +51,10 @@ class Nav extends React.Component {
   onEnter(value, event) {
     this.handleSubmit();
   }
+  togglePopup() {
+      this.setState({
+        showPopup: !this.state.showPopup
+      });}
   render() {
     return (
       <div>
@@ -66,8 +85,24 @@ class Nav extends React.Component {
               </li>
               <li>< a class="p" href="/survey"><img src={ic} /></a></li>
               <li><a class="p" href="/profile">{sessionStorage.getItem("name")}'s Profile</a></li>
-              <li><a href="/notification" class="notification"><span><img src={bell} /></span><span class="badge">{sessionStorage.getItem("l")}</span></a></li>
+              <li><a>  </a></li>
+                            <li><a>  </a></li>
+                            <li><a>  </a></li>
+                            <li><a>  </a></li>
+                            <li><a>  </a></li>
+                            <li><a>  </a></li>
+                            <li><a>  </a></li>
+                                          <li><a>  </a></li>
+                                          <li><a>  </a></li>
+                                          <li><a>  </a></li>
+             <li><a class="notification"><span><img src={bell} onClick={this.togglePopup.bind(this)}/></span><span class="badge">{sessionStorage.getItem("l")}</span></a></li>
             </ul>
+            {this.state.showPopup ?
+                      <Popup
+                        closePopup={this.togglePopup.bind(this)}
+                      />
+                      : null
+                    }
           </div>
         </HashRouter>
 
