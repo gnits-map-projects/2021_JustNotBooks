@@ -17,12 +17,11 @@ class Popup extends React.Component {
     return (
       <div className='popup'>
         <div className='popup_inner'>
-          <center><br/><br/>
-          <h3>YOU MAY HAVE NEW NOTIFICATIONS</h3>
+          <center><br/><br/><br/>
+          <h3>You Have New Notifications</h3>
           <br/><br/>
-        <button onClick={event =>  window.location.href='./notification'} style={{ "float": "Center" }} > Show </button>
-        <br/><br/>
-        <button onClick={event =>  window.location.reload()} style={{ "float": "Center" }} > Cancel</button>
+        <input type="submit" value= "Click to see.." onClick={event =>  window.location.href='./notification'} style={{ "float": "Left" }} />
+        <button  onClick={event =>  window.location.reload()} style={{position: 'absolute', top: 5, right: 5}} > <b>X</b></button>
         </center></div>
       </div>
     );
@@ -94,39 +93,12 @@ class Nav extends React.Component {
                   />
                 </li>
               </div>
-              <li>< a className="p" href="/survey"><img src={ic} /></a></li>
-              <li><a className="p" href="/profile">{sessionStorage.getItem("name")}'s Profile</a></li>
-              <li><a href="/notification" className="notification"><span><img src={bell} /></span><span className="badge">{sessionStorage.getItem("l")}</span></a></li>
-              <li><a>  </a></li>
-              <li><a>  </a></li>
-              <li><a>  </a></li>
-              <li><a>  </a></li>
-              <li><a>  </a></li>
-              <li><a>  </a></li>
-
-
-              <li>
-                <SearchField
-
-                  placeholder="Search for an item"
-                  onChange={this.handleChange}
-                  onSearchClick={this.handleSubmit}
-                  onEnter={this.onEnter}
-                  classNames="searchBar"
-                />
-              </li>
               <li>< a class="p" href="/survey"><img src={ic} /></a></li>
               <li><a class="p" href="/profile">{sessionStorage.getItem("name")}'s Profile</a></li>
               <li><a>  </a></li>
                             <li><a>  </a></li>
                             <li><a>  </a></li>
                             <li><a>  </a></li>
-                            <li><a>  </a></li>
-                            <li><a>  </a></li>
-                            <li><a>  </a></li>
-                                          <li><a>  </a></li>
-                                          <li><a>  </a></li>
-                                          <li><a>  </a></li>
              <li><a class="notification"><span><img src={bell} onClick={this.togglePopup.bind(this)}/></span><span class="badge">{sessionStorage.getItem("l")}</span></a></li>
             </ul>
             {this.state.showPopup ?

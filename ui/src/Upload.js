@@ -284,7 +284,7 @@ export class Upload extends React.Component {
                   <div class="fileimages">
                         <input type="file" onInput={this.handleImage} required/>
                             <div class="imgfile">
-                            <img class="upload1" src={this.state.file}/>
+                            <img class="image" src={this.state.file}/>
                              </div>
                            </div><br/><br/><br/>
                     <br></br><br></br><br></br><br/>

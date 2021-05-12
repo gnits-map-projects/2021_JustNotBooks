@@ -149,7 +149,7 @@ class Seller extends Component {
           <tr id={id} class="tr">
 
             <td >{item.itemName}</td>
-            <td><img src={img} width="200px" height="200px" /></td>
+            <td><img class="image" src={img}  /></td>
             <td >{item.price}</td>
             <td >{item.description}</td>
             <td>{item.fromDate}</td>
@@ -170,7 +170,7 @@ class Seller extends Component {
           <tr id={id} class="tr">
 
             <td >{item.itemName}</td>
-            <td><img src={img} width="200px" height="200px" /></td>
+            <td><img class="image" src={img}  /></td>
             <td >{item.price}</td>
             <td >{item.description}</td>
             <td>{item.fromDate}</td>
@@ -387,7 +387,7 @@ class Seller extends Component {
         return (
           <tr id={id} class="tr">
             <td >{item.itemName}</td>
-            <td><img src={img} width="200px" height="200px" /></td>
+            <td><img class="image" src={img}  /></td>
             <td >{item.price}</td>
             <td >{item.description}</td>
             <td>{item.fromDate}</td>
@@ -407,7 +407,7 @@ class Seller extends Component {
           <tr id={id} class="tr">
 
             <td >{item.itemName}</td>
-            <td><img src={img} width="200px" height="200px" /></td>
+            <td><img class="image" src={img}  /></td>
             <td >{item.price}</td>
             <td >{item.description}</td>
             <td>{item.fromDate}</td>

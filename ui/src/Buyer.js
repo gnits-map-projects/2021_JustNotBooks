@@ -6,7 +6,6 @@ import emailjs from 'emailjs-com';
 import swal from 'sweetalert'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSortDown, faSortUp } from '@fortawesome/free-solid-svg-icons'
-import emailjs from 'emailjs-com'
 import { init } from 'emailjs-com';
 
 init("user_eQuTDdOKVg6qHspQzBx7u");
@@ -240,7 +239,7 @@ class Buyer extends React.Component {
         <tr id={id} class="tr">
 
           <td >{item.itemName}</td>
-          <td><img src={img} width="200px" height="200px" /></td>
+          <td><img class="image" src={img}  /></td>
           <td >{item.price}</td>
           <td >{item.description}</td>
           <td >{item.owner}</td>
@@ -358,7 +357,7 @@ class Buyer extends React.Component {
         <tr id={id} class="tr">
 
           <td >{item.itemName}</td>
-          <td><img src={img} width="200px" height="200px" /></td>
+          <td><img class="image" src={img}  /></td>
           <td >{item.price}</td>
           <td >{item.description}</td>
           <td >{item.owner}</td>
@@ -434,7 +433,7 @@ class Buyer extends React.Component {
         <tr id={id} class="tr">
 
           <td >{item.itemName}</td>
-          <td><img src={img} width="200px" height="200px" /></td>
+          <td><img class="image" src={img}  /></td>
           <td >{item.price}</td>
           <td >{item.description}</td>
           <td >{item.owner}</td>
