@@ -6,6 +6,10 @@ import emailjs from 'emailjs-com';
 import swal from 'sweetalert'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSortDown, faSortUp } from '@fortawesome/free-solid-svg-icons'
+import emailjs from 'emailjs-com'
+import { init } from 'emailjs-com';
+
+init("user_eQuTDdOKVg6qHspQzBx7u");
 
 const admin = {
   width: '100%',
@@ -195,13 +199,13 @@ class Buyer extends React.Component {
       })
         .then(response => {
           if (response.ok) {
-            emailjs.send("service_vclyh4x","template_9ghmwb3",
-          {
-           your_name: sessionStorage.getItem("name"),
-           from_name: "JustNotBooks",
-           message: "Thanks for Borrowing!! Return on time is appreciated..",
-           email:sessionStorage.getItem("uemail"),
-           });
+            emailjs.send("service_vclyh4x", "template_9ghmwb3",
+              {
+                your_name: sessionStorage.getItem("name"),
+                from_name: "JustNotBooks",
+                message: "Thanks for Borrowing!! Return on time is appreciated..",
+                email: sessionStorage.getItem("uemail"),
+              });
 
 
             //this.sendFeedback(templateId, { message_html: "Thanks for Borrowing!! Return on time is appreciated..", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail") })
@@ -236,7 +240,7 @@ class Buyer extends React.Component {
         <tr id={id} class="tr">
 
           <td >{item.itemName}</td>
-          <td><img src={img} width="200px" height="500px" /></td>
+          <td><img src={img} width="200px" height="200px" /></td>
           <td >{item.price}</td>
           <td >{item.description}</td>
           <td >{item.owner}</td>
@@ -244,7 +248,7 @@ class Buyer extends React.Component {
           <td >{item.address}</td>
           <td >{item.status}</td>
           <td>{item.rating}</td>
-          <td><button onClick={event =>  window.location.href='./Review'} > Reviews</button></td>
+          <td><button onClick={event => window.location.href = './Review'} > Reviews</button></td>
           <td><button onClick={() => this.handleBuy(sessionStorage.getItem("name"), item.id)} > Buy </button></td>
         </tr>
       );
@@ -331,7 +335,7 @@ class Buyer extends React.Component {
             <th>Address</th>
             <th>Status</th>
             <th>Rating</th>
-             <th>Reviews</th>
+            <th>Reviews</th>
             <tbody> {this.renderResultBorrow()} </tbody>
           </table>
 
@@ -354,7 +358,7 @@ class Buyer extends React.Component {
         <tr id={id} class="tr">
 
           <td >{item.itemName}</td>
-          <td><img src={img} width="100px" height="65" /> </td>
+          <td><img src={img} width="200px" height="200px" /></td>
           <td >{item.price}</td>
           <td >{item.description}</td>
           <td >{item.owner}</td>
@@ -364,7 +368,7 @@ class Buyer extends React.Component {
           <td >{item.address}</td>
           <td >{item.status}</td>
           <td>{item.rating}</td>
-          <td><button onClick={event =>  window.location.href='./Review'} > Reviews</button></td>
+          <td><button onClick={event => window.location.href = './Review'} > Reviews</button></td>
           <td><button onClick={() => this.handleBorrow(sessionStorage.getItem("name"), item.id, item.fromDate)} > Borrow </button></td>
         </tr>
       );
@@ -438,7 +442,7 @@ class Buyer extends React.Component {
           <td >{item.address}</td>
           <td >{item.status}</td>
           <td>{item.rating}</td>
-          <td><button onClick={event =>  window.location.href='./Review'} > Reviews</button></td>
+          <td><button onClick={event => window.location.href = './Review'} > Reviews</button></td>
           <td><button onClick={() => this.handleBuy(sessionStorage.getItem("name"), item.id)} > Take </button></td>
         </tr>
       );
@@ -471,7 +475,7 @@ class Buyer extends React.Component {
         return response.json()
       }).then(res => {
         this.setState({ s: res })
-        //console.log(this.state.s)
+        //console.log(this.state.s) 
       })
 
 
@@ -502,7 +506,7 @@ class Buyer extends React.Component {
         return response.json()
       }).then(res => {
         this.setState({ b: res })
-        //console.log(this.state.s)
+        //console.log(this.state.s) 
       })
 
 
@@ -533,7 +537,7 @@ class Buyer extends React.Component {
         return response.json()
       }).then(res => {
         this.setState({ d: res })
-        //console.log(this.state.s)
+        //console.log(this.state.s) 
       })
 
 

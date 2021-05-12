@@ -63,7 +63,11 @@ a:hover{
 }
 .searchBar{
   border-radius: 5px;
+  width:650px;
 }
 .searchBar > button {
   border-radius: 5px;
+}
+.liSearch >div >div {
+  z-index: 1000!important;
 }

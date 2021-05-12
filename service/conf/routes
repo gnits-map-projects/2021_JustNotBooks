@@ -14,6 +14,7 @@ POST    /edit                       controllers.PersonController.editPerson()
 POST    /editPassword               controllers.PersonController.editPassword()
 
 
+GET     /itemnames                    controllers.ItemController.getItemNames()
 POST    /item                      controllers.ItemController.addItem()
 POST   /buy                      controllers.ItemController.buy()
 POST   /borrow                     controllers.ItemController.borrow()
@@ -29,7 +30,7 @@ POST    /search                     controllers.ItemController.search()
 POST   /itemReturn                   controllers.ItemController.returnItem()
 
 
-
+GET     /totaltransac                  controllers.TransactionController.getTransac()
 POST    /transaction                      controllers.TransactionController.addTransaction(trans: String)
 
 POST    /notification                   controllers.NotificationController.addNotification()

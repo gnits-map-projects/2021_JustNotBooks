@@ -16,6 +16,7 @@ public interface ItemRepository {
     CompletionStage<Item> borrowItem(String customer,Long id,String takenAt);
     CompletionStage<Item> returnItem(String customer,Long id,String returnedAt);
     CompletionStage<Stream<Item>> listBuy(String owner);
+    CompletionStage<Stream<String>> listItemNames();
     CompletionStage<Stream<Item>> listBorrow(String owner);
     CompletionStage<Stream<Item>> listDonate(String owner);
     CompletionStage<Stream<Item>> listUploaded(String owner);
