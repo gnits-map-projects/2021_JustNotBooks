@@ -9,7 +9,7 @@ export class Register extends React.Component {
 
   constructor(props) {
     super(props);
-      
+
     this.state={
 
       e:false,
@@ -35,9 +35,9 @@ export class Register extends React.Component {
 	  this.handleConfirmPasswordChange=this.handleConfirmPasswordChange.bind(this)
     this.handleSubmit=this.handleSubmit.bind(this)
     this.handleCancel=this.handleCancel.bind(this)
-	
+
   }
-  
+
   handleNameChange=event=>{
     this.setState({
       name : event.target.value
@@ -46,7 +46,7 @@ export class Register extends React.Component {
   handleEmailChange=event=>{
     const { name, value } = event.target;
     let errors = this.state.errors;
-    errors.email = 
+    errors.email =
           validEmailRegex.test(event.target.value)
             ? ''
             : 'Email is not valid!';
@@ -54,14 +54,14 @@ export class Register extends React.Component {
     if(errors.email ==  '')
       {
         this.setState({e : true});
-     }       
+     }
      this.setState({errors, [name]: value});
-    
+
   }
   handlePhoneNumberChange=event=>{
     const { name, value } = event.target;
     let errors = this.state.errors;
-    errors.mobile = 
+    errors.mobile =
     (validMobileRegex.test(event.target.value))
       ? ''
       : 'Enter a valid phone number!';
@@ -70,13 +70,13 @@ export class Register extends React.Component {
       this.setState({ph : true});
     }
     this.setState({errors, [name]: value});
-    
+
   }
 
   handlePasswordChange=event=>{
     const { name, value } = event.target;
     let errors = this.state.errors;
-    errors.password = 
+    errors.password =
     event.target.value.length < 8
       ? 'Password must be 8 characters long!'
       : '';
@@ -98,7 +98,7 @@ export class Register extends React.Component {
   }
 
   handleSubmit(event) {
-    
+
     event.preventDefault();
     console.log(this.state)
      var body = {
@@ -123,22 +123,22 @@ else if(this.state.pswd==""){
 }
 	else if(this.state.cpswd!=this.state.pswd){
 			alert('confirm password does not matched')
-	  
+
 		  }
     else{
-    
+
 
   const url = "http://localhost:9000/check";
     let headers = new Headers();
- 
+
     headers.append('Content-Type','application/json');
     headers.append('Accept','application/json');
- 
+
     headers.append('Access-Control-Allow-origin',url);
     headers.append('Access-Control-Allow-Credentials','true');
- 
+
     headers.append('POST','GET');
- 
+
     fetch(url, {
        headers:headers,
        method: 'POST',
@@ -146,10 +146,10 @@ else if(this.state.pswd==""){
     })
   /*.then(response => response.json())
     .then(contents => {console.log(contents); })*/
- 
+
 
       .then(response => {if(response.ok){
-            
+
         //alert('Details submitted successfully!!');
         //swal({title:"Error",text:"Details submitted successfully!!",type:"success",timer:5000});
         swal("Good Job!","Details submitted successfully!!","success")
@@ -159,7 +159,7 @@ else if(this.state.pswd==""){
       }
       else {
 
-        
+
         //this.fun.bind(this);
         //alert('Username already exists!!Please try to login');
         //swal({title:"Error",text:"Username already exists!!Please try to login",type:"error",timer:5000});
@@ -169,21 +169,22 @@ else if(this.state.pswd==""){
       }
       })
       .catch(()=> console.log("can't access " + url + " response. "))
-      
+
         }
 
       }
 
 
-  
-  
-  
+
+
+
   render() {
     const {errors} = this.state;
     return (
 		<div className="register">
 				<form onSubmit={this.displayLogin}>
 					<h2>Register</h2>
+					  <h5 >Already Registered? <a href ="/login">Login here</a> </h5>
 
 					<div className="name">
 						<input
@@ -237,15 +238,15 @@ else if(this.state.pswd==""){
 					</div>
 
 
-		
+
 
 					<input type="submit" value="Register" onClick={this.handleSubmit}/>
           <input type="submit" value="Cancel" onClick={this.handleCancel}/>
 				</form>
 
-				<a href ="/login">Login here</a>
+
 			</div>
-      
+
     );
   }
 }
