@@ -1,6 +1,5 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-//import "./App.scss";
 import { BrowserRouter, Route } from 'react-router-dom';
 import Login from './Login'
 import Register from './Register'
@@ -16,25 +15,16 @@ import Search from "./Search";
 import Notification from "./Notification"
 import EditPswd from "./EditPswd"
 import Survey from "./survey"
-
-//import ResetPassword from "./reset"
-
-
 import Feedback from "./Feedback"
 import Review from "./Review"
 import ResetPassword from "./ResetPassword";
-
-
 
 class App extends React.Component {
   constructor(props) {
     super(props);
   }
-
-
   render() {
     return (
-
       <BrowserRouter>
         <div className="App">
           <Route exact path="/" component={Register} />
@@ -53,13 +43,10 @@ class App extends React.Component {
           <Route path="/editPswd" component={EditPswd} />
           <Route path="/survey" component={Survey} />
           <Route path="/Review" component={Review} />
-
           <Route path="/ResetPassword" component={ResetPassword} />
         </div>
       </BrowserRouter>
-
     );
   }
 }
-
 export default App;

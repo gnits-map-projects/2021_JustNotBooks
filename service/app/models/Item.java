@@ -24,6 +24,7 @@ public class Item {
     public String address;
     public String status="Available";
     public String uploadedAt;
+    public String rating;
 
     public void setUploadedAt(String uploadedAt) {
         this.uploadedAt = uploadedAt;
@@ -142,5 +143,8 @@ public class Item {
     public void setStatus(String status) {
         this.status = status;
     }
+
+   public  String getRating(){return rating;}
+   public  void  setRating(String rating) { this.rating=rating ;}
 
 }

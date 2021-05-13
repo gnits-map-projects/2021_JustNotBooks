@@ -171,7 +171,7 @@ export class Upload extends React.Component {
  .catch(()=> console.log("can't access " + url + " response. "))
 
  swal("Good job!",'Item uploaded',"success");
- 
+
  this.props.history.push("./profile");
  emailjs.send("service_vclyh4x","template_9ghmwb3",
           {
@@ -274,11 +274,17 @@ export class Upload extends React.Component {
                         />
                         <br />
                         <br />
-
-                    <div class="fileimages">
+                       {/*Image:<br></br><input
+                                    type="file"
+                                    name="image"
+                                    id="image"
+                                    value={this.state.image}
+                                    onInput={this.handleImage} required
+                                  /><br></br>*/}
+                  <div class="fileimages">
                         <input type="file" onInput={this.handleImage} required/>
                             <div class="imgfile">
-                            <img class="upload1" src={this.state.file2}/>
+                            <img class="image" src={this.state.file}/>
                              </div>
                            </div><br/><br/><br/>
                     <br></br><br></br><br></br><br/>
