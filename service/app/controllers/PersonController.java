@@ -110,8 +110,9 @@ public class PersonController extends Controller {
         JsonNode j = request().body().asJson();
         String name = j.get("name").asText();
         String email = j.get("email").asText();
+        String address= j.get("address").asText();
         Long phoneNumber = j.get("phoneNumber").asLong();
-        return personRepository.edit(name,email,phoneNumber).thenApplyAsync(p -> {
+        return personRepository.edit(name,email,phoneNumber,address).thenApplyAsync(p -> {
             return ok("Update successful");
         }, ec.current());
     }

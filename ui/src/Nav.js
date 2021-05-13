@@ -12,7 +12,21 @@ import {
 } from "react-router-dom";
 import SearchField from "react-search-field";
 import './Nav.css';
-
+class Popup extends React.Component {
+  render() {
+    return (
+      <div className='popup'>
+        <div className='popup_inner'>
+          <center><br/><br/><br/>
+          <h3>You Have New Notifications</h3>
+          <br/><br/>
+        <input type="submit" value= "Click to see.." onClick={event =>  window.location.href='./notification'} style={{ "float": "Left" }} />
+        <button  onClick={event =>  window.location.reload()} style={{position: 'absolute', top: 5, right: 5}} > <b>X</b></button>
+        </center></div>
+      </div>
+    );
+  }
+}
 
 class Nav extends React.Component {
   constructor(props) {
@@ -54,6 +68,10 @@ class Nav extends React.Component {
   componentDidMount() {
     this.fetchItems();
   }
+  togglePopup() {
+      this.setState({
+        showPopup: !this.state.showPopup
+      });}
   render() {
     return (
       <div>
@@ -75,10 +93,20 @@ class Nav extends React.Component {
                   />
                 </li>
               </div>
-              <li>< a className="p" href="/survey"><img src={ic} /></a></li>
-              <li><a className="p" href="/profile">{sessionStorage.getItem("name")}'s Profile</a></li>
-              <li><a href="/notification" className="notification"><span><img src={bell} /></span><span className="badge">{sessionStorage.getItem("l")}</span></a></li>
+              <li>< a class="p" href="/survey"><img src={ic} /></a></li>
+              <li><a class="p" href="/profile">{sessionStorage.getItem("name")}'s Profile</a></li>
+              <li><a>  </a></li>
+                            <li><a>  </a></li>
+                            <li><a>  </a></li>
+                            <li><a>  </a></li>
+             <li><a class="notification"><span><img src={bell} onClick={this.togglePopup.bind(this)}/></span><span class="badge">{sessionStorage.getItem("l")}</span></a></li>
             </ul>
+            {this.state.showPopup ?
+                      <Popup
+                        closePopup={this.togglePopup.bind(this)}
+                      />
+                      : null
+                    }
           </div>
         </HashRouter>
       </div>

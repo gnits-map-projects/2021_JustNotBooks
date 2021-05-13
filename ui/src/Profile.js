@@ -13,6 +13,7 @@ class Profile extends Component {
         phoneNumber:'',
         name : '',
         email: ' ',
+        address: ' ',
         pswd:' ',
   
       }
@@ -20,6 +21,7 @@ class Profile extends Component {
       this.handleNameChange=this.handleNameChange.bind(this)
       this.handleEmailChange=this.handleEmailChange.bind(this)
       this.handlePhoneChange=this.handlePhoneChange.bind(this)
+      this.handleAddressChange=this.handleAddressChange.bind(this)
       this.handleUpload=this.handleUpload.bind(this);
       this.handleEdit=this.handleEdit.bind(this);
       this.handleEditPassword=this.handleEditPassword.bind(this);
@@ -60,10 +62,12 @@ class Profile extends Component {
             this.setState({
                email:res.data1.email,
                phoneNumber:res.data1.phoneNumber,
+               address:res.data1.address,
                pswd:res.data1.pswd
               });
               sessionStorage.setItem("uname",this.state.name);
               sessionStorage.setItem("uemail",this.state.email);
+              sessionStorage.setItem("udrss",this.state.address);
               sessionStorage.setItem("upswd",this.state.pswd);
               sessionStorage.setItem("uphone",this.state.phoneNumber);
               
@@ -90,7 +94,11 @@ class Profile extends Component {
           phoneNumber: event.target.value
         });
       }
-    
+     handleAddressChange=event=>{
+            this.setState({
+              address : event.target.value
+            });
+          }
     handleUpload=event=>{
         //event.preventDefault();
         //alert("Clicked")
@@ -131,6 +139,11 @@ class Profile extends Component {
                           <h4>Phone Number:{sessionStorage.getItem("uphone")}</h4>
                         </div>
                       </div>
+                      <div class="row">
+                                              <div class="collabel">
+                                                    <h4>Address:{sessionStorage.getItem("udrss")}</h4>
+                                              </div>
+                                              </div>
                 </form>
 
 

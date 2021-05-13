@@ -18,15 +18,18 @@ export class Register extends React.Component {
       e: false,
       p: false,
       ph: false,
+      ad:false,
       email: '',
       phoneNumber: '',
       pswd: '',
       name: '',
+      address : '',
       cpswd: '',
       errors: {
         name: '',
         email: '',
         password: '',
+        address: '',
         mobile: '',
       }
 
@@ -34,6 +37,7 @@ export class Register extends React.Component {
     this.handleNameChange = this.handleNameChange.bind(this)
     this.handleEmailChange = this.handleEmailChange.bind(this)
     this.handlePhoneNumberChange = this.handlePhoneNumberChange.bind(this)
+    this.handleAddressChange=this.handleAddressChange.bind(this)
     this.handlePasswordChange = this.handlePasswordChange.bind(this)
     this.handleConfirmPasswordChange = this.handleConfirmPasswordChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -91,7 +95,11 @@ export class Register extends React.Component {
       cpswd: event.target.value
     });
   }
-
+ handleAddressChange=event=>{
+    this.setState({
+      address : event.target.value
+    });
+  }
   handleCancel=event=>{
     window.location.reload();
   }
@@ -105,6 +113,7 @@ export class Register extends React.Component {
       name: this.state.name,
       phoneNumber: this.state.phoneNumber,
       email: this.state.email,
+      address : this.state.address,
     }
     console.log(body);
     if (this.state.name == "") {
@@ -116,6 +125,9 @@ export class Register extends React.Component {
 }
 else if(this.state.phoneNumber==""){
   alert('Please enter the phone number')
+}
+else if(this.state.address==""){
+  alert('Please enter the address')
 }
 else if(this.state.pswd==""){
   alert('Please enter the password')
@@ -220,7 +232,15 @@ else if(this.state.pswd==""){
             <span className='error'>{errors.mobile}</span>
           </div>
 
-
+<div className="address">
+						<input
+							type="text"
+							placeholder="Address"
+							name="address"
+							value={this.state.address}
+							onChange={this.handleAddressChange} required
+						/>
+					</div>
           <div className="pasword">
             <input
               type="password"

@@ -13,7 +13,9 @@ const validMobileRegex = RegExp(/^[6-9]{1}[0-9]{9}$/);
 var n=sessionStorage.getItem("uname")
 var e=sessionStorage.getItem("uemail")
 var ph=sessionStorage.getItem("uphone")
+var ad=sessionStorage.getItem("address")
 console.log("Name",n);
+console.log("Address",ad);
 export class Edit extends React.Component {
 
   constructor(props) {
@@ -24,13 +26,16 @@ export class Edit extends React.Component {
       n:false,        
       e:false,
       ph:false,
+       ad:false,
       email:e,
       phoneNumber:ph,
       name : n,
+      address:ad,
       cpswd : '',
       errors: {
         name: '',
         email: '',
+        address: '',
         mobile : '',
       }
 
@@ -38,6 +43,7 @@ export class Edit extends React.Component {
     this.handleEmailChange=this.handleEmailChange.bind(this)
     this.handlePhoneNumberChange=this.handlePhoneNumberChange.bind(this)
     this.handleUpdate=this.handleUpdate.bind(this)
+    this.handleAddressChange=this.handleAddressChange.bind(this)
     this.handleCancel=this.handleCancel.bind(this)
     this.state.name=sessionStorage.getItem("name")
   }
@@ -46,6 +52,7 @@ export class Edit extends React.Component {
     this.setState({
        name : sessionStorage.getItem("uname"),
        email:sessionStorage.getItem("uemail"),
+        address : sessionStorage.getItem("address"),
        phoneNumber:sessionStorage.getItem("uphone"),
      })
      
@@ -88,7 +95,11 @@ export class Edit extends React.Component {
   }
   
   
-
+ handleAddressChange=event=>{
+    this.setState({
+      address : event.target.value
+    });
+  }
   handleCancel(){
     //window.location.href="/home";
     window.history.back();
@@ -100,6 +111,7 @@ export class Edit extends React.Component {
         var body = {
         name : sessionStorage.getItem("name"),
         phoneNumber: this.state.phoneNumber,
+        address: this.state.address,
         email : this.state.email,
         }
         console.log(body);
@@ -179,7 +191,16 @@ export class Edit extends React.Component {
                                     />
                                     <span className='error'>{errors.mobile}</span>
 					</div>
-                 
+                 <div className="address">
+                 						<input
+                 							type="text"
+                 							placeholder="Address"
+                 							name="address"
+                 							value={this.state.address}
+                 							onChange={this.handleAddressChange} required
+                 						/>
+                 					</div>
+
 			
 					<input type="submit" value="Update" onClick={this.handleUpdate}/>
           <input type="submit" value="Cancel" onClick={this.handleCancel}/>

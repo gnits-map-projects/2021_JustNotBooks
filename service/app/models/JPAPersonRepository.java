@@ -52,8 +52,8 @@ public class JPAPersonRepository implements PersonRepository {
     }
 
     @Override
-    public CompletionStage<Person> edit(String name, String email, Long phoneNumber) {
-        return supplyAsync(() -> wrap(em -> editvalue(em, name, email, phoneNumber)), executionContext);
+    public CompletionStage<Person> edit(String name, String email, Long phoneNumber,String address) {
+        return supplyAsync(() -> wrap(em -> editvalue(em, name, email, phoneNumber,address)), executionContext);
     }
 
     @Override
@@ -76,8 +76,8 @@ public class JPAPersonRepository implements PersonRepository {
         return person;
     }
 
-    private Person editvalue(EntityManager em, String name, String email, Long phoneNumber) {
-        int i = em.createQuery("update Person SET email=:email,phoneNumber=:phoneNumber where name=:name").setParameter("name", name).setParameter("email", email).setParameter("phoneNumber", phoneNumber).executeUpdate();
+    private Person editvalue(EntityManager em, String name, String email, Long phoneNumber, String address) {
+        int i = em.createQuery("update Person SET email=:email,phoneNumber=:phoneNumber,address=:address where name=:name").setParameter("name", name).setParameter("email", email).setParameter("phoneNumber", phoneNumber).setParameter("address", address).executeUpdate();
         //int i=q.executeUpdate();
         if (i != 0) {
             Person persons = em.createQuery("select p from Person p where name=:name", Person.class).setParameter("name", name).getSingleResult();

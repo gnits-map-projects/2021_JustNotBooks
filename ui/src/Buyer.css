@@ -36,7 +36,10 @@ button{
    
    transform: scale(1.01) ;
 }
-
+.image{
+ height:100px;
+     width:100px;
+}
 
 .btnstyle{
   width:100%;

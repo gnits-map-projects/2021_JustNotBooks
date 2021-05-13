@@ -13,6 +13,7 @@ public class Person {
     public String name;
     public String email;
     public Long phoneNumber;
+    public String address;
     public String pswd;
 
     public Long getId() {
@@ -53,5 +54,11 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+    public String getAddress() {
+        return address;
+    }
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
