@@ -119,29 +119,29 @@ class Profile extends Component {
         <div> <Nav/>
       <div className="profilemain">
       
-        <h1><div align ="center"> My Profile</div></h1>
+        <h2><div align ="center"> My Profile</div></h2>
         
 				<form onSubmit={this.displayLogin}>
                   
                     <div class="row">
                         <div class="collabel">
-                              <h4>Name:{sessionStorage.getItem("name")}</h4>
+                              <h4><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</b> {sessionStorage.getItem("name")}</h4>
                         </div>
                         </div>
                       <div class="row">
                         <div class="collabel">
-                            <h4>Email:{sessionStorage.getItem("uemail")}</h4>
+                            <h4><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp; </b>    {sessionStorage.getItem("uemail")}</h4>
                         </div>
                         
                     </div>
                     <div class="row">
                         <div class="collabel">
-                          <h4>Phone Number:{sessionStorage.getItem("uphone")}</h4>
+                          <h4><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Phone Number&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</b>{ sessionStorage.getItem("uphone")}</h4>
                         </div>
                       </div>
                       <div class="row">
                                               <div class="collabel">
-                                                    <h4>Address:{sessionStorage.getItem("udrss")}</h4>
+                                                    <h4><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;  </b>        {sessionStorage.getItem("udrss")}</h4>
                                               </div>
                                               </div>
                 </form>

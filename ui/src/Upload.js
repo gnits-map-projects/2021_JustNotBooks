@@ -196,26 +196,25 @@ export class Upload extends React.Component {
 				<form>
 					<h5><div align = "center">
 					<h2>Upload</h2></div>
-						Item Name  :
-						<input
-                            type="text"
+						
+						<input type='text'
 							placeholder="Item Name"
 							name="itemName"
 							value={this.state.itemName}
 							onChange={this.handleItemNameChange} required
-						/><br></br><br></br>
-                        Price:
+						/>
+                       
                         <input
-                            type="text"
+                            type='text'
                             placeholder="Price"
                             name="price"
                             value={this.state.price}
                             onChange={this.handlePriceChange} required
 
                         />
-                        <br></br><br></br><br></br>
-                        Description:<input
-                            type="text"
+                        
+                        <input
+                            type='text'
                             placeholder="Description"
                             name="description"
                             value={this.state.description}
@@ -248,7 +247,8 @@ export class Upload extends React.Component {
                         </label>
                     </div>
                     <br></br>
-                    From&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;<input
+                    From&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;&nbsp;
+                    <input
                             type="date"
                             placeholder="From Date"
                             name="fromDate"
@@ -261,7 +261,8 @@ export class Upload extends React.Component {
                         />
                         <br/><br/>
 
-                      To&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;<input
+                      To&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;
+                      <input
                             type="date"
                             placeholder="To Date"
                             name="toDate"
@@ -286,12 +287,11 @@ export class Upload extends React.Component {
                             <div class="imgfile">
                             <img class="image" src={this.state.file}/>
                              </div>
-                           </div><br/><br/><br/>
-                    <br></br><br></br><br></br><br/>
+                           </div>
 
 
 
-					<div align="center" ><input type="submit" value="Submit" onClick={this.handleSubmit}/></div></h5>
+					<input type="submit" value="Submit" onClick={this.handleSubmit}/></h5>
           <input type="submit" value="Cancel" onClick={this.handleCancel}/>
 				</form>
 

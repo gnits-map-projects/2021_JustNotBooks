@@ -1,8 +1,12 @@
 .collabel{
    
     background-color:whitesmoke;
-    padding:  10px;
+    padding:  5px;
     
+    
+}
+.collabel h4{
+    font-size: 17.5px;
 }
 .profilemain{
     
@@ -12,4 +16,5 @@
     padding:  20px;
     box-shadow: 5px 5px 5px grey;
     opacity: 0.9;
+    
 }

@@ -268,7 +268,11 @@ else if(this.state.pswd==""){
 
 					<input type="submit" value="Register" onClick={this.handleSubmit}/>
           <input type="submit" value="Cancel" onClick={this.handleCancel}/>
-          <p>Already Registered?   <a href ="/login">Login here!</a></p>
+          <div>
+          <div id="ar"><p>Already Registered?  </p></div> 
+          <div id="lh"><p> <a href ="/login">Login here!</a></p></div>
+          </div>
+          <div><p></p></div>
 				</form>
 
       </div>
