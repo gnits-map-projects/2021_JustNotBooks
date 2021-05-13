@@ -25,6 +25,7 @@ export class ResetPassword extends React.Component {
         this.handleNewPswdChange=this.handleNewPswdChange.bind(this)
         this.handleOldPswdChange=this.handleOldPswdChange.bind(this)
         this.handleNameChange=this.handleNameChange.bind(this)
+        this.handleok=this.handleok.bind(this)
         
 
     }
@@ -53,7 +54,12 @@ export class ResetPassword extends React.Component {
         });
         
       }
-    
+      async handleok(event) {
+
+        swal("Logged out successfully!!", "", "success");
+        await new Promise(r => setTimeout(r, 2000));
+        window.location.href = "./login";
+    }
        
       handleUpdate(event) {
         

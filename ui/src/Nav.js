@@ -59,11 +59,15 @@ class Nav extends React.Component {
       <div>
         <HashRouter>
           <div>
-            <center><h1>JustNotBooks-Buy.Borrow.Rent</h1></center>
+            <center><h1><b>JustNotBooks-Buy.Borrow.Rent</b></h1></center>
             <ul className="header">
               <li><a href="/home"><img src={h} /></a></li>
               <li><a href="/buyer">Exchanges</a></li>
               <li><a href="/seller">Transaction</a></li>
+              <li><a></a></li>
+              <li><a></a></li>
+              
+              <li><a></a></li>
               <div style={{ width: "650px", display: "inline-block", verticalAlign: "middle", zIndex: "100" }}>
                 <li className="liSearch">
                   <ReactSearchAutocomplete
