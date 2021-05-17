@@ -99,9 +99,10 @@ class Nav extends React.Component {
                   />
                 </li>
               </div>
-              <li>< a class="p" href="/survey"><img src={ic} /></a></li>
-              <li><a class="p" href="/profile">{sessionStorage.getItem("name")}'s Profile</a></li>
-              <li><a class="notification"><span><img src={bell} onClick={this.togglePopup.bind(this)} /></span><span class="badge">{sessionStorage.getItem("l")}</span></a></li>
+              
+              <li>< a className="p" href="/survey"><img src={ic} /></a></li>
+              <li><NavLink exact to="/profile" activeClassName="active" className="p">{sessionStorage.getItem("name")}'s Profile</NavLink></li>
+              <li><a className="notification"><img src={bell} onClick={this.togglePopup.bind(this)} /><p className="badge">{sessionStorage.getItem("l")}</p></a></li>
             </ul>
             {this.state.showPopup ?
               <Popup

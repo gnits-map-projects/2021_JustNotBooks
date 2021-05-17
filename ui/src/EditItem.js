@@ -208,13 +208,13 @@ export class EditItem extends React.Component {
                       <div className="category">
                                 <label>
                                     <input type="radio" id="buy" name="category" value="buy" onClick= {this.DateEnable.bind(this)} onChange={this.handleCategoryChange}/>Buy
-                                </label>
+                                </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <label>
                                     <input type="radio" id="borrow" name="category" value="borrow" onClick= {this.DateEnable.bind(this)} onChange={this.handleCategoryChange}/>Borrow
-                                </label>
+                                </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <label>
                                     <input type="radio" id="donate" name="category" value="donate" onClick= {this.DateEnable.bind(this)} onChange={this.handleCategoryChange}/>Donate
-                                </label>
+                                </label>&nbsp;&nbsp;&nbsp;
                     </div>
                     <br></br>
                     <div className="description">
