@@ -25,11 +25,13 @@ img
 a{
   opacity: 1;
 }
-a:hover{
+ul.header li .active{
+  background-color: black;
+}
+/*a:hover{
   background-color:white;
   color:black;
-}
-
+}*/
 
 .popup {
   position: fixed;

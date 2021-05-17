@@ -25,10 +25,8 @@ export class ResetPassword extends React.Component {
         this.handleNewPswdChange=this.handleNewPswdChange.bind(this)
         this.handleOldPswdChange=this.handleOldPswdChange.bind(this)
         this.handleNameChange=this.handleNameChange.bind(this)
-        this.handleok=this.handleok.bind(this)
-        
-
-    }
+      
+      }
     
 
   

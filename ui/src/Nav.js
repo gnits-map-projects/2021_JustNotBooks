@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import search from './images/search.jpg';
 import ic from './images/log.png'
+import { BrowserRouter} from 'react-router-dom';
 import h from './images/ho.png'
 import bell from './images/bellll.png'
 import "./Nav.css"
@@ -75,13 +76,18 @@ class Nav extends React.Component {
   render() {
     return (
       <div>
-        <HashRouter>
+        
           <div>
             <center><h1><b>JustNotBooks-Buy.Borrow.Rent</b></h1></center>
             <ul className="header">
-              <li><a href="/home"><img src={h} /></a></li>
-              <li><a href="/buyer">Exchanges</a></li>
-              <li><a href="/seller">Transaction</a></li>
+            
+              
+              <li><NavLink exact to="/home"  activeClassName="active" ><img src={h} /></NavLink></li>
+
+              <li><NavLink exact to="/buyer" activeClassName="active">Exchanges</NavLink></li>
+
+              <li><NavLink exact to="/seller" activeClassName="active" >Transaction</NavLink></li>
+              
               <div style={{ width: "600px", display: "inline-block", verticalAlign: "middle", zIndex: "100" }}>
                 <li className="liSearch">
                   <ReactSearchAutocomplete
@@ -104,10 +110,13 @@ class Nav extends React.Component {
               : null
             }
           </div>
-        </HashRouter>
+        
       </div>
     )
   }
 }
 
 export default Nav;
+//<li><a class="active" href="/home"><img src={h} /></a></li>
+/*<li><NavLink exact to="/buyer" style={{color: 'black', textDecoration: 'none'}} activeStyle={{backgroundColor:'red', textDecoration: 'none'}}
+              >Exchanges</NavLink></li>*/

@@ -1,10 +1,6 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import Nav from "./Nav.js"
-<<<<<<< HEAD
-
-=======
->>>>>>> e9eee24ace73261db48a2e659aae2d6dae577810
 import "./Buyer.css"
 import emailjs from 'emailjs-com';
 import swal from 'sweetalert'
