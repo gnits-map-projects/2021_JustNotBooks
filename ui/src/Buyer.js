@@ -1,10 +1,6 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import Nav from "./Nav.js"
-<<<<<<< HEAD
-
-=======
->>>>>>> e9eee24ace73261db48a2e659aae2d6dae577810
 import "./Buyer.css"
 import emailjs from 'emailjs-com';
 import swal from 'sweetalert'
@@ -43,6 +39,8 @@ class Buyer extends React.Component {
       disabled3: false,
       sortBy: {
         'price': 'asc',
+        'fromDate': 'asc',
+        'toDate': 'asc',
         'rating': 'asc'
       }
     }
@@ -73,6 +71,7 @@ class Buyer extends React.Component {
     if (colId == 'price') {
       this.setState({ 'sortBy': { ...this.state.sortBy, 'price': sortOrder }, 's': sortedData });
     }
+
   }
 
   handleSort2(event, colId) {
@@ -81,6 +80,12 @@ class Buyer extends React.Component {
     console.log('sortedData >>', sortedData);
     if (colId == 'price') {
       this.setState({ 'sortBy': { ...this.state.sortBy, 'price': sortOrder }, 'b': sortedData });
+    }
+    if (colId == 'fromDate') {
+      this.setState({ 'sortBy': { ...this.state.sortBy, 'fromDate': sortOrder }, 'b': sortedData });
+    }
+    if (colId == 'toDate') {
+      this.setState({ 'sortBy': { ...this.state.sortBy, 'toDate': sortOrder }, 'b': sortedData });
     }
   }
 
@@ -91,6 +96,7 @@ class Buyer extends React.Component {
     if (colId == 'price') {
       this.setState({ 'sortBy': { ...this.state.sortBy, 'price': sortOrder }, 'd': sortedData });
     }
+
   }
 
   compare(key, sortOrder) {
@@ -332,8 +338,16 @@ class Buyer extends React.Component {
             </th>
             <th>Description</th>
             <th>Owner</th>
-            <th>From</th>
-            <th>To</th>
+            <th>From
+            <span className="sortIcon" onClick={(e) => this.handleSort2(e, 'fromDate')}>
+                {this.state.sortBy['fromDate'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
+              </span>
+            </th>
+            <th>To
+            <span className="sortIcon" onClick={(e) => this.handleSort2(e, 'toDate')}>
+                {this.state.sortBy['toDate'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
+              </span>
+            </th>
             <th>Category</th>
             <th>Address</th>
             <th>Status</th>
