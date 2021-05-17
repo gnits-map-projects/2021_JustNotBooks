@@ -8,28 +8,30 @@ import { init } from 'emailjs-com';
 init("user_eQuTDdOKVg6qHspQzBx7u");
 
 export class ResetPassword extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state={
-          
-          oldPswd:'',
-          newPswd:'',
-          name : '',
-          errors: {
-            password: '',
-          }
-    
-    
-        }
-        this.handleUpdate=this.handleUpdate.bind(this)
-        this.handleNewPswdChange=this.handleNewPswdChange.bind(this)
-        this.handleOldPswdChange=this.handleOldPswdChange.bind(this)
-        this.handleNameChange=this.handleNameChange.bind(this)
-      
-      }
-    
+  constructor(props) {
+    super(props);
+    this.state = {
 
-  
+      oldPswd: '',
+      newPswd: '',
+      name: '',
+      errors: {
+        password: '',
+      }
+
+
+    }
+    this.handleUpdate = this.handleUpdate.bind(this)
+    this.handleNewPswdChange = this.handleNewPswdChange.bind(this)
+    this.handleOldPswdChange = this.handleOldPswdChange.bind(this)
+    this.handleNameChange = this.handleNameChange.bind(this)
+    //this.handleok=this.handleok.bind(this)
+
+
+  }
+
+
+
   handleNameChange = event => {
     this.setState({
       name: event.target.value
