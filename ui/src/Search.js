@@ -27,6 +27,8 @@ class Search extends React.Component {
       takenAt: '',
       sortBy: {
         'price': 'asc',
+        'fromDate': 'asc',
+        'toDate': 'asc',
         'rating': 'asc'
       }
     }
@@ -141,33 +143,51 @@ class Search extends React.Component {
   handleSort(event, colId) {
     const sortOrder = this.state.sortBy[colId] == 'asc' ? 'desc' : 'asc';
     const sortedData = this.state.s.sort(this.compare(colId, sortOrder));
-    console.log('sortedData >>', sortedData);
+    //console.log('sortedData >>', sortedData);
     if (colId == 'price') {
       this.setState({ 'sortBy': { ...this.state.sortBy, 'price': sortOrder }, 's': sortedData });
     }
+    if (colId == 'fromDate') {
+      this.setState({ 'sortBy': { ...this.state.sortBy, 'fromDate': sortOrder }, 's': sortedData });
+    }
+    if (colId == 'toDate') {
+      this.setState({ 'sortBy': { ...this.state.sortBy, 'toDate': sortOrder }, 's': sortedData });
+    }
   }
 
+  setNull(a, b, key) {
+    a[key] = a[key] === null ? "" : a[key]
+    b[key] = b[key] === null ? "" : b[key]
+  }
+  revertNull(a, b, key) {
+    a[key] = a[key] === "" ? null : a[key]
+    b[key] = b[key] === "" ? null : b[key]
+  }
   compare(key, sortOrder) {
     return ((a, b) => {
+      this.setNull(a, b, key);
       if (sortOrder == 'asc') {
         if (a[key] < b[key]) {
+          this.revertNull(a, b, key);
           return -1;
         }
         if (a[key] > b[key]) {
+          this.revertNull(a, b, key);
           return 1;
         }
       } else if (sortOrder == 'desc') {
         if (a[key] < b[key]) {
+          this.revertNull(a, b, key);
           return 1;
         }
         if (a[key] > b[key]) {
+          this.revertNull(a, b, key);
           return -1;
         }
       }
       return 0;
     })
   }
-
 
 
 
@@ -297,8 +317,16 @@ class Search extends React.Component {
               </th>
               <th>Description</th>
               <th>Owner</th>
-              <th>From</th>
-              <th>To</th>
+              <th>From
+                <span className="sortIcon" onClick={(e) => this.handleSort(e, 'fromDate')}>
+                  {this.state.sortBy['fromDate'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
+                </span>
+              </th>
+              <th>To
+                <span className="sortIcon" onClick={(e) => this.handleSort(e, 'toDate')}>
+                  {this.state.sortBy['toDate'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
+                </span>
+              </th>
               <th>Category</th>
               <th>Address</th>
               <th>Status</th>
