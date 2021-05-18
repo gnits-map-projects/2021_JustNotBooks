@@ -56,7 +56,16 @@ class Seller extends Component {
     }
     this.state.returnedAt = yyyy + '-' + mm + '-' + dd;
   }
-
+  confirmDialog(owner, id){
+    if (window.confirm('Are you sure to delete the product?')) {
+      this.handleDelete(owner, id)
+      console.log('Deleting product.');
+    } else {
+      // Do nothing!
+      console.log('Not deleting the product');
+    }
+    
+  }
   handleDelete(owner, id) {
 
     var s = this.state.s;
@@ -185,7 +194,7 @@ class Seller extends Component {
             <td>{item.category}</td>
             <td >{item.address}</td>
             <td >{item.status}</td>
-            <td><button onClick={() => this.handleDelete(sessionStorage.getItem("name"), item.id)} > Delete </button></td>
+            <td><button onClick={() => this.confirmDialog(sessionStorage.getItem("name"), item.id)} > Delete </button></td>
             <td><button onClick={() => window.location.href = "./editItem/" + parseInt(item.id)} > Edit </button></td>
           </tr>
         );
