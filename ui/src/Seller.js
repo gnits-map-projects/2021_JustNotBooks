@@ -35,6 +35,8 @@ class Seller extends Component {
       ownerNote: '',
       sortBy: {
         'price': 'asc',
+        'fromDate': 'asc',
+        'toDate': 'asc',
         'rating': 'asc'
       }
     }
@@ -95,35 +97,60 @@ class Seller extends Component {
   handleSort1(event, colId) {
     const sortOrder = this.state.sortBy[colId] == 'asc' ? 'desc' : 'asc';
     const sortedData = this.state.s.sort(this.compare(colId, sortOrder));
-    console.log('sortedData >>', sortedData);
+    //console.log('sortedData >>', sortedData);
     if (colId == 'price') {
       this.setState({ 'sortBy': { ...this.state.sortBy, 'price': sortOrder }, 's': sortedData });
+    }
+    if (colId == 'fromDate') {
+      this.setState({ 'sortBy': { ...this.state.sortBy, 'fromDate': sortOrder }, 's': sortedData });
+    }
+    if (colId == 'toDate') {
+      this.setState({ 'sortBy': { ...this.state.sortBy, 'toDate': sortOrder }, 's': sortedData });
     }
   }
 
   handleSort2(event, colId) {
     const sortOrder = this.state.sortBy[colId] == 'asc' ? 'desc' : 'asc';
     const sortedData = this.state.t.sort(this.compare(colId, sortOrder));
-    console.log('sortedData >>', sortedData);
+    //console.log('sortedData >>', sortedData);
     if (colId == 'price') {
       this.setState({ 'sortBy': { ...this.state.sortBy, 'price': sortOrder }, 't': sortedData });
     }
+    if (colId == 'fromDate') {
+      this.setState({ 'sortBy': { ...this.state.sortBy, 'fromDate': sortOrder }, 't': sortedData });
+    }
+    if (colId == 'toDate') {
+      this.setState({ 'sortBy': { ...this.state.sortBy, 'toDate': sortOrder }, 't': sortedData });
+    }
   }
 
+  setNull(a, b, key) {
+    a[key] = a[key] === null ? "" : a[key]
+    b[key] = b[key] === null ? "" : b[key]
+  }
+  revertNull(a, b, key) {
+    a[key] = a[key] === "" ? null : a[key]
+    b[key] = b[key] === "" ? null : b[key]
+  }
   compare(key, sortOrder) {
     return ((a, b) => {
+      this.setNull(a, b, key);
       if (sortOrder == 'asc') {
         if (a[key] < b[key]) {
+          this.revertNull(a, b, key);
           return -1;
         }
         if (a[key] > b[key]) {
+          this.revertNull(a, b, key);
           return 1;
         }
       } else if (sortOrder == 'desc') {
         if (a[key] < b[key]) {
+          this.revertNull(a, b, key);
           return 1;
         }
         if (a[key] > b[key]) {
+          this.revertNull(a, b, key);
           return -1;
         }
       }
@@ -149,7 +176,7 @@ class Seller extends Component {
           <tr id={id} class="tr">
 
             <td >{item.itemName}</td>
-            <td><img class="image" src={img}  /></td>
+            <td><img class="image" src={img} /></td>
             <td >{item.price}</td>
             <td >{item.description}</td>
             <td>{item.fromDate}</td>
@@ -170,7 +197,7 @@ class Seller extends Component {
           <tr id={id} class="tr">
 
             <td >{item.itemName}</td>
-            <td><img class="image" src={img}  /></td>
+            <td><img class="image" src={img} /></td>
             <td >{item.price}</td>
             <td >{item.description}</td>
             <td>{item.fromDate}</td>
@@ -295,25 +322,25 @@ class Seller extends Component {
             }
           })
 
-        }
-        }
-        else{
-          var s=this.state.s;
-          var body = {
-            customer:customer,
-            id:id,
-            returnedAt:this.state.returnedAt,
-            }
-          const url = 'http://localhost:9000/itemReturn'
-            let headers = new Headers();
+      }
+    }
+    else {
+      var s = this.state.s;
+      var body = {
+        customer: customer,
+        id: id,
+        returnedAt: this.state.returnedAt,
+      }
+      const url = 'http://localhost:9000/itemReturn'
+      let headers = new Headers();
 
-            headers.append('Content-Type', 'application/json');
-            headers.append('Accept', 'application/json');
+      headers.append('Content-Type', 'application/json');
+      headers.append('Accept', 'application/json');
 
-            headers.append('Access-Control-Allow-origin', url);
-            headers.append('Access-Control-Allow-Credentials', 'true');
+      headers.append('Access-Control-Allow-origin', url);
+      headers.append('Access-Control-Allow-Credentials', 'true');
 
-            headers.append('GET','POST');
+      headers.append('GET', 'POST');
 
       fetch(url, {
         headers: headers,
@@ -387,7 +414,7 @@ class Seller extends Component {
         return (
           <tr id={id} class="tr">
             <td >{item.itemName}</td>
-            <td><img class="image" src={img}  /></td>
+            <td><img class="image" src={img} /></td>
             <td >{item.price}</td>
             <td >{item.description}</td>
             <td>{item.fromDate}</td>
@@ -407,7 +434,7 @@ class Seller extends Component {
           <tr id={id} class="tr">
 
             <td >{item.itemName}</td>
-            <td><img class="image" src={img}  /></td>
+            <td><img class="image" src={img} /></td>
             <td >{item.price}</td>
             <td >{item.description}</td>
             <td>{item.fromDate}</td>
@@ -508,13 +535,21 @@ class Seller extends Component {
                 <th>Name</th>
                 <th>Image</th>
                 <th>Price
-                        <span className="sortIcon" onClick={(e) => this.handleSort1(e, 'price')}>
+                  <span className="sortIcon" onClick={(e) => this.handleSort1(e, 'price')}>
                     {this.state.sortBy['price'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
                   </span>
                 </th>
                 <th>Description</th>
-                <th>From</th>
-                <th>To</th>
+                <th>From
+                <span className="sortIcon" onClick={(e) => this.handleSort1(e, 'fromDate')}>
+                    {this.state.sortBy['fromDate'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
+                  </span>
+                </th>
+                <th>To
+                <span className="sortIcon" onClick={(e) => this.handleSort1(e, 'toDate')}>
+                    {this.state.sortBy['toDate'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
+                  </span>
+                </th>
                 <th>Customer</th>
                 <th>Category</th>
                 <th>Address</th>
@@ -532,13 +567,21 @@ class Seller extends Component {
               <th>Name</th>
               <th>Image</th>
               <th>Price
-                        <span className="sortIcon" onClick={(e) => this.handleSort2(e, 'price')}>
+                <span className="sortIcon" onClick={(e) => this.handleSort2(e, 'price')}>
                   {this.state.sortBy['price'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
                 </span>
               </th>
               <th>Description</th>
-              <th>From</th>
-              <th>To</th>
+              <th>From
+                <span className="sortIcon" onClick={(e) => this.handleSort2(e, 'fromDate')}>
+                  {this.state.sortBy['fromDate'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
+                </span>
+              </th>
+              <th>To
+                <span className="sortIcon" onClick={(e) => this.handleSort2(e, 'toDate')}>
+                  {this.state.sortBy['toDate'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
+                </span>
+              </th>
               <th>Owner</th>
               <th>Category</th>
               <th>Address</th>

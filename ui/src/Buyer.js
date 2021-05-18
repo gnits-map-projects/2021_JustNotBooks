@@ -39,10 +39,11 @@ class Buyer extends React.Component {
       disabled3: false,
       sortBy: {
         'price': 'asc',
+        'fromDate': 'asc',
+        'toDate': 'asc',
         'rating': 'asc'
       }
     }
-
     this.handleSort1 = this.handleSort1.bind(this);
     this.handleSort2 = this.handleSort2.bind(this);
     this.handleSort3 = this.handleSort3.bind(this);
@@ -69,6 +70,10 @@ class Buyer extends React.Component {
     if (colId == 'price') {
       this.setState({ 'sortBy': { ...this.state.sortBy, 'price': sortOrder }, 's': sortedData });
     }
+    if (colId == 'rating') {
+      this.setState({ 'sortBy': { ...this.state.sortBy, 'rating': sortOrder }, 's': sortedData });
+    }
+
   }
 
   handleSort2(event, colId) {
@@ -77,6 +82,15 @@ class Buyer extends React.Component {
     console.log('sortedData >>', sortedData);
     if (colId == 'price') {
       this.setState({ 'sortBy': { ...this.state.sortBy, 'price': sortOrder }, 'b': sortedData });
+    }
+    if (colId == 'fromDate') {
+      this.setState({ 'sortBy': { ...this.state.sortBy, 'fromDate': sortOrder }, 'b': sortedData });
+    }
+    if (colId == 'toDate') {
+      this.setState({ 'sortBy': { ...this.state.sortBy, 'toDate': sortOrder }, 'b': sortedData });
+    }
+    if (colId == 'rating') {
+      this.setState({ 'sortBy': { ...this.state.sortBy, 'rating': sortOrder }, 'b': sortedData });
     }
   }
 
@@ -87,22 +101,38 @@ class Buyer extends React.Component {
     if (colId == 'price') {
       this.setState({ 'sortBy': { ...this.state.sortBy, 'price': sortOrder }, 'd': sortedData });
     }
+    if (colId == 'rating') {
+      this.setState({ 'sortBy': { ...this.state.sortBy, 'rating': sortOrder }, 'd': sortedData });
+    }
   }
 
+  setNull(a, b, key) {
+    a[key] = a[key] === null ? "" : a[key]
+    b[key] = b[key] === null ? "" : b[key]
+  }
+  revertNull(a, b, key) {
+    a[key] = a[key] === "" ? null : a[key]
+    b[key] = b[key] === "" ? null : b[key]
+  }
   compare(key, sortOrder) {
     return ((a, b) => {
+      this.setNull(a, b, key);
       if (sortOrder == 'asc') {
         if (a[key] < b[key]) {
+          this.revertNull(a, b, key);
           return -1;
         }
         if (a[key] > b[key]) {
+          this.revertNull(a, b, key);
           return 1;
         }
       } else if (sortOrder == 'desc') {
         if (a[key] < b[key]) {
+          this.revertNull(a, b, key);
           return 1;
         }
         if (a[key] > b[key]) {
+          this.revertNull(a, b, key);
           return -1;
         }
       }
@@ -152,9 +182,7 @@ class Buyer extends React.Component {
 
         }
       })
-
   }
-
   sendFeedback(templateId, variables) {
     window.emailjs.send(
       'gmail', templateId,
@@ -205,8 +233,6 @@ class Buyer extends React.Component {
                 message: "Thanks for Borrowing!! Return on time is appreciated..",
                 email: sessionStorage.getItem("uemail"),
               });
-
-
             //this.sendFeedback(templateId, { message_html: "Thanks for Borrowing!! Return on time is appreciated..", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail") })
             //alert("Thanks for Borrowing!! Return on time is appreciated..")
             //  swal("Thanks!","Thanks for Borrowing!! Return on time is appreciated..","success")
@@ -222,11 +248,7 @@ class Buyer extends React.Component {
           }
         })
     }
-
-
-
   }
-
   renderResultRows() {
 
     let s = this.state.s
@@ -256,11 +278,9 @@ class Buyer extends React.Component {
 
   }
   BuyTable() {
-
     return (
       <div class="admin">
         <Nav />
-
         <Row>
           <Col lg='4'>
             <button className="btnstyle" onClick={() => { this.setState({ st: "buy", disabled1: true, disabled2: false, disabled3: false }) }} style={{ "color": this.state.disabled1 ? "white" : "black", backgroundColor: this.state.disabled1 ? "orangered" : "darkorange" }}> <b>Buy</b> </button>
@@ -272,7 +292,6 @@ class Buyer extends React.Component {
             <button className="btnstyle" onClick={() => { this.setState({ st: "donate", disabled1: false, disabled2: false, disabled3: true }) }} style={{ "color": this.state.disabled3 ? "white" : "black", backgroundColor: this.state.disabled3 ? "orangered" : "darkorange" }}><b>Donation</b> </button>
           </Col>
         </Row><br></br>
-
         <div className='Table'>
           <table id="product" class="w3-table-all">
             <th>Name</th>
@@ -287,23 +306,22 @@ class Buyer extends React.Component {
             <th>Category</th>
             <th>Address</th>
             <th>Status</th>
-            <th>Rating</th>
+            <th>Rating
+            <span className="sortIcon" onClick={(e) => this.handleSort1(e, 'rating')}>
+                {this.state.sortBy['rating'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
+              </span>
+            </th>
             <th>Reviews</th>
             <tbody> {this.renderResultRows()} </tbody>
           </table>
         </div>
       </div>
-
     );
-
-
   }
   BorrowTable() {
-
     return (
       <div class="admin">
         <Nav />
-
         <Row>
           <Col lg='4'>
             <button className="btnstyle" onClick={() => { this.setState({ st: "buy", disabled1: true, disabled2: false, disabled3: false }) }} style={{ "color": this.state.disabled1 ? "white" : "black", backgroundColor: this.state.disabled1 ? "orangered" : "darkorange" }}> <b>Buy</b> </button>
@@ -315,8 +333,6 @@ class Buyer extends React.Component {
             <button className="btnstyle" onClick={() => { this.setState({ st: "donate", disabled1: false, disabled2: false, disabled3: true }) }} style={{ "color": this.state.disabled3 ? "white" : "black", backgroundColor: this.state.disabled3 ? "orangered" : "darkorange" }}><b>Donation</b> </button>
           </Col>
         </Row><br></br>
-
-
         <div className='Table'>
           <table id="product" class="w3-table-all">
             <th>Name</th>
@@ -328,22 +344,30 @@ class Buyer extends React.Component {
             </th>
             <th>Description</th>
             <th>Owner</th>
-            <th>From</th>
-            <th>To</th>
+            <th>From
+            <span className="sortIcon" onClick={(e) => this.handleSort2(e, 'fromDate')}>
+                {this.state.sortBy['fromDate'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
+              </span>
+            </th>
+            <th>To
+            <span className="sortIcon" onClick={(e) => this.handleSort2(e, 'toDate')}>
+                {this.state.sortBy['toDate'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
+              </span>
+            </th>
             <th>Category</th>
             <th>Address</th>
             <th>Status</th>
-            <th>Rating</th>
+            <th>Rating
+            <span className="sortIcon" onClick={(e) => this.handleSort1(e, 'rating')}>
+                {this.state.sortBy['rating'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
+              </span>
+            </th>
             <th>Reviews</th>
             <tbody> {this.renderResultBorrow()} </tbody>
           </table>
-
         </div>
       </div>
-
     );
-
-
   }
   renderResultBorrow() {
 
@@ -409,7 +433,11 @@ class Buyer extends React.Component {
             <th>Category</th>
             <th>Address</th>
             <th>Status</th>
-            <th>Rating</th>
+            <th>Rating
+            <span className="sortIcon" onClick={(e) => this.handleSort1(e, 'rating')}>
+                {this.state.sortBy['rating'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
+              </span>
+            </th>
             <th>Reviews</th>
             <tbody> {this.renderResultDonate()} </tbody>
           </table>
