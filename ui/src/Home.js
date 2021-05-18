@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Fade } from 'react-slideshow-image'
 import slide1 from './images/exc.jpeg';
 import slide2 from './images/ed1.jpg';
@@ -48,19 +48,19 @@ const Home = () => {
         <div className="pictures" id="b">
           <Fade {...properties}>
             <div className="slideshow">
-              <div><img src={slide1} /></div>
+              <div><img src={slide1} alt="slide 1" /></div>
             </div>
             <div className="slideshow">
-              <div><img src={slide2} /></div>
+              <div><img src={slide2} alt="slide 2" /></div>
             </div>
             <div className="slideshow" >
-              <div><img src={slide3} /></div>
+              <div><img src={slide3} alt="slide 3" /></div>
             </div>
             <div className="slideshow" >
-              <div><img src={slide4} /></div>
+              <div><img src={slide4} alt="slide 4" /></div>
             </div>
             <div className="slideshow" >
-              <div><img src={slide5} /></div>
+              <div><img src={slide5} alt="slide 5" /></div>
             </div>
           </Fade>
         </div>

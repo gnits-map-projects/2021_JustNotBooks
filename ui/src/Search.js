@@ -1,13 +1,7 @@
 import React, { Component } from "react";
-//import { Container } from "react-bootstrap";
-//import Col from 'react-bootstrap/Col'
-//import Row from 'react-bootstrap/Row'
-//import UserProfile from "./UserProfile";
 import Nav from "./Nav.js"
 import "./Buyer.css"
 import "./Seller.css"
-import Buyer from "./Buyer.js";
-// import { static } from "express";
 import swal from 'sweetalert'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSortDown, faSortUp } from '@fortawesome/free-solid-svg-icons'

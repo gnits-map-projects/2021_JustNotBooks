@@ -1,16 +1,10 @@
-import React, { Component } from "react";
-import search from './images/search.jpg';
+import React from "react";
 import ic from './images/log.png'
-import { BrowserRouter} from 'react-router-dom';
 import h from './images/ho.png'
 import bell from './images/bellll.png'
 import "./Nav.css"
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
-import {
-  Route,
-  NavLink,
-  HashRouter
-} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import './Nav.css';
 class Popup extends React.Component {
   render() {
@@ -76,42 +70,42 @@ class Nav extends React.Component {
   render() {
     return (
       <div>
-        
-          <div>
-            <center><h1><b>JustNotBooks-Buy.Borrow.Rent</b></h1></center>
-            <ul className="header">
-            
-              
-              <li><NavLink exact to="/home"  activeClassName="active" ><img src={h} /></NavLink></li>
 
-              <li><NavLink exact to="/buyer" activeClassName="active">Exchanges</NavLink></li>
+        <div>
+          <center><h1><b>JustNotBooks-Buy.Borrow.Rent</b></h1></center>
+          <ul className="header">
 
-              <li><NavLink exact to="/seller" activeClassName="active" >Transaction</NavLink></li>
-              
-              <div style={{ width: "600px", display: "inline-block", verticalAlign: "middle", zIndex: "100" }}>
-                <li className="liSearch">
-                  <ReactSearchAutocomplete
-                    items={this.state.items}
-                    onSearch={this.handleOnSearch}
-                    onSelect={this.handleOnSelect}
-                    placeholder='Search for an item'
-                    autoFocus
-                  />
-                </li>
-              </div>
-              
-              <li>< a className="p" href="/survey"><img src={ic} /></a></li>
-              <li><NavLink exact to="/profile" activeClassName="active" className="p">{sessionStorage.getItem("name")}'s Profile</NavLink></li>
-              <li><a className="notification"><img src={bell} onClick={this.togglePopup.bind(this)} /><p className="badge">{sessionStorage.getItem("l")}</p></a></li>
-            </ul>
-            {this.state.showPopup ?
-              <Popup
-                closePopup={this.togglePopup.bind(this)}
-              />
-              : null
-            }
-          </div>
-        
+
+            <li><NavLink exact to="/home" activeClassName="active" ><img src={h} alt="home" /></NavLink></li>
+
+            <li><NavLink exact to="/buyer" activeClassName="active">Exchanges</NavLink></li>
+
+            <li><NavLink exact to="/seller" activeClassName="active" >Transaction</NavLink></li>
+
+            <div style={{ width: "600px", display: "inline-block", verticalAlign: "middle", zIndex: "100" }}>
+              <li className="liSearch">
+                <ReactSearchAutocomplete
+                  items={this.state.items}
+                  onSearch={this.handleOnSearch}
+                  onSelect={this.handleOnSelect}
+                  placeholder='Search for an item'
+                  autoFocus
+                />
+              </li>
+            </div>
+
+            <li>< a className="p" href="/survey"><img src={ic} alt="" /></a></li>
+            <li><NavLink exact to="/profile" activeClassName="active" className="p">{sessionStorage.getItem("name")}'s Profile</NavLink></li>
+            <li><a className="notification"><img src={bell} alt="notification" onClick={this.togglePopup.bind(this)} /><p className="badge">{sessionStorage.getItem("l")}</p></a></li>
+          </ul>
+          {this.state.showPopup ?
+            <Popup
+              closePopup={this.togglePopup.bind(this)}
+            />
+            : null
+          }
+        </div>
+
       </div>
     )
   }

@@ -1,7 +1,5 @@
 import React from "react";
 import swal from 'sweetalert'
-
-import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
 import "./login.css";
 
 export class Login extends React.Component {
@@ -46,11 +44,11 @@ export class Login extends React.Component {
       name: this.state.name,
     }
     //console.log(body);
-    if (this.state.name == "") {
+    if (this.state.name === "") {
       alert('Please enter the name')
 
     }
-    else if (this.state.pswd == "") {
+    else if (this.state.pswd === "") {
       alert('Please enter the password')
     }
     else {

@@ -1,6 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
 import "./edit.css"
-
 import swal from 'sweetalert'
 import emailjs from 'emailjs-com'
 import { init } from 'emailjs-com';
@@ -44,7 +43,7 @@ export class ResetPassword extends React.Component {
       event.target.value.length < 8
         ? 'Password must be 8 characters long!'
         : '';
-    if (errors.password == '') {
+    if (errors.password === '') {
       this.setState({ p: true });
     }
     this.setState({ errors, [name]: value });

@@ -20,9 +20,6 @@ import Review from "./Review"
 import ResetPassword from "./ResetPassword";
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     return (
       <BrowserRouter>
