@@ -36,8 +36,8 @@ class Seller extends Component {
       sortBy: {
         'price': 'asc',
         'fromDate': 'asc',
-        'toDate': 'asc',
-        'rating': 'asc'
+        'toDate': 'asc'
+
       }
     }
     this.handleSort1 = this.handleSort1.bind(this);

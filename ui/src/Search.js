@@ -28,8 +28,7 @@ class Search extends React.Component {
       sortBy: {
         'price': 'asc',
         'fromDate': 'asc',
-        'toDate': 'asc',
-        'rating': 'asc'
+        'toDate': 'asc'
       }
     }
     this.state.takenAt = Date();

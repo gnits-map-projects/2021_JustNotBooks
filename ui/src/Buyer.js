@@ -40,8 +40,8 @@ class Buyer extends React.Component {
       sortBy: {
         'price': 'asc',
         'fromDate': 'asc',
-        'toDate': 'asc',
-        'rating': 'asc'
+        'toDate': 'asc'
+        
       }
     }
     this.handleSort1 = this.handleSort1.bind(this);
@@ -70,9 +70,7 @@ class Buyer extends React.Component {
     if (colId === 'price') {
       this.setState({ 'sortBy': { ...this.state.sortBy, 'price': sortOrder }, 's': sortedData });
     }
-    if (colId === 'rating') {
-      this.setState({ 'sortBy': { ...this.state.sortBy, 'rating': sortOrder }, 's': sortedData });
-    }
+    
 
   }
 
@@ -89,9 +87,7 @@ class Buyer extends React.Component {
     if (colId === 'toDate') {
       this.setState({ 'sortBy': { ...this.state.sortBy, 'toDate': sortOrder }, 'b': sortedData });
     }
-    if (colId === 'rating') {
-      this.setState({ 'sortBy': { ...this.state.sortBy, 'rating': sortOrder }, 'b': sortedData });
-    }
+    
   }
 
   handleSort3(event, colId) {
@@ -101,9 +97,7 @@ class Buyer extends React.Component {
     if (colId === 'price') {
       this.setState({ 'sortBy': { ...this.state.sortBy, 'price': sortOrder }, 'd': sortedData });
     }
-    if (colId === 'rating') {
-      this.setState({ 'sortBy': { ...this.state.sortBy, 'rating': sortOrder }, 'd': sortedData });
-    }
+   
   }
 
   setNull(a, b, key) {
@@ -307,9 +301,7 @@ class Buyer extends React.Component {
             <th>Address</th>
             <th>Status</th>
             <th>Rating
-            <span className="sortIcon" onClick={(e) => this.handleSort1(e, 'rating')}>
-                {this.state.sortBy['rating'] === 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
-              </span>
+            
             </th>
             <th>Reviews</th>
             <tbody> {this.renderResultRows()} </tbody>
@@ -358,9 +350,7 @@ class Buyer extends React.Component {
             <th>Address</th>
             <th>Status</th>
             <th>Rating
-            <span className="sortIcon" onClick={(e) => this.handleSort1(e, 'rating')}>
-                {this.state.sortBy['rating'] === 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
-              </span>
+           
             </th>
             <th>Reviews</th>
             <tbody> {this.renderResultBorrow()} </tbody>
@@ -434,9 +424,7 @@ class Buyer extends React.Component {
             <th>Address</th>
             <th>Status</th>
             <th>Rating
-            <span className="sortIcon" onClick={(e) => this.handleSort1(e, 'rating')}>
-                {this.state.sortBy['rating'] === 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
-              </span>
+            
             </th>
             <th>Reviews</th>
             <tbody> {this.renderResultDonate()} </tbody>
