@@ -10,7 +10,7 @@ class logout extends React.Component {
     }
     render() {
         var ans = window.confirm("Are you sure to logout? ");
-        if (ans == true)
+        if (ans === true)
             return (<Redirect to="/login" />);
         else
             return (<Redirect to="/home" />);

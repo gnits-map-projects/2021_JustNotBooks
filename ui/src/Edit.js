@@ -72,7 +72,7 @@ export class Edit extends React.Component {
         ? ''
         : 'Email is not valid!';
     console.log(errors.email)
-    if (errors.email == '') {
+    if (errors.email === '') {
       this.setState({ e: true });
     }
     this.setState({ errors, [name]: value });
@@ -85,7 +85,7 @@ export class Edit extends React.Component {
       (validMobileRegex.test(event.target.value))
         ? ''
         : 'Enter a valid phone number!';
-    if (errors.mobile == '') {
+    if (errors.mobile === '') {
       this.setState({ ph: true });
     }
     this.setState({ errors, [name]: value });

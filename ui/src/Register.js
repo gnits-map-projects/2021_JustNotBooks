@@ -18,12 +18,12 @@ export class Register extends React.Component {
       e: false,
       p: false,
       ph: false,
-      ad:false,
+      ad: false,
       email: '',
       phoneNumber: '',
       pswd: '',
       name: '',
-      address : '',
+      address: '',
       cpswd: '',
       errors: {
         name: '',
@@ -37,7 +37,7 @@ export class Register extends React.Component {
     this.handleNameChange = this.handleNameChange.bind(this)
     this.handleEmailChange = this.handleEmailChange.bind(this)
     this.handlePhoneNumberChange = this.handlePhoneNumberChange.bind(this)
-    this.handleAddressChange=this.handleAddressChange.bind(this)
+    this.handleAddressChange = this.handleAddressChange.bind(this)
     this.handlePasswordChange = this.handlePasswordChange.bind(this)
     this.handleConfirmPasswordChange = this.handleConfirmPasswordChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -58,7 +58,7 @@ export class Register extends React.Component {
         ? ''
         : 'Email is not valid!';
     console.log(errors.email)
-    if (errors.email == '') {
+    if (errors.email === '') {
       this.setState({ e: true });
     }
     this.setState({ errors, [name]: value });
@@ -71,7 +71,7 @@ export class Register extends React.Component {
       (validMobileRegex.test(event.target.value))
         ? ''
         : ' Please Enter a valid phone number!';
-    if (errors.mobile == '') {
+    if (errors.mobile === '') {
       this.setState({ ph: true });
     }
     this.setState({ errors, [name]: value });
@@ -85,7 +85,7 @@ export class Register extends React.Component {
       event.target.value.length < 8
         ? 'Password must be 8 characters long!!'
         : '';
-    if (errors.password == '') {
+    if (errors.password === '') {
       this.setState({ p: true });
     }
     this.setState({ errors, [name]: value });
@@ -95,17 +95,17 @@ export class Register extends React.Component {
       cpswd: event.target.value
     });
   }
- handleAddressChange=event=>{
+  handleAddressChange = event => {
     this.setState({
-      address : event.target.value
+      address: event.target.value
     });
   }
-  handleCancel=event=>{
+  handleCancel = event => {
     window.location.reload();
   }
 
-  handleSubmit=event=>{
-    
+  handleSubmit = event => {
+
     event.preventDefault();
     console.log(this.state)
     var body = {
@@ -113,68 +113,69 @@ export class Register extends React.Component {
       name: this.state.name,
       phoneNumber: this.state.phoneNumber,
       email: this.state.email,
-      address : this.state.address,
+      address: this.state.address,
     }
     console.log(body);
-    if (this.state.name == "") {
+    if (this.state.name === "") {
       alert('Please enter the name')
 
     }
-  else if(this.state.email==""){
-    alert('Please enter the email')
-}
-else if(this.state.phoneNumber==""){
-  alert('Please enter the phone number')
-}
-else if(this.state.address==""){
-  alert('Please enter the address')
-}
-else if(this.state.pswd==""){
-  alert('Please enter the password')
-}
-	else if(this.state.cpswd!=this.state.pswd){
-			alert('confirm password does not matched')
-	  
-		  }
-    else{
-    
+    else if (this.state.email === "") {
+      alert('Please enter the email')
+    }
+    else if (this.state.phoneNumber === "") {
+      alert('Please enter the phone number')
+    }
+    else if (this.state.address === "") {
+      alert('Please enter the address')
+    }
+    else if (this.state.pswd === "") {
+      alert('Please enter the password')
+    }
+    else if (this.state.cpswd !== this.state.pswd) {
+      alert('confirm password does not matched')
 
-    const url = "http://localhost:9000/check";
-    let headers = new Headers();
- 
-    headers.append('Content-Type','application/json');
-    headers.append('Accept','application/json');
- 
-    headers.append('Access-Control-Allow-origin',url);
-    headers.append('Access-Control-Allow-Credentials','true');
- 
-    headers.append('POST','GET');
- 
-    fetch(url, {
-       headers:headers,
-       method: 'POST',
-       body: JSON.stringify(body)
-    })
-  /*.then(response => response.json())
-    .then(contents => {console.log(contents); })*/
- 
+    }
+    else {
 
-      .then(response => {if(response.ok){
-            
-        //alert('Details submitted successfully!!');
-        //swal({title:"Error",text:"Details submitted successfully!!",type:"success",timer:5000});
-        swal("Good Job!","Details submitted successfully!!","success")
-        //this.fun.bind(this);
-        this.props.history.push("/login");
+
+      const url = "http://localhost:9000/check";
+      let headers = new Headers();
+
+      headers.append('Content-Type', 'application/json');
+      headers.append('Accept', 'application/json');
+
+      headers.append('Access-Control-Allow-origin', url);
+      headers.append('Access-Control-Allow-Credentials', 'true');
+
+      headers.append('POST', 'GET');
+
+      fetch(url, {
+        headers: headers,
+        method: 'POST',
+        body: JSON.stringify(body)
+      })
+        /*.then(response => response.json())
+          .then(contents => {console.log(contents); })*/
+
+
+        .then(response => {
+          if (response.ok) {
+
+            //alert('Details submitted successfully!!');
+            //swal({title:"Error",text:"Details submitted successfully!!",type:"success",timer:5000});
+            swal("Good Job!", "Details submitted successfully!!", "success")
+            //this.fun.bind(this);
+            this.props.history.push("/login");
             //window.location.href="/main";
-            emailjs.send("service_vclyh4x","template_9ghmwb3",
-            {
-             your_name:this.state.name,
-             from_name: "JustNotBooks",
-             message: "Thanks for registering",
-             email:this.state.email,
-             });
-      }
+            emailjs.send("service_vclyh4x", "template_9ghmwb3",
+              {
+                your_name: this.state.name,
+                from_name: "JustNotBooks",
+                message: "Thanks for registering",
+                email: this.state.email,
+              });
+          }
           else {
 
 
@@ -198,19 +199,19 @@ else if(this.state.pswd==""){
   render() {
     const { errors } = this.state;
     return (
-		<div className="register">
-				<form onSubmit={this.displayLogin}>
-					<h2>Register</h2>
-					
-					<div className="name">
-						<input
-							type="text"
-							placeholder="User Name"
-							name="name"
-							value={this.state.name}
-							onChange={this.handleNameChange} required
-						/>
-					</div>
+      <div className="register">
+        <form onSubmit={this.displayLogin}>
+          <h2>Register</h2>
+
+          <div className="name">
+            <input
+              type="text"
+              placeholder="User Name"
+              name="name"
+              value={this.state.name}
+              onChange={this.handleNameChange} required
+            />
+          </div>
           <div className="email">
             <input
               type="text"
@@ -232,15 +233,15 @@ else if(this.state.pswd==""){
             <span className='error'>{errors.mobile}</span>
           </div>
 
-<div className="address">
-						<input
-							type="text"
-							placeholder="Address"
-							name="address"
-							value={this.state.address}
-							onChange={this.handleAddressChange} required
-						/>
-					</div>
+          <div className="address">
+            <input
+              type="text"
+              placeholder="Address"
+              name="address"
+              value={this.state.address}
+              onChange={this.handleAddressChange} required
+            />
+          </div>
           <div className="pasword">
             <input
               type="password"
@@ -264,16 +265,16 @@ else if(this.state.pswd==""){
 
 
 
-         
 
-					<input type="submit" value="Register" onClick={this.handleSubmit}/>
-          <input type="submit" value="Cancel" onClick={this.handleCancel}/>
+
+          <input type="submit" value="Register" onClick={this.handleSubmit} />
+          <input type="submit" value="Cancel" onClick={this.handleCancel} />
           <div>
-          <div id="ar"><p>Already Registered?  </p></div> 
-          <div id="lh"><p> <a href ="/login">Login here!</a></p></div>
+            <div id="ar"><p>Already Registered?  </p></div>
+            <div id="lh"><p> <a href="/login">Login here!</a></p></div>
           </div>
           <div><p></p></div>
-				</form>
+        </form>
 
       </div>
 
