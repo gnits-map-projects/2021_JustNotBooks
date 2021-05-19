@@ -142,7 +142,7 @@ class Buyer extends React.Component {
 
   handleBuy(customer, id) {
 
-    var s = this.state.s;
+    //var s = this.state.s;
     var body = {
       customer: customer,
       id: id,
@@ -202,7 +202,7 @@ class Buyer extends React.Component {
     }
     else {
 
-      var s = this.state.s;
+      //var s = this.state.s;
       var body = {
         customer: customer,
         id: id,
@@ -252,7 +252,7 @@ class Buyer extends React.Component {
   renderResultRows() {
 
     let s = this.state.s
-    let n
+    //let n
 
     return s.map((item, id) => {
       //console.log(i,typeof(i))
@@ -372,7 +372,7 @@ class Buyer extends React.Component {
   renderResultBorrow() {
 
     let b = this.state.b
-    let n
+    //let n
 
     return b.map((item, id) => {
       //console.log(i,typeof(i))
@@ -452,7 +452,7 @@ class Buyer extends React.Component {
   renderResultDonate() {
 
     let d = this.state.d
-    let n
+    //let n
 
     return d.map((item, id) => {
       //console.log(i,typeof(i))

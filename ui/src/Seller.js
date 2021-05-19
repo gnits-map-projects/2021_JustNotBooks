@@ -68,7 +68,7 @@ class Seller extends Component {
   }
   handleDelete(owner, id) {
 
-    var s = this.state.s;
+    //var s = this.state.s;
     var body = {
       owner: owner,
       id: id,
@@ -169,7 +169,7 @@ class Seller extends Component {
   renderResultRows() {
 
     let s = this.state.s
-    let n
+    //let n
     sessionStorage.setItem("price", this.state.s.price);
     sessionStorage.setItem("address", this.state.s.address);
     sessionStorage.setItem("description", this.state.s.description);
@@ -285,8 +285,8 @@ class Seller extends Component {
           }
         })
       {
-        var s = this.state.s;
-        var body = {
+        //var s = this.state.s;
+        body = {
           customer: customer,
           id: id,
           returnedAt: this.state.returnedAt,
@@ -334,8 +334,8 @@ class Seller extends Component {
       }
     }
     else {
-      var s = this.state.s;
-      var body = {
+      //var s = this.state.s;
+      body = {
         customer: customer,
         id: id,
         returnedAt: this.state.returnedAt,
@@ -414,7 +414,7 @@ class Seller extends Component {
   renderResultTaken() {
 
     let t = this.state.t
-    let n
+    //let n
 
     return t.map((item, id) => {
       //console.log(i,typeof(i))

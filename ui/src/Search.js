@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Nav from "./Nav.js"
 import "./Buyer.css"
 import "./Seller.css"
@@ -38,7 +38,7 @@ class Search extends React.Component {
 
   handleBuy(customer, id) {
 
-    var s = this.state.s;
+    //var s = this.state.s;
     var body = {
       customer: customer,
       id: id,
@@ -96,7 +96,7 @@ class Search extends React.Component {
     }
     else {
 
-      var s = this.state.s;
+      //var s = this.state.s;
       var body = {
         customer: customer,
         id: id,
@@ -194,7 +194,7 @@ class Search extends React.Component {
   renderResultRows() {
 
     let s = this.state.s
-    let n
+    //let n
 
     return s.map((item, id) => {
       //console.log(i,typeof(i))
