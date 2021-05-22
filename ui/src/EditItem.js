@@ -194,10 +194,12 @@ export class EditItem extends React.Component {
             <h2>Edit Item Details</h2>
 
             <div className="itemName">
-              Item Name:{this.state.itemName}
+              &nbsp;Item Name : {this.state.itemName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
             <div className="price">
-              <input
+             &nbsp;Price:&nbsp;&nbsp;
+
+                <input
                 type="text"
                 placeholder="price"
                 name="price"
@@ -208,7 +210,8 @@ export class EditItem extends React.Component {
             </div>
             <div className="category">
               <label>
-                <input type="radio" id="buy" name="category" value="buy" onClick={this.DateEnable.bind(this)} onChange={this.handleCategoryChange} />Buy
+                &nbsp;&nbsp;<input type="radio" id="buy" name="category" value="buy" onClick={this.DateEnable.bind(this)} onChange={this.handleCategoryChange} />Buy
+
                                 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <label>
                 <input type="radio" id="borrow" name="category" value="borrow" onClick={this.DateEnable.bind(this)} onChange={this.handleCategoryChange} />Borrow
@@ -219,6 +222,8 @@ export class EditItem extends React.Component {
                     </div>
             <br></br>
             <div className="description">
+
+             <label for="description" class="Date"> Description: </label>
               <input
                 type="text"
                 placeholder="description"
@@ -229,6 +234,7 @@ export class EditItem extends React.Component {
 
             </div>
             <div className="address">
+             <label for="address" class="Date"> Address: </label>
               <input
                 type="text"
                 placeholder="address"
@@ -238,7 +244,8 @@ export class EditItem extends React.Component {
               />
 
             </div>
-                    From:<input
+                  <label for="fromDate" class="Date"> From: </label>
+                    <input
               type="date"
               placeholder="From Date"
               name="fromDate"
@@ -249,7 +256,9 @@ export class EditItem extends React.Component {
               onChange={this.handleFromChange} required
 
             />
-            <p>  </p>To:<input
+            <p>  </p>
+            <label for="toDate" class="Date" > To: </label>
+            <input
               type="date"
               placeholder="To Date"
               name="toDate"

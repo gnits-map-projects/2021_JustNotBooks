@@ -57,6 +57,17 @@ public class PersonController extends Controller {
             return ok("Insert Successful");
         }, ec.current());
     }
+    public CompletionStage<Result> addReview( )
+    {
+        JsonNode js = request().body().asJson();
+        String review=js.get("review").asText();
+        String name=js.get("name").asText();
+        Long rate=js.get("rate").asLong();
+        return personRepository.addReview(review,name,rate).thenApplyAsync(p -> {
+            //return redirect(routes.PersonController.index());
+            return ok("Insert Successful");
+        }, ec.current());
+    }
 
 
 
@@ -74,13 +85,13 @@ public class PersonController extends Controller {
     public Result valid(String user) {
         return ok("Hi "+user);
     }
-   //Map<String, String> hm = new HashMap<String, String>();
+    //Map<String, String> hm = new HashMap<String, String>();
     public Result login() {
         JsonNode j=request().body().asJson();
         String username=j.get("name").asText();
         String password=j.get("pswd").asText();
         Person ps=personRepository.login(username,password);
-       if(ps==null){
+        if(ps==null){
             return badRequest("Invalid credentials!!");
         }
         else{
@@ -159,4 +170,3 @@ public class PersonController extends Controller {
     }
 
 }
-
