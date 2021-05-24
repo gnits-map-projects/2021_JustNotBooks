@@ -7,7 +7,8 @@ import swal from 'sweetalert'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSortDown, faSortUp } from '@fortawesome/free-solid-svg-icons'
 import { init } from 'emailjs-com';
-
+import { useState } from "react";
+import { useEffect } from "react";
 init("user_eQuTDdOKVg6qHspQzBx7u");
 
 const admin = {
@@ -34,19 +35,22 @@ class Buyer extends React.Component {
       data: [],
       st: 'buy',
       takenAt: '',
+      avgrating: '',
       disabled1: true,
       disabled2: false,
       disabled3: false,
       sortBy: {
         'price': 'asc',
+
         'fromDate': 'asc',
-        'toDate': 'asc'
-        
+        'toDate': 'asc',
       }
     }
+
     this.handleSort1 = this.handleSort1.bind(this);
     this.handleSort2 = this.handleSort2.bind(this);
     this.handleSort3 = this.handleSort3.bind(this);
+    this.handlerating=this.handlerating.bind(this);
 
     var today;
     today = new Date();
@@ -63,64 +67,101 @@ class Buyer extends React.Component {
     this.state.takenAt = yyyy + '-' + mm + '-' + dd;
   }
 
+
   handleSort1(event, colId) {
-    const sortOrder = this.state.sortBy[colId] === 'asc' ? 'desc' : 'asc';
+    const sortOrder = this.state.sortBy[colId] == 'asc' ? 'desc' : 'asc';
     const sortedData = this.state.s.sort(this.compare(colId, sortOrder));
     console.log('sortedData >>', sortedData);
-    if (colId === 'price') {
+    if (colId == 'price') {
       this.setState({ 'sortBy': { ...this.state.sortBy, 'price': sortOrder }, 's': sortedData });
     }
-    
 
   }
 
   handleSort2(event, colId) {
-    const sortOrder = this.state.sortBy[colId] === 'asc' ? 'desc' : 'asc';
+    const sortOrder = this.state.sortBy[colId] == 'asc' ? 'desc' : 'asc';
     const sortedData = this.state.b.sort(this.compare(colId, sortOrder));
     console.log('sortedData >>', sortedData);
-    if (colId === 'price') {
+    if (colId == 'price') {
       this.setState({ 'sortBy': { ...this.state.sortBy, 'price': sortOrder }, 'b': sortedData });
     }
-    if (colId === 'fromDate') {
-      this.setState({ 'sortBy': { ...this.state.sortBy, 'fromDate': sortOrder }, 'b': sortedData });
-    }
-    if (colId === 'toDate') {
-      this.setState({ 'sortBy': { ...this.state.sortBy, 'toDate': sortOrder }, 'b': sortedData });
-    }
-    
+    if (colId == 'fromDate') {
+          this.setState({ 'sortBy': { ...this.state.sortBy, 'fromDate': sortOrder }, 'b': sortedData });
+        }
+        if (colId == 'toDate') {
+          this.setState({ 'sortBy': { ...this.state.sortBy, 'toDate': sortOrder }, 'b': sortedData });
+        }
+
   }
 
   handleSort3(event, colId) {
-    const sortOrder = this.state.sortBy[colId] === 'asc' ? 'desc' : 'asc';
+    const sortOrder = this.state.sortBy[colId] == 'asc' ? 'desc' : 'asc';
     const sortedData = this.state.d.sort(this.compare(colId, sortOrder));
     console.log('sortedData >>', sortedData);
-    if (colId === 'price') {
+    if (colId == 'price') {
       this.setState({ 'sortBy': { ...this.state.sortBy, 'price': sortOrder }, 'd': sortedData });
     }
-   
+
   }
+  handlerating(owner)
+    {                         var body = { owner: owner };
+
+                          console.log("Entered",owner);
+
+                         const url = "http://localhost:9000/avgrating";
+                         let headers = new Headers();
+
+                         headers.append('Content-Type','application/json');
+                         headers.append('Accept','application/json');
+
+                         headers.append('Access-Control-Allow-origin',url);
+                         headers.append('Access-Control-Allow-Credentials','true');
+
+                         headers.append('POST','GET');
+
+                         fetch(url, {
+                            headers:headers,
+                            method: 'POST',
+                            body: JSON.stringify(body)
+                         })
+                         .then((response) => {
+                         console.log(response)
+                                 return response.json();
+
+
+                               })
+                               .then((response) => {
+                                console.log("esss");
+                                 this.setState({ avgrating: response });
+                                 return this.state.avgrating;
+                                 // console.log(this.sate.ngo[1])
+                               });
+
+
+                             }
 
   setNull(a, b, key) {
-    a[key] = a[key] === null ? "" : a[key]
-    b[key] = b[key] === null ? "" : b[key]
-  }
-  revertNull(a, b, key) {
-    a[key] = a[key] === "" ? null : a[key]
-    b[key] = b[key] === "" ? null : b[key]
-  }
+      a[key] = a[key] === null ? "" : a[key]
+      b[key] = b[key] === null ? "" : b[key]
+    }
+    revertNull(a, b, key) {
+      a[key] = a[key] === "" ? null : a[key]
+      b[key] = b[key] === "" ? null : b[key]
+    }
+
   compare(key, sortOrder) {
     return ((a, b) => {
-      this.setNull(a, b, key);
-      if (sortOrder === 'asc') {
+     this.setNull(a, b, key);
+      if (sortOrder == 'asc') {
         if (a[key] < b[key]) {
-          this.revertNull(a, b, key);
+        this.revertNull(a, b, key);
           return -1;
         }
         if (a[key] > b[key]) {
           this.revertNull(a, b, key);
           return 1;
         }
-      } else if (sortOrder === 'desc') {
+      } else if (sortOrder == 'desc') {
         if (a[key] < b[key]) {
           this.revertNull(a, b, key);
           return 1;
@@ -136,7 +177,7 @@ class Buyer extends React.Component {
 
   handleBuy(customer, id) {
 
-    //var s = this.state.s;
+    var s = this.state.s;
     var body = {
       customer: customer,
       id: id,
@@ -176,7 +217,9 @@ class Buyer extends React.Component {
 
         }
       })
+
   }
+
   sendFeedback(templateId, variables) {
     window.emailjs.send(
       'gmail', templateId,
@@ -196,7 +239,7 @@ class Buyer extends React.Component {
     }
     else {
 
-      //var s = this.state.s;
+      var s = this.state.s;
       var body = {
         customer: customer,
         id: id,
@@ -227,6 +270,8 @@ class Buyer extends React.Component {
                 message: "Thanks for Borrowing!! Return on time is appreciated..",
                 email: sessionStorage.getItem("uemail"),
               });
+
+
             //this.sendFeedback(templateId, { message_html: "Thanks for Borrowing!! Return on time is appreciated..", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail") })
             //alert("Thanks for Borrowing!! Return on time is appreciated..")
             //  swal("Thanks!","Thanks for Borrowing!! Return on time is appreciated..","success")
@@ -242,28 +287,35 @@ class Buyer extends React.Component {
           }
         })
     }
+
+
+
   }
+
   renderResultRows() {
 
     let s = this.state.s
-    //let n
+    let n
 
     return s.map((item, id) => {
       //console.log(i,typeof(i))
+       //sessionStorage.setItem("feedbackname", item.itemName);
       let img = "/pictures/" + item.image
+      let a=this.handlerating(item.owner);
       return (
         <tr id={id} class="tr">
 
           <td >{item.itemName}</td>
-          <td><img class="image" src={img} alt="" /></td>
+          <td><img class="image" src={img}  /></td>
           <td >{item.price}</td>
           <td >{item.description}</td>
           <td >{item.owner}</td>
+         <td >{a}</td>
           <td>{item.category}</td>
           <td >{item.address}</td>
           <td >{item.status}</td>
-          <td>{item.rating}</td>
-          <td><button onClick={event => window.location.href = './Review'} > Reviews</button></td>
+
+          {/*<td><button onClick={event => window.location.href = './Review'} > Reviews</button></td>*/}
           <td><button onClick={() => this.handleBuy(sessionStorage.getItem("name"), item.id)} > Buy </button></td>
         </tr>
       );
@@ -272,9 +324,11 @@ class Buyer extends React.Component {
 
   }
   BuyTable() {
+
     return (
       <div class="admin">
         <Nav />
+
         <Row>
           <Col lg='4'>
             <button className="btnstyle" onClick={() => { this.setState({ st: "buy", disabled1: true, disabled2: false, disabled3: false }) }} style={{ "color": this.state.disabled1 ? "white" : "black", backgroundColor: this.state.disabled1 ? "orangered" : "darkorange" }}> <b>Buy</b> </button>
@@ -286,34 +340,38 @@ class Buyer extends React.Component {
             <button className="btnstyle" onClick={() => { this.setState({ st: "donate", disabled1: false, disabled2: false, disabled3: true }) }} style={{ "color": this.state.disabled3 ? "white" : "black", backgroundColor: this.state.disabled3 ? "orangered" : "darkorange" }}><b>Donation</b> </button>
           </Col>
         </Row><br></br>
+
         <div className='Table'>
           <table id="product" class="w3-table-all">
             <th>Name</th>
             <th>Image</th>
             <th>Price
             <span className="sortIcon" onClick={(e) => this.handleSort1(e, 'price')}>
-                {this.state.sortBy['price'] === 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
+                {this.state.sortBy['price'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
               </span>
             </th>
             <th>Description</th>
             <th>Owner</th>
+            <th>Owner Rating</th>
             <th>Category</th>
             <th>Address</th>
             <th>Status</th>
-            <th>Rating
-            
-            </th>
-            <th>Reviews</th>
+
             <tbody> {this.renderResultRows()} </tbody>
           </table>
         </div>
       </div>
+
     );
+
+
   }
   BorrowTable() {
+
     return (
       <div class="admin">
         <Nav />
+
         <Row>
           <Col lg='4'>
             <button className="btnstyle" onClick={() => { this.setState({ st: "buy", disabled1: true, disabled2: false, disabled3: false }) }} style={{ "color": this.state.disabled1 ? "white" : "black", backgroundColor: this.state.disabled1 ? "orangered" : "darkorange" }}> <b>Buy</b> </button>
@@ -325,63 +383,63 @@ class Buyer extends React.Component {
             <button className="btnstyle" onClick={() => { this.setState({ st: "donate", disabled1: false, disabled2: false, disabled3: true }) }} style={{ "color": this.state.disabled3 ? "white" : "black", backgroundColor: this.state.disabled3 ? "orangered" : "darkorange" }}><b>Donation</b> </button>
           </Col>
         </Row><br></br>
+
+
         <div className='Table'>
           <table id="product" class="w3-table-all">
             <th>Name</th>
             <th>Image</th>
             <th>Price
             <span className="sortIcon" onClick={(e) => this.handleSort2(e, 'price')}>
-                {this.state.sortBy['price'] === 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
+                {this.state.sortBy['price'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
               </span>
             </th>
             <th>Description</th>
             <th>Owner</th>
-            <th>From
-            <span className="sortIcon" onClick={(e) => this.handleSort2(e, 'fromDate')}>
-                {this.state.sortBy['fromDate'] === 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
-              </span>
-            </th>
-            <th>To
-            <span className="sortIcon" onClick={(e) => this.handleSort2(e, 'toDate')}>
-                {this.state.sortBy['toDate'] === 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
-              </span>
-            </th>
+            <th>Owner Rating</th>
+            <th>From</th>
+            <th>To</th>
             <th>Category</th>
             <th>Address</th>
             <th>Status</th>
-            <th>Rating
-           
-            </th>
+            <th>Item Rating</th>
             <th>Reviews</th>
             <tbody> {this.renderResultBorrow()} </tbody>
           </table>
+
         </div>
       </div>
+
     );
+
+
   }
   renderResultBorrow() {
 
     let b = this.state.b
-    //let n
+    let n
 
     return b.map((item, id) => {
       //console.log(i,typeof(i))
+      // sessionStorage.setItem("feedbackname", item.itemName);
       let img = "/pictures/" + item.image
       return (
         <tr id={id} class="tr">
 
           <td >{item.itemName}</td>
-          <td><img class="image" src={img} alt="" /></td>
+          <td><img class="image" src={img}  /></td>
           <td >{item.price}</td>
           <td >{item.description}</td>
           <td >{item.owner}</td>
+           <td >{item.rate2}</td>
           <td >{item.fromDate}</td>
           <td >{item.toDate}</td>
           <td>{item.category}</td>
           <td >{item.address}</td>
           <td >{item.status}</td>
-          <td>{item.rating}</td>
-          <td><button onClick={event => window.location.href = './Review'} > Reviews</button></td>
+          <td>{item.rate1}</td>
+          <td>{item.review}</td>
+          {/*<td><button onClick={event => window.location.href = './Review'} > Reviews</button></td>*/}
           <td><button onClick={() => this.handleBorrow(sessionStorage.getItem("name"), item.id, item.fromDate)} > Borrow </button></td>
         </tr>
       );
@@ -415,18 +473,16 @@ class Buyer extends React.Component {
             <th>Image</th>
             <th>Price
             <span className="sortIcon" onClick={(e) => this.handleSort3(e, 'price')}>
-                {this.state.sortBy['price'] === 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
+                {this.state.sortBy['price'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
               </span>
             </th>
             <th>Description</th>
             <th>Owner</th>
+            <th>Owner Rating</th>
             <th>Category</th>
             <th>Address</th>
             <th>Status</th>
-            <th>Rating
-            
-            </th>
-            <th>Reviews</th>
+
             <tbody> {this.renderResultDonate()} </tbody>
           </table>
 
@@ -440,7 +496,7 @@ class Buyer extends React.Component {
   renderResultDonate() {
 
     let d = this.state.d
-    //let n
+    let n
 
     return d.map((item, id) => {
       //console.log(i,typeof(i))
@@ -449,15 +505,16 @@ class Buyer extends React.Component {
         <tr id={id} class="tr">
 
           <td >{item.itemName}</td>
-          <td><img class="image" src={img} alt="" /></td>
+          <td><img class="image" src={img}  /></td>
           <td >{item.price}</td>
           <td >{item.description}</td>
           <td >{item.owner}</td>
+           <td >{item.rate2}</td>
           <td>{item.category}</td>
           <td >{item.address}</td>
           <td >{item.status}</td>
-          <td>{item.rating}</td>
-          <td><button onClick={event => window.location.href = './Review'} > Reviews</button></td>
+
+          {/*<td><button onClick={event => window.location.href = './Review'} > Reviews</button></td>*/}
           <td><button onClick={() => this.handleBuy(sessionStorage.getItem("name"), item.id)} > Take </button></td>
         </tr>
       );
@@ -490,7 +547,7 @@ class Buyer extends React.Component {
         return response.json()
       }).then(res => {
         this.setState({ s: res })
-        //console.log(this.state.s) 
+        //console.log(this.state.s)
       })
 
 
@@ -521,7 +578,7 @@ class Buyer extends React.Component {
         return response.json()
       }).then(res => {
         this.setState({ b: res })
-        //console.log(this.state.s) 
+        //console.log(this.state.s)
       })
 
 
@@ -552,7 +609,7 @@ class Buyer extends React.Component {
         return response.json()
       }).then(res => {
         this.setState({ d: res })
-        //console.log(this.state.s) 
+        //console.log(this.state.s)
       })
 
 
@@ -572,10 +629,10 @@ class Buyer extends React.Component {
   render() {
 
 
-    if (this.state.st === "donate") {
+    if (this.state.st == "donate") {
       return this.DonateTable();
     }
-    else if (this.state.st === "borrow") {
+    else if (this.state.st == "borrow") {
       return this.BorrowTable();
     }
     else {

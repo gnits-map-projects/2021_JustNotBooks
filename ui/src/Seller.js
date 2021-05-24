@@ -35,13 +35,13 @@ class Seller extends Component {
       ownerNote: '',
       sortBy: {
         'price': 'asc',
-        'fromDate': 'asc',
+        'rating': 'asc',
         'toDate': 'asc'
-
       }
     }
     this.handleSort1 = this.handleSort1.bind(this);
     this.handleSort2 = this.handleSort2.bind(this);
+    this.handlefeedback=this.handlefeedback.bind(this);
     var today;
     today = new Date();
     var dd = today.getDate();
@@ -56,19 +56,28 @@ class Seller extends Component {
     }
     this.state.returnedAt = yyyy + '-' + mm + '-' + dd;
   }
-  confirmDialog(owner, id) {
-    if (window.confirm('Are you sure to delete the product?')) {
-      this.handleDelete(owner, id)
-      console.log('Deleting product.');
-    } else {
-      // Do nothing!
-      console.log('Not deleting the product');
+
+  confirmDialog(owner, id){
+      if (window.confirm('Are you sure to delete the product?')) {
+        this.handleDelete(owner, id)
+        console.log('Deleting product.');
+      } else {
+        // Do nothing!
+        console.log('Not deleting the product');
+      }
+
     }
+  handlefeedback(itemName)
+  {
+  //window.location.href = './Feedback'
+  sessionStorage.setItem("feedbackname", itemName);
+  window.location.href = './Feedback'
 
   }
+
   handleDelete(owner, id) {
 
-    //var s = this.state.s;
+    var s = this.state.s;
     var body = {
       owner: owner,
       id: id,
@@ -104,62 +113,37 @@ class Seller extends Component {
 
   }
   handleSort1(event, colId) {
-    const sortOrder = this.state.sortBy[colId] === 'asc' ? 'desc' : 'asc';
+    const sortOrder = this.state.sortBy[colId] == 'asc' ? 'desc' : 'asc';
     const sortedData = this.state.s.sort(this.compare(colId, sortOrder));
-    //console.log('sortedData >>', sortedData);
-    if (colId === 'price') {
+    console.log('sortedData >>', sortedData);
+    if (colId == 'price') {
       this.setState({ 'sortBy': { ...this.state.sortBy, 'price': sortOrder }, 's': sortedData });
-    }
-    if (colId === 'fromDate') {
-      this.setState({ 'sortBy': { ...this.state.sortBy, 'fromDate': sortOrder }, 's': sortedData });
-    }
-    if (colId === 'toDate') {
-      this.setState({ 'sortBy': { ...this.state.sortBy, 'toDate': sortOrder }, 's': sortedData });
     }
   }
 
   handleSort2(event, colId) {
-    const sortOrder = this.state.sortBy[colId] === 'asc' ? 'desc' : 'asc';
+    const sortOrder = this.state.sortBy[colId] == 'asc' ? 'desc' : 'asc';
     const sortedData = this.state.t.sort(this.compare(colId, sortOrder));
-    //console.log('sortedData >>', sortedData);
-    if (colId === 'price') {
+    console.log('sortedData >>', sortedData);
+    if (colId == 'price') {
       this.setState({ 'sortBy': { ...this.state.sortBy, 'price': sortOrder }, 't': sortedData });
-    }
-    if (colId === 'fromDate') {
-      this.setState({ 'sortBy': { ...this.state.sortBy, 'fromDate': sortOrder }, 't': sortedData });
-    }
-    if (colId === 'toDate') {
-      this.setState({ 'sortBy': { ...this.state.sortBy, 'toDate': sortOrder }, 't': sortedData });
     }
   }
 
-  setNull(a, b, key) {
-    a[key] = a[key] === null ? "" : a[key]
-    b[key] = b[key] === null ? "" : b[key]
-  }
-  revertNull(a, b, key) {
-    a[key] = a[key] === "" ? null : a[key]
-    b[key] = b[key] === "" ? null : b[key]
-  }
   compare(key, sortOrder) {
     return ((a, b) => {
-      this.setNull(a, b, key);
-      if (sortOrder === 'asc') {
+      if (sortOrder == 'asc') {
         if (a[key] < b[key]) {
-          this.revertNull(a, b, key);
           return -1;
         }
         if (a[key] > b[key]) {
-          this.revertNull(a, b, key);
           return 1;
         }
-      } else if (sortOrder === 'desc') {
+      } else if (sortOrder == 'desc') {
         if (a[key] < b[key]) {
-          this.revertNull(a, b, key);
           return 1;
         }
         if (a[key] > b[key]) {
-          this.revertNull(a, b, key);
           return -1;
         }
       }
@@ -169,23 +153,26 @@ class Seller extends Component {
   renderResultRows() {
 
     let s = this.state.s
-    //let n
+    let n
     sessionStorage.setItem("price", this.state.s.price);
     sessionStorage.setItem("address", this.state.s.address);
     sessionStorage.setItem("description", this.state.s.description);
     sessionStorage.setItem("category", this.state.s.category);
     sessionStorage.setItem("id", this.state.s.id);
+    //sessionStorage.setItem("feedbackname",this.state.s.itemName);
+
 
     return s.map((item, id) => {
       //console.log(i,typeof(i))
-      if (item.customer === null) {
+     // sessionStorage.setItem("feedbackname", item.itemName);
+      if (item.customer == null) {
         let img = "/pictures/" + item.image
         return (
 
           <tr id={id} class="tr">
 
             <td >{item.itemName}</td>
-            <td><img class="image" src={img} alt="" /></td>
+            <td><img class="image" src={img}  /></td>
             <td >{item.price}</td>
             <td >{item.description}</td>
             <td>{item.fromDate}</td>
@@ -194,6 +181,9 @@ class Seller extends Component {
             <td>{item.category}</td>
             <td >{item.address}</td>
             <td >{item.status}</td>
+            <td>{item.rate2}</td>
+            <td>{item.rate1}</td>
+            <td>{item.review}</td>
             <td><button onClick={() => this.confirmDialog(sessionStorage.getItem("name"), item.id)} > Delete </button></td>
             <td><button onClick={() => window.location.href = "./editItem/" + parseInt(item.id)} > Edit </button></td>
           </tr>
@@ -206,7 +196,7 @@ class Seller extends Component {
           <tr id={id} class="tr">
 
             <td >{item.itemName}</td>
-            <td><img class="image" src={img} alt="" /></td>
+            <td><img class="image" src={img}  /></td>
             <td >{item.price}</td>
             <td >{item.description}</td>
             <td>{item.fromDate}</td>
@@ -215,6 +205,9 @@ class Seller extends Component {
             <td>{item.category}</td>
             <td >{item.address}</td>
             <td >{item.status}</td>
+            <td>{item.rate2}</td>
+            <td>{item.rate1}</td>
+            <td>{item.review}</td>
             <td></td><td></td>
           </tr>
         );
@@ -285,8 +278,8 @@ class Seller extends Component {
           }
         })
       {
-        //var s = this.state.s;
-        body = {
+        var s = this.state.s;
+        var body = {
           customer: customer,
           id: id,
           returnedAt: this.state.returnedAt,
@@ -331,25 +324,25 @@ class Seller extends Component {
             }
           })
 
-      }
-    }
-    else {
-      //var s = this.state.s;
-      body = {
-        customer: customer,
-        id: id,
-        returnedAt: this.state.returnedAt,
-      }
-      const url = 'http://localhost:9000/itemReturn'
-      let headers = new Headers();
+        }
+        }
+        else{
+          var s=this.state.s;
+          var body = {
+            customer:customer,
+            id:id,
+            returnedAt:this.state.returnedAt,
+            }
+          const url = 'http://localhost:9000/itemReturn'
+            let headers = new Headers();
 
-      headers.append('Content-Type', 'application/json');
-      headers.append('Accept', 'application/json');
+            headers.append('Content-Type', 'application/json');
+            headers.append('Accept', 'application/json');
 
-      headers.append('Access-Control-Allow-origin', url);
-      headers.append('Access-Control-Allow-Credentials', 'true');
+            headers.append('Access-Control-Allow-origin', url);
+            headers.append('Access-Control-Allow-Credentials', 'true');
 
-      headers.append('GET', 'POST');
+            headers.append('GET','POST');
 
       fetch(url, {
         headers: headers,
@@ -414,16 +407,17 @@ class Seller extends Component {
   renderResultTaken() {
 
     let t = this.state.t
-    //let n
-
+    let n
+     //sessionStorage.setItem("feedbackname", this.state.itemName);
     return t.map((item, id) => {
-      //console.log(i,typeof(i))
+      console.log(id)
       let img = "/pictures/" + item.image
-      if (item.category === "borrow") {
+      //sessionStorage.setItem("feedbackname", item.itemName);
+      if (item.category == "borrow") {
         return (
           <tr id={id} class="tr">
             <td >{item.itemName}</td>
-            <td><img class="image" src={img} alt="" /></td>
+            <td><img class="image" src={img}  /></td>
             <td >{item.price}</td>
             <td >{item.description}</td>
             <td>{item.fromDate}</td>
@@ -432,7 +426,7 @@ class Seller extends Component {
             <td>{item.category}</td>
             <td >{item.address}</td>
             <td >{item.status}</td>
-            <td><button onClick={event => window.location.href = './Feedback'} > Feedback</button></td>
+            <td><button onClick={() => this.handlefeedback(item.itemName)} >Feedback</button></td>
             <td><button onClick={() => this.handleReturn(sessionStorage.getItem("name"), item.owner, item.id, item.toDate)} > Return </button></td><td></td>
           </tr>
         );
@@ -443,7 +437,7 @@ class Seller extends Component {
           <tr id={id} class="tr">
 
             <td >{item.itemName}</td>
-            <td><img class="image" src={img} alt="" /></td>
+            <td><img class="image" src={img}  /></td>
             <td >{item.price}</td>
             <td >{item.description}</td>
             <td>{item.fromDate}</td>
@@ -452,10 +446,13 @@ class Seller extends Component {
             <td>{item.category}</td>
             <td >{item.address}</td>
             <td >{item.status}</td>
-            <td><button onClick={event => window.location.href = './Feedback'} > Feedback</button></td>
+            <td><button onClick={() => this.handlefeedback(item.itemName)} > Feedback</button></td>
+            {/*<td><button onClick={event => window.location.href = './Feedback'} > Feedback</button></td>*/}
             <td></td>
 
           </tr>
+
+
         );
       }
     });
@@ -544,25 +541,20 @@ class Seller extends Component {
                 <th>Name</th>
                 <th>Image</th>
                 <th>Price
-                  <span className="sortIcon" onClick={(e) => this.handleSort1(e, 'price')}>
-                    {this.state.sortBy['price'] === 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
+                        <span className="sortIcon" onClick={(e) => this.handleSort1(e, 'price')}>
+                    {this.state.sortBy['price'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
                   </span>
                 </th>
                 <th>Description</th>
-                <th>From
-                <span className="sortIcon" onClick={(e) => this.handleSort1(e, 'fromDate')}>
-                    {this.state.sortBy['fromDate'] === 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
-                  </span>
-                </th>
-                <th>To
-                <span className="sortIcon" onClick={(e) => this.handleSort1(e, 'toDate')}>
-                    {this.state.sortBy['toDate'] === 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
-                  </span>
-                </th>
+                <th>From</th>
+                <th>To</th>
                 <th>Customer</th>
                 <th>Category</th>
                 <th>Address</th>
                 <th>Status</th>
+                <th>Owner Rating</th>
+                <th>Item Rating</th>
+                <th>Item Review</th>
                 <tbody> {this.renderResultRows()} </tbody>
               </table>
             </div>
@@ -576,21 +568,13 @@ class Seller extends Component {
               <th>Name</th>
               <th>Image</th>
               <th>Price
-                <span className="sortIcon" onClick={(e) => this.handleSort2(e, 'price')}>
-                  {this.state.sortBy['price'] === 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
+                        <span className="sortIcon" onClick={(e) => this.handleSort2(e, 'price')}>
+                  {this.state.sortBy['price'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
                 </span>
               </th>
               <th>Description</th>
-              <th>From
-                <span className="sortIcon" onClick={(e) => this.handleSort2(e, 'fromDate')}>
-                  {this.state.sortBy['fromDate'] === 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
-                </span>
-              </th>
-              <th>To
-                <span className="sortIcon" onClick={(e) => this.handleSort2(e, 'toDate')}>
-                  {this.state.sortBy['toDate'] === 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
-                </span>
-              </th>
+              <th>From</th>
+              <th>To</th>
               <th>Owner</th>
               <th>Category</th>
               <th>Address</th>
