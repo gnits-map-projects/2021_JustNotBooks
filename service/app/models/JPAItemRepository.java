@@ -88,7 +88,15 @@ public class JPAItemRepository implements ItemRepository {
         List<String> items = em.createQuery("select distinct itemName from Item where status=:s", String.class).setParameter("s",s).getResultList();
         return items.stream();
     }
-
+    @Override
+    public CompletionStage<Stream<Double>> getavgrating(String owner) {
+        return supplyAsync(() -> wrap(em -> getavgrating(em,owner)), executionContext);
+    }
+    private Stream<Double> getavgrating(EntityManager em,String owner)
+    {
+        List<Double> items = em.createQuery("select AVG(rate2) from Item  where  owner=:owner ",Double.class).setParameter("owner",owner).getResultList();
+        return items.stream();
+    }
     @Override
     public CompletionStage<Stream<Item>> listBorrow(String owner) {
         return supplyAsync(() -> wrap(em -> listborrow(em,owner)), executionContext);
@@ -252,7 +260,7 @@ public class JPAItemRepository implements ItemRepository {
 
 
 
-    @Override
+    /*@Override
     public CompletionStage<Double> getavgrating(String owner) {
         return supplyAsync(() -> wrap(em -> getavgrating(em,owner)), executionContext);
     }
@@ -262,17 +270,7 @@ public class JPAItemRepository implements ItemRepository {
 
         Double i = em.createQuery("select AVG(rate2) from Item  where  owner=:owner ",Double.class).setParameter("owner",owner).getSingleResult();
         return i;
-    }
-    /*@Override
-    public CompletionStage<Stream<Double>> getavgrating(String owner) {
-        return supplyAsync(() -> wrap(em -> getavgrating(em,owner)), executionContext);
-    }
-    private Stream<Double> getavgrating(EntityManager em,String owner)
-
-    {
-
-        List<Double> i = em.createQuery("select AVG(rate2) from Item  where  owner=:owner ",Double.class).setParameter("owner",owner).getResultList();
-        return i.stream();
     }*/
+
 
 }

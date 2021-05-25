@@ -31,6 +31,7 @@ class Buyer extends React.Component {
       s: [],
       b: [],
       d: [],
+      rate: [],
       filter: "",
       data: [],
       st: 'buy',
@@ -50,7 +51,7 @@ class Buyer extends React.Component {
     this.handleSort1 = this.handleSort1.bind(this);
     this.handleSort2 = this.handleSort2.bind(this);
     this.handleSort3 = this.handleSort3.bind(this);
-    this.handlerating=this.handlerating.bind(this);
+    //this.handlerating = this.handlerating.bind(this);
 
     var today;
     today = new Date();
@@ -86,11 +87,11 @@ class Buyer extends React.Component {
       this.setState({ 'sortBy': { ...this.state.sortBy, 'price': sortOrder }, 'b': sortedData });
     }
     if (colId == 'fromDate') {
-          this.setState({ 'sortBy': { ...this.state.sortBy, 'fromDate': sortOrder }, 'b': sortedData });
-        }
-        if (colId == 'toDate') {
-          this.setState({ 'sortBy': { ...this.state.sortBy, 'toDate': sortOrder }, 'b': sortedData });
-        }
+      this.setState({ 'sortBy': { ...this.state.sortBy, 'fromDate': sortOrder }, 'b': sortedData });
+    }
+    if (colId == 'toDate') {
+      this.setState({ 'sortBy': { ...this.state.sortBy, 'toDate': sortOrder }, 'b': sortedData });
+    }
 
   }
 
@@ -103,58 +104,58 @@ class Buyer extends React.Component {
     }
 
   }
-  handlerating(owner)
-    {                         var body = { owner: owner };
+  /*handlerating(owner) {
+    var body = { owner: owner };
 
-                          console.log("Entered",owner);
+    console.log("Entered", owner);
 
-                         const url = "http://localhost:9000/avgrating";
-                         let headers = new Headers();
+    const url = "http://localhost:9000/avgrating";
+    let headers = new Headers();
 
-                         headers.append('Content-Type','application/json');
-                         headers.append('Accept','application/json');
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
 
-                         headers.append('Access-Control-Allow-origin',url);
-                         headers.append('Access-Control-Allow-Credentials','true');
+    headers.append('Access-Control-Allow-origin', url);
+    headers.append('Access-Control-Allow-Credentials', 'true');
 
-                         headers.append('POST','GET');
+    headers.append('POST', 'GET');
 
-                         fetch(url, {
-                            headers:headers,
-                            method: 'POST',
-                            body: JSON.stringify(body)
-                         })
-                         .then((response) => {
-                         console.log(response)
-                                 return response.json();
-
-
-                               })
-                               .then((response) => {
-                                console.log("esss");
-                                 this.setState({ avgrating: response });
-                                 return this.state.avgrating;
-                                 // console.log(this.sate.ngo[1])
-                               });
+    fetch(url, {
+      headers: headers,
+      method: 'POST',
+      body: JSON.stringify(body)
+    })
+      .then((response) => {
+        console.log(response)
+        return response.json();
 
 
-                             }
+      })
+      .then((response) => {
+        console.log("esss");
+        this.setState({ avgrating: response });
+        return this.state.avgrating;
+        // console.log(this.sate.ngo[1])
+      });
+
+
+  }*/
 
   setNull(a, b, key) {
-      a[key] = a[key] === null ? "" : a[key]
-      b[key] = b[key] === null ? "" : b[key]
-    }
-    revertNull(a, b, key) {
-      a[key] = a[key] === "" ? null : a[key]
-      b[key] = b[key] === "" ? null : b[key]
-    }
+    a[key] = a[key] === null ? "" : a[key]
+    b[key] = b[key] === null ? "" : b[key]
+  }
+  revertNull(a, b, key) {
+    a[key] = a[key] === "" ? null : a[key]
+    b[key] = b[key] === "" ? null : b[key]
+  }
 
   compare(key, sortOrder) {
     return ((a, b) => {
-     this.setNull(a, b, key);
+      this.setNull(a, b, key);
       if (sortOrder == 'asc') {
         if (a[key] < b[key]) {
-        this.revertNull(a, b, key);
+          this.revertNull(a, b, key);
           return -1;
         }
         if (a[key] > b[key]) {
@@ -201,7 +202,6 @@ class Buyer extends React.Component {
     })
       .then(response => {
         if (response.ok) {
-
           const templateId = 'template_Ne4ypnOa';
           this.sendFeedback(templateId, { message_html: "Thank you for purchasing!!", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail") })
           var note = "Thank you for purchasing!!"
@@ -217,9 +217,7 @@ class Buyer extends React.Component {
 
         }
       })
-
   }
-
   sendFeedback(templateId, variables) {
     window.emailjs.send(
       'gmail', templateId,
@@ -230,7 +228,6 @@ class Buyer extends React.Component {
       // Handle errors here however you like, or use a React error boundary
       .catch(err => console.error('Oh well, you failed. Here some thoughts on the error that occured:', err))
   }
-
   handleBorrow(customer, id, fromDate) {
 
     if (this.state.takenAt < fromDate) {
@@ -291,7 +288,6 @@ class Buyer extends React.Component {
 
 
   }
-
   renderResultRows() {
 
     let s = this.state.s
@@ -299,29 +295,24 @@ class Buyer extends React.Component {
 
     return s.map((item, id) => {
       //console.log(i,typeof(i))
-       //sessionStorage.setItem("feedbackname", item.itemName);
+      //sessionStorage.setItem("feedbackname", item.itemName);
       let img = "/pictures/" + item.image
-      let a=this.handlerating(item.owner);
       return (
         <tr id={id} class="tr">
-
           <td >{item.itemName}</td>
-          <td><img class="image" src={img}  /></td>
+          <td><img class="image" src={img} /></td>
           <td >{item.price}</td>
           <td >{item.description}</td>
           <td >{item.owner}</td>
-         <td >{a}</td>
+
           <td>{item.category}</td>
           <td >{item.address}</td>
           <td >{item.status}</td>
-
           {/*<td><button onClick={event => window.location.href = './Review'} > Reviews</button></td>*/}
           <td><button onClick={() => this.handleBuy(sessionStorage.getItem("name"), item.id)} > Buy </button></td>
         </tr>
       );
     });
-
-
   }
   BuyTable() {
 
@@ -352,7 +343,7 @@ class Buyer extends React.Component {
             </th>
             <th>Description</th>
             <th>Owner</th>
-            <th>Owner Rating</th>
+
             <th>Category</th>
             <th>Address</th>
             <th>Status</th>
@@ -427,18 +418,18 @@ class Buyer extends React.Component {
         <tr id={id} class="tr">
 
           <td >{item.itemName}</td>
-          <td><img class="image" src={img}  /></td>
+          <td><img class="image" src={img} /></td>
           <td >{item.price}</td>
           <td >{item.description}</td>
           <td >{item.owner}</td>
-           <td >{item.rate2}</td>
+          <td >{item.rate2 === null ? "No rating available" : item.rate2}</td>
           <td >{item.fromDate}</td>
           <td >{item.toDate}</td>
           <td>{item.category}</td>
           <td >{item.address}</td>
           <td >{item.status}</td>
-          <td>{item.rate1}</td>
-          <td>{item.review}</td>
+          <td>{item.rate1 === null ? "No rating available" : item.rate1}</td>
+          <td>{item.review === null ? "No review available" : item.review}</td>
           {/*<td><button onClick={event => window.location.href = './Review'} > Reviews</button></td>*/}
           <td><button onClick={() => this.handleBorrow(sessionStorage.getItem("name"), item.id, item.fromDate)} > Borrow </button></td>
         </tr>
@@ -447,7 +438,6 @@ class Buyer extends React.Component {
 
 
   }
-
   DonateTable() {
 
     return (
@@ -478,7 +468,7 @@ class Buyer extends React.Component {
             </th>
             <th>Description</th>
             <th>Owner</th>
-            <th>Owner Rating</th>
+
             <th>Category</th>
             <th>Address</th>
             <th>Status</th>
@@ -503,26 +493,21 @@ class Buyer extends React.Component {
       let img = "/pictures/" + item.image
       return (
         <tr id={id} class="tr">
-
           <td >{item.itemName}</td>
-          <td><img class="image" src={img}  /></td>
+          <td><img class="image" src={img} /></td>
           <td >{item.price}</td>
           <td >{item.description}</td>
           <td >{item.owner}</td>
-           <td >{item.rate2}</td>
+
           <td>{item.category}</td>
           <td >{item.address}</td>
           <td >{item.status}</td>
-
           {/*<td><button onClick={event => window.location.href = './Review'} > Reviews</button></td>*/}
           <td><button onClick={() => this.handleBuy(sessionStorage.getItem("name"), item.id)} > Take </button></td>
         </tr>
       );
     });
-
-
   }
-
   buy() {
     const url = "http://localhost:9000/itemsbuy";
 
@@ -549,10 +534,6 @@ class Buyer extends React.Component {
         this.setState({ s: res })
         //console.log(this.state.s)
       })
-
-
-
-
   }
   borrow() {
     const url = "http://localhost:9000/itemsborrow";
@@ -580,10 +561,6 @@ class Buyer extends React.Component {
         this.setState({ b: res })
         //console.log(this.state.s)
       })
-
-
-
-
   }
   donate() {
     const url = "http://localhost:9000/itemsdonate";
@@ -611,24 +588,39 @@ class Buyer extends React.Component {
         this.setState({ d: res })
         //console.log(this.state.s)
       })
-
-
-
-
   }
+  /* rating() {
+     const url = "http://localhost:9000/avgrating";
+     var body = {
+       owner: sessionStorage.getItem("name")
+     }
+     let headers = new Headers();
+     headers.append('Content-Type', 'application/json');
+     headers.append('Accept', 'application/json');
+     headers.append('Access-Control-Allow-origin', url);
+     headers.append('Access-Control-Allow-Credentials', 'true');
+     headers.append('POST', 'GET');
+     fetch(url, {
+       headers: headers,
+       method: 'POST',
+       body: JSON.stringify(body)
+     })
+       .then(response => {
+         return response.json()
+       }).then(res => {
+         this.setState({ rate: res })
+       })
+   }*/
   componentDidMount() {
     this.buy()
     this.borrow()
     this.donate()
+    //this.rating()
   }
   handleChange = event => {
     this.setState({ filter: event.target.value });
   };
-
-
   render() {
-
-
     if (this.state.st == "donate") {
       return this.DonateTable();
     }
@@ -638,7 +630,6 @@ class Buyer extends React.Component {
     else {
       return this.BuyTable();
     }
-
   }
 }
 

@@ -41,7 +41,7 @@ class Seller extends Component {
     }
     this.handleSort1 = this.handleSort1.bind(this);
     this.handleSort2 = this.handleSort2.bind(this);
-    this.handlefeedback=this.handlefeedback.bind(this);
+    this.handlefeedback = this.handlefeedback.bind(this);
     var today;
     today = new Date();
     var dd = today.getDate();
@@ -57,21 +57,20 @@ class Seller extends Component {
     this.state.returnedAt = yyyy + '-' + mm + '-' + dd;
   }
 
-  confirmDialog(owner, id){
-      if (window.confirm('Are you sure to delete the product?')) {
-        this.handleDelete(owner, id)
-        console.log('Deleting product.');
-      } else {
-        // Do nothing!
-        console.log('Not deleting the product');
-      }
-
+  confirmDialog(owner, id) {
+    if (window.confirm('Are you sure to delete the product?')) {
+      this.handleDelete(owner, id)
+      console.log('Deleting product.');
+    } else {
+      // Do nothing!
+      console.log('Not deleting the product');
     }
-  handlefeedback(itemName)
-  {
-  //window.location.href = './Feedback'
-  sessionStorage.setItem("feedbackname", itemName);
-  window.location.href = './Feedback'
+
+  }
+  handlefeedback(itemName) {
+    //window.location.href = './Feedback'
+    sessionStorage.setItem("feedbackname", itemName);
+    window.location.href = './Feedback'
 
   }
 
@@ -164,7 +163,7 @@ class Seller extends Component {
 
     return s.map((item, id) => {
       //console.log(i,typeof(i))
-     // sessionStorage.setItem("feedbackname", item.itemName);
+      // sessionStorage.setItem("feedbackname", item.itemName);
       if (item.customer == null) {
         let img = "/pictures/" + item.image
         return (
@@ -172,7 +171,7 @@ class Seller extends Component {
           <tr id={id} class="tr">
 
             <td >{item.itemName}</td>
-            <td><img class="image" src={img}  /></td>
+            <td><img class="image" src={img} /></td>
             <td >{item.price}</td>
             <td >{item.description}</td>
             <td>{item.fromDate}</td>
@@ -181,9 +180,9 @@ class Seller extends Component {
             <td>{item.category}</td>
             <td >{item.address}</td>
             <td >{item.status}</td>
-            <td>{item.rate2}</td>
-            <td>{item.rate1}</td>
-            <td>{item.review}</td>
+            <td>{item.rate2 === null ? "No rating available" : item.rate2}</td>
+            <td>{item.rate1 === null ? "No rating available" : item.rate1}</td>
+            <td>{item.review === null ? "No review available" : item.review}</td>
             <td><button onClick={() => this.confirmDialog(sessionStorage.getItem("name"), item.id)} > Delete </button></td>
             <td><button onClick={() => window.location.href = "./editItem/" + parseInt(item.id)} > Edit </button></td>
           </tr>
@@ -196,7 +195,7 @@ class Seller extends Component {
           <tr id={id} class="tr">
 
             <td >{item.itemName}</td>
-            <td><img class="image" src={img}  /></td>
+            <td><img class="image" src={img} /></td>
             <td >{item.price}</td>
             <td >{item.description}</td>
             <td>{item.fromDate}</td>
@@ -205,9 +204,9 @@ class Seller extends Component {
             <td>{item.category}</td>
             <td >{item.address}</td>
             <td >{item.status}</td>
-            <td>{item.rate2}</td>
-            <td>{item.rate1}</td>
-            <td>{item.review}</td>
+            <td>{item.rate2 === null ? "No rating available" : item.rate2}</td>
+            <td>{item.rate1 === null ? "No rating available" : item.rate1}</td>
+            <td>{item.review === null ? "No review available" : item.review}</td>
             <td></td><td></td>
           </tr>
         );
@@ -324,25 +323,25 @@ class Seller extends Component {
             }
           })
 
-        }
-        }
-        else{
-          var s=this.state.s;
-          var body = {
-            customer:customer,
-            id:id,
-            returnedAt:this.state.returnedAt,
-            }
-          const url = 'http://localhost:9000/itemReturn'
-            let headers = new Headers();
+      }
+    }
+    else {
+      var s = this.state.s;
+      var body = {
+        customer: customer,
+        id: id,
+        returnedAt: this.state.returnedAt,
+      }
+      const url = 'http://localhost:9000/itemReturn'
+      let headers = new Headers();
 
-            headers.append('Content-Type', 'application/json');
-            headers.append('Accept', 'application/json');
+      headers.append('Content-Type', 'application/json');
+      headers.append('Accept', 'application/json');
 
-            headers.append('Access-Control-Allow-origin', url);
-            headers.append('Access-Control-Allow-Credentials', 'true');
+      headers.append('Access-Control-Allow-origin', url);
+      headers.append('Access-Control-Allow-Credentials', 'true');
 
-            headers.append('GET','POST');
+      headers.append('GET', 'POST');
 
       fetch(url, {
         headers: headers,
@@ -408,7 +407,7 @@ class Seller extends Component {
 
     let t = this.state.t
     let n
-     //sessionStorage.setItem("feedbackname", this.state.itemName);
+    //sessionStorage.setItem("feedbackname", this.state.itemName);
     return t.map((item, id) => {
       console.log(id)
       let img = "/pictures/" + item.image
@@ -417,7 +416,7 @@ class Seller extends Component {
         return (
           <tr id={id} class="tr">
             <td >{item.itemName}</td>
-            <td><img class="image" src={img}  /></td>
+            <td><img class="image" src={img} /></td>
             <td >{item.price}</td>
             <td >{item.description}</td>
             <td>{item.fromDate}</td>
@@ -437,7 +436,7 @@ class Seller extends Component {
           <tr id={id} class="tr">
 
             <td >{item.itemName}</td>
-            <td><img class="image" src={img}  /></td>
+            <td><img class="image" src={img} /></td>
             <td >{item.price}</td>
             <td >{item.description}</td>
             <td>{item.fromDate}</td>
@@ -552,7 +551,7 @@ class Seller extends Component {
                 <th>Category</th>
                 <th>Address</th>
                 <th>Status</th>
-                <th>Owner Rating</th>
+                <th>Your Rating</th>
                 <th>Item Rating</th>
                 <th>Item Review</th>
                 <tbody> {this.renderResultRows()} </tbody>

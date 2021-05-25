@@ -57,6 +57,14 @@ public class ItemController extends Controller {
             return ok(toJson(itemStream.collect(Collectors.toList())));
         }, ec.current());
     }
+    public CompletionStage<Result> getownerrating(){
+        JsonNode js = request().body().asJson();
+        String owner = js.get("owner").asText();
+        return itemRepository.getavgrating(owner).thenApplyAsync(itemStream -> {
+            return ok(toJson(itemStream.collect(Collectors.toList())));
+        }, ec.current());
+
+    }
     public CompletionStage<Result> getBorrowItems() {
         JsonNode js = request().body().asJson();
         String owner = js.get("owner").asText();
@@ -234,13 +242,6 @@ public class ItemController extends Controller {
 
     }
 
-    public CompletionStage<Result> getownerrating(){
-        JsonNode js = request().body().asJson();
-        String owner = js.get("owner").asText();
-        return itemRepository.getavgrating(owner).thenApplyAsync(itemStream -> {
-            return ok("success");
-        }, ec.current());
 
-    }
 
 }

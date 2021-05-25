@@ -26,6 +26,6 @@ public interface ItemRepository {
     CompletionStage<Item> del(String owner,Long id);
     public Item details(Long id);
     public CompletionStage<Stream<Item>> getSearchItems(String search, String owner);
-    public CompletionStage <Double> getavgrating(String owner);
+    public CompletionStage<Stream<Double>> getavgrating(String owner);
 
 }
