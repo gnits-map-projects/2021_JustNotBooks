@@ -42,7 +42,8 @@ class Buyer extends React.Component {
       disabled3: false,
       sortBy: {
         'price': 'asc',
-
+        'rate2': 'asc',
+        'rate1': 'asc',
         'fromDate': 'asc',
         'toDate': 'asc',
       }
@@ -85,6 +86,12 @@ class Buyer extends React.Component {
     console.log('sortedData >>', sortedData);
     if (colId == 'price') {
       this.setState({ 'sortBy': { ...this.state.sortBy, 'price': sortOrder }, 'b': sortedData });
+    }
+    if (colId == 'rate1') {
+      this.setState({ 'sortBy': { ...this.state.sortBy, 'rate1': sortOrder }, 'b': sortedData });
+    }
+    if (colId == 'rate2') {
+      this.setState({ 'sortBy': { ...this.state.sortBy, 'rate2': sortOrder }, 'b': sortedData });
     }
     if (colId == 'fromDate') {
       this.setState({ 'sortBy': { ...this.state.sortBy, 'fromDate': sortOrder }, 'b': sortedData });
@@ -387,13 +394,29 @@ class Buyer extends React.Component {
             </th>
             <th>Description</th>
             <th>Owner</th>
-            <th>Owner Rating</th>
-            <th>From</th>
-            <th>To</th>
+            <th>Owner Rating
+            <span className="sortIcon" onClick={(e) => this.handleSort2(e, 'rate2')}>
+                {this.state.sortBy['rate2'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
+              </span>
+            </th>
+            <th>From
+            <span className="sortIcon" onClick={(e) => this.handleSort2(e, 'fromDate')}>
+                {this.state.sortBy['fromDate'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
+              </span>
+            </th>
+            <th>To
+            <span className="sortIcon" onClick={(e) => this.handleSort2(e, 'toDate')}>
+                {this.state.sortBy['toDate'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
+              </span>
+            </th>
             <th>Category</th>
             <th>Address</th>
             <th>Status</th>
-            <th>Item Rating</th>
+            <th>Item Rating
+            <span className="sortIcon" onClick={(e) => this.handleSort2(e, 'rate1')}>
+                {this.state.sortBy['rate1'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
+              </span>
+            </th>
             <th>Reviews</th>
             <tbody> {this.renderResultBorrow()} </tbody>
           </table>
