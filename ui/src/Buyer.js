@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSortDown, faSortUp } from '@fortawesome/free-solid-svg-icons'
 import { init } from 'emailjs-com';
 
-init("user_eQuTDdOKVg6qHspQzBx7u");
+init("user_B6pnRyDfSi46pZ02tVzA7");
 
 const admin = {
   width: '100%',
@@ -166,9 +166,14 @@ class Buyer extends React.Component {
     })
       .then(response => {
         if (response.ok) {
-
-          const templateId = 'template_Ne4ypnOa';
-          this.sendFeedback(templateId, { message_html: "Thank you for purchasing!!", from_name: "JustNotBooks", email: sessionStorage.getItem("uemail") })
+          emailjs.send("service_u99tbjs", "template_vldqnoa",
+              {
+                your_name: sessionStorage.getItem("name"),
+                from_name: "JustNotBooks",
+                message: "Thanks for Buying the product!! Let us know your feedback ",
+                email: sessionStorage.getItem("uemail"),
+              });
+          
           var note = "Thank you for purchasing!!"
           sessionStorage.setItem("notification", note)
           swal({
@@ -226,7 +231,7 @@ class Buyer extends React.Component {
       })
         .then(response => {
           if (response.ok) {
-            emailjs.send("service_vclyh4x", "template_9ghmwb3",
+            emailjs.send("service_u99tbjs", "template_vldqnoa",
               {
                 your_name: sessionStorage.getItem("name"),
                 from_name: "JustNotBooks",

@@ -6,7 +6,7 @@ import swal from 'sweetalert'
 import emailjs from 'emailjs-com'
 import{ init } from 'emailjs-com';
 
-init("user_eQuTDdOKVg6qHspQzBx7u");
+init("user_B6pnRyDfSi46pZ02tVzA7");
 var image1;
 export class Upload extends React.Component {
 
@@ -173,7 +173,7 @@ export class Upload extends React.Component {
  swal("Good job!",'Item uploaded',"success");
 
  this.props.history.push("./profile");
- emailjs.send("service_vclyh4x","template_9ghmwb3",
+ emailjs.send("service_u99tbjs", "template_vldqnoa",
           {
            your_name: sessionStorage.getItem("name"),
            from_name: "JustNotBooks",
