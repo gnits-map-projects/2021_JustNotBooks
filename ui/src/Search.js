@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Nav from "./Nav.js"
 import "./Buyer.css"
 import "./Seller.css"
@@ -28,8 +28,7 @@ class Search extends React.Component {
       sortBy: {
         'price': 'asc',
         'fromDate': 'asc',
-        'toDate': 'asc',
-        'rating': 'asc'
+        'toDate': 'asc'
       }
     }
     this.state.takenAt = Date();
@@ -38,7 +37,7 @@ class Search extends React.Component {
 
   handleBuy(customer, id) {
 
-    var s = this.state.s;
+    //var s = this.state.s;
     var body = {
       customer: customer,
       id: id,
@@ -96,7 +95,7 @@ class Search extends React.Component {
     }
     else {
 
-      var s = this.state.s;
+      //var s = this.state.s;
       var body = {
         customer: customer,
         id: id,
@@ -141,16 +140,16 @@ class Search extends React.Component {
   }
 
   handleSort(event, colId) {
-    const sortOrder = this.state.sortBy[colId] == 'asc' ? 'desc' : 'asc';
+    const sortOrder = this.state.sortBy[colId] === 'asc' ? 'desc' : 'asc';
     const sortedData = this.state.s.sort(this.compare(colId, sortOrder));
     //console.log('sortedData >>', sortedData);
-    if (colId == 'price') {
+    if (colId === 'price') {
       this.setState({ 'sortBy': { ...this.state.sortBy, 'price': sortOrder }, 's': sortedData });
     }
-    if (colId == 'fromDate') {
+    if (colId === 'fromDate') {
       this.setState({ 'sortBy': { ...this.state.sortBy, 'fromDate': sortOrder }, 's': sortedData });
     }
-    if (colId == 'toDate') {
+    if (colId === 'toDate') {
       this.setState({ 'sortBy': { ...this.state.sortBy, 'toDate': sortOrder }, 's': sortedData });
     }
   }
@@ -166,7 +165,7 @@ class Search extends React.Component {
   compare(key, sortOrder) {
     return ((a, b) => {
       this.setNull(a, b, key);
-      if (sortOrder == 'asc') {
+      if (sortOrder === 'asc') {
         if (a[key] < b[key]) {
           this.revertNull(a, b, key);
           return -1;
@@ -175,7 +174,7 @@ class Search extends React.Component {
           this.revertNull(a, b, key);
           return 1;
         }
-      } else if (sortOrder == 'desc') {
+      } else if (sortOrder === 'desc') {
         if (a[key] < b[key]) {
           this.revertNull(a, b, key);
           return 1;
@@ -194,17 +193,17 @@ class Search extends React.Component {
   renderResultRows() {
 
     let s = this.state.s
-    let n
+    //let n
 
     return s.map((item, id) => {
       //console.log(i,typeof(i))
       let img = "/pictures/" + item.image
-      if (item.category == "buy") {
+      if (item.category === "buy") {
         return (
           <tr id={id} class="tr">
 
             <td >{item.itemName}</td>
-            <td><img src={img} width="200px" height="200px" /></td>
+            <td><img src={img} alt="" width="200px" height="200px" /></td>
             <td >{item.price}</td>
             <td >{item.description}</td>
             <td >{item.owner}</td>
@@ -217,12 +216,12 @@ class Search extends React.Component {
           </tr>
         );
       }
-      else if (item.category == "borrow") {
+      else if (item.category === "borrow") {
         return (
           <tr id={id} class="tr">
 
             <td >{item.itemName}</td>
-            <td><img src={img} width="200px" height="200px" /></td>
+            <td><img src={img} alt="" width="200px" height="200px" /></td>
             <td >{item.price}</td>
             <td >{item.description}</td>
             <td >{item.owner}</td>
@@ -240,7 +239,7 @@ class Search extends React.Component {
           <tr id={id} class="tr">
 
             <td >{item.itemName}</td>
-            <td><img src={img} width="200px" height="200px" /></td>
+            <td><img src={img} alt="" width="200px" height="200px" /></td>
             <td >{item.price}</td>
             <td >{item.description}</td>
             <td >{item.owner}</td>
@@ -312,19 +311,19 @@ class Search extends React.Component {
               <th>Image</th>
               <th>Price
               <span className="sortIcon" onClick={(e) => this.handleSort(e, 'price')}>
-                  {this.state.sortBy['price'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
+                  {this.state.sortBy['price'] === 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
                 </span>
               </th>
               <th>Description</th>
               <th>Owner</th>
               <th>From
                 <span className="sortIcon" onClick={(e) => this.handleSort(e, 'fromDate')}>
-                  {this.state.sortBy['fromDate'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
+                  {this.state.sortBy['fromDate'] === 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
                 </span>
               </th>
               <th>To
                 <span className="sortIcon" onClick={(e) => this.handleSort(e, 'toDate')}>
-                  {this.state.sortBy['toDate'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
+                  {this.state.sortBy['toDate'] === 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
                 </span>
               </th>
               <th>Category</th>

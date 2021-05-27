@@ -57,6 +57,14 @@ public class ItemController extends Controller {
             return ok(toJson(itemStream.collect(Collectors.toList())));
         }, ec.current());
     }
+    public CompletionStage<Result> getownerrating(){
+        JsonNode js = request().body().asJson();
+        String owner = js.get("owner").asText();
+        return itemRepository.getavgrating(owner).thenApplyAsync(itemStream -> {
+            return ok(toJson(itemStream.collect(Collectors.toList())));
+        }, ec.current());
+
+    }
     public CompletionStage<Result> getBorrowItems() {
         JsonNode js = request().body().asJson();
         String owner = js.get("owner").asText();
@@ -204,6 +212,17 @@ public class ItemController extends Controller {
         });
 
     }
+    public CompletionStage<Result> addReview() {
+        JsonNode js = request().body().asJson();
+        String review = js.get("review").asText();
+        Long rate1=js.get("rate1").asLong();
+        Long rate2=js.get("rate2").asLong();
+        //Long id=js.get("id").asLong();
+        String itemname = js.get("itemname").asText();
+        return itemRepository.addReview(itemname,rate1,rate2,review).thenApplyAsync(itemStream -> {
+            return ok("Successful");
+        }, ec.current());
+    }
     public CompletionStage<Result> returnItem(){
         JsonNode js = request().body().asJson();
         String customer = js.get("customer").asText();
@@ -222,6 +241,7 @@ public class ItemController extends Controller {
         });
 
     }
+
 
 
 }

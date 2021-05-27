@@ -24,7 +24,9 @@ public class Item {
     public String address;
     public String status="Available";
     public String uploadedAt;
-    public String rating;
+    public String review;
+    public Long rate1;
+    public Long rate2;
 
     public void setUploadedAt(String uploadedAt) {
         this.uploadedAt = uploadedAt;
@@ -144,7 +146,28 @@ public class Item {
         this.status = status;
     }
 
-   public  String getRating(){return rating;}
-   public  void  setRating(String rating) { this.rating=rating ;}
-
+    public String getReview()
+    {
+        return review;
+    }
+    public void setReview(String review)
+    {
+        this.review=review;
+    }
+    public Long getRate1()
+    {
+        return rate1;
+    }
+    public void setRate1(Long rate1)
+    {
+        this.rate1=rate1;
+    }
+    public Long getRate2()
+    {
+        return rate2;
+    }
+    public void setRate2(Long rate2)
+    {
+        this.rate2=rate2;
+    }
 }

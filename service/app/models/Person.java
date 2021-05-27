@@ -15,6 +15,8 @@ public class Person {
     public Long phoneNumber;
     public String address;
     public String pswd;
+    public String review;
+    public  Long rating;
 
     public Long getId() {
         return id;
@@ -61,4 +63,8 @@ public class Person {
     public void setAddress(String address) {
         this.address = address;
     }
+    public  String getReview(){ return review;}
+    public  void setReview(String review){this.review=review;}
+    public  Long getRating(){ return rating;}
+    public  void setRating(Long rating){this.rating=rating;}
 }

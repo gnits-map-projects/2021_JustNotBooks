@@ -39,6 +39,10 @@ public class JPAPersonRepository implements PersonRepository {
     public CompletionStage<Person> add(Person person) {
         return supplyAsync(() -> wrap(em -> insert(em, person)), executionContext);
     }
+    @Override
+    public CompletionStage<Integer> addReview(String review,String name,Long rate) {
+        return supplyAsync(() -> wrap(em -> insertreview(em, review,name,rate)), executionContext);
+    }
 
     @Override
     public CompletionStage<Stream<Person>> list() {
@@ -181,5 +185,9 @@ public class JPAPersonRepository implements PersonRepository {
         } else {
             return null;
         }
+    }
+    private int insertreview(EntityManager em, String review,String name,Long rate) {
+        int i = em.createQuery("update Person SET review =: r ,rating=: ra where name=:name").setParameter("name", name).setParameter("ra", rate).setParameter("r", review).executeUpdate();
+        return i;
     }
 }

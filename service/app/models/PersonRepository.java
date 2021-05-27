@@ -23,6 +23,7 @@ public interface PersonRepository {
     public CompletionStage<Person> edit(String name,String email,Long phoneNumber,String address);
     public CompletionStage<Person> editPswd(String name,String oldPswd,String newPswd);
     public CompletionStage<Person> resetPswd(String name,String newPswd);
+    public CompletionStage<Integer> addReview(String Review,String name,Long rate);
     abstract Person checkName(String Name);
 
 

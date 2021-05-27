@@ -35,13 +35,15 @@ class Seller extends Component {
       ownerNote: '',
       sortBy: {
         'price': 'asc',
+        'rate2': 'asc',
+        'rate1': 'asc',
         'fromDate': 'asc',
         'toDate': 'asc',
-        'rating': 'asc'
       }
     }
     this.handleSort1 = this.handleSort1.bind(this);
     this.handleSort2 = this.handleSort2.bind(this);
+    this.handlefeedback = this.handlefeedback.bind(this);
     var today;
     today = new Date();
     var dd = today.getDate();
@@ -56,7 +58,8 @@ class Seller extends Component {
     }
     this.state.returnedAt = yyyy + '-' + mm + '-' + dd;
   }
-  confirmDialog(owner, id){
+
+  confirmDialog(owner, id) {
     if (window.confirm('Are you sure to delete the product?')) {
       this.handleDelete(owner, id)
       console.log('Deleting product.');
@@ -64,8 +67,15 @@ class Seller extends Component {
       // Do nothing!
       console.log('Not deleting the product');
     }
-    
+
   }
+  handlefeedback(itemName) {
+    //window.location.href = './Feedback'
+    sessionStorage.setItem("feedbackname", itemName);
+    window.location.href = './Feedback'
+
+  }
+
   handleDelete(owner, id) {
 
     var s = this.state.s;
@@ -106,9 +116,15 @@ class Seller extends Component {
   handleSort1(event, colId) {
     const sortOrder = this.state.sortBy[colId] == 'asc' ? 'desc' : 'asc';
     const sortedData = this.state.s.sort(this.compare(colId, sortOrder));
-    //console.log('sortedData >>', sortedData);
+    console.log('sortedData >>', sortedData);
     if (colId == 'price') {
       this.setState({ 'sortBy': { ...this.state.sortBy, 'price': sortOrder }, 's': sortedData });
+    }
+    if (colId == 'rate1') {
+      this.setState({ 'sortBy': { ...this.state.sortBy, 'rate1': sortOrder }, 's': sortedData });
+    }
+    if (colId == 'rate2') {
+      this.setState({ 'sortBy': { ...this.state.sortBy, 'rate2': sortOrder }, 's': sortedData });
     }
     if (colId == 'fromDate') {
       this.setState({ 'sortBy': { ...this.state.sortBy, 'fromDate': sortOrder }, 's': sortedData });
@@ -121,7 +137,7 @@ class Seller extends Component {
   handleSort2(event, colId) {
     const sortOrder = this.state.sortBy[colId] == 'asc' ? 'desc' : 'asc';
     const sortedData = this.state.t.sort(this.compare(colId, sortOrder));
-    //console.log('sortedData >>', sortedData);
+    console.log('sortedData >>', sortedData);
     if (colId == 'price') {
       this.setState({ 'sortBy': { ...this.state.sortBy, 'price': sortOrder }, 't': sortedData });
     }
@@ -141,6 +157,7 @@ class Seller extends Component {
     a[key] = a[key] === "" ? null : a[key]
     b[key] = b[key] === "" ? null : b[key]
   }
+
   compare(key, sortOrder) {
     return ((a, b) => {
       this.setNull(a, b, key);
@@ -175,9 +192,12 @@ class Seller extends Component {
     sessionStorage.setItem("description", this.state.s.description);
     sessionStorage.setItem("category", this.state.s.category);
     sessionStorage.setItem("id", this.state.s.id);
+    //sessionStorage.setItem("feedbackname",this.state.s.itemName);
+
 
     return s.map((item, id) => {
       //console.log(i,typeof(i))
+      // sessionStorage.setItem("feedbackname", item.itemName);
       if (item.customer == null) {
         let img = "/pictures/" + item.image
         return (
@@ -194,6 +214,9 @@ class Seller extends Component {
             <td>{item.category}</td>
             <td >{item.address}</td>
             <td >{item.status}</td>
+            <td>{item.rate2 === null ? "No rating available" : item.rate2}</td>
+            <td>{item.rate1 === null ? "No rating available" : item.rate1}</td>
+            <td>{item.review === null ? "No review available" : item.review}</td>
             <td><button onClick={() => this.confirmDialog(sessionStorage.getItem("name"), item.id)} > Delete </button></td>
             <td><button onClick={() => window.location.href = "./editItem/" + parseInt(item.id)} > Edit </button></td>
           </tr>
@@ -215,6 +238,9 @@ class Seller extends Component {
             <td>{item.category}</td>
             <td >{item.address}</td>
             <td >{item.status}</td>
+            <td>{item.rate2 === null ? "No rating available" : item.rate2}</td>
+            <td>{item.rate1 === null ? "No rating available" : item.rate1}</td>
+            <td>{item.review === null ? "No review available" : item.review}</td>
             <td></td><td></td>
           </tr>
         );
@@ -415,10 +441,11 @@ class Seller extends Component {
 
     let t = this.state.t
     let n
-
+    //sessionStorage.setItem("feedbackname", this.state.itemName);
     return t.map((item, id) => {
-      //console.log(i,typeof(i))
+      console.log(id)
       let img = "/pictures/" + item.image
+      //sessionStorage.setItem("feedbackname", item.itemName);
       if (item.category == "borrow") {
         return (
           <tr id={id} class="tr">
@@ -432,7 +459,7 @@ class Seller extends Component {
             <td>{item.category}</td>
             <td >{item.address}</td>
             <td >{item.status}</td>
-            <td><button onClick={event => window.location.href = './Feedback'} > Feedback</button></td>
+            <td><button onClick={() => this.handlefeedback(item.itemName)} >Feedback</button></td>
             <td><button onClick={() => this.handleReturn(sessionStorage.getItem("name"), item.owner, item.id, item.toDate)} > Return </button></td><td></td>
           </tr>
         );
@@ -452,10 +479,13 @@ class Seller extends Component {
             <td>{item.category}</td>
             <td >{item.address}</td>
             <td >{item.status}</td>
-            <td><button onClick={event => window.location.href = './Feedback'} > Feedback</button></td>
+            <td><button onClick={() => this.handlefeedback(item.itemName)} > Feedback</button></td>
+            {/*<td><button onClick={event => window.location.href = './Feedback'} > Feedback</button></td>*/}
             <td></td>
 
           </tr>
+
+
         );
       }
     });
@@ -544,18 +574,18 @@ class Seller extends Component {
                 <th>Name</th>
                 <th>Image</th>
                 <th>Price
-                  <span className="sortIcon" onClick={(e) => this.handleSort1(e, 'price')}>
+                        <span className="sortIcon" onClick={(e) => this.handleSort1(e, 'price')}>
                     {this.state.sortBy['price'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
                   </span>
                 </th>
                 <th>Description</th>
                 <th>From
-                <span className="sortIcon" onClick={(e) => this.handleSort1(e, 'fromDate')}>
+            <span className="sortIcon" onClick={(e) => this.handleSort1(e, 'fromDate')}>
                     {this.state.sortBy['fromDate'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
                   </span>
                 </th>
                 <th>To
-                <span className="sortIcon" onClick={(e) => this.handleSort1(e, 'toDate')}>
+            <span className="sortIcon" onClick={(e) => this.handleSort1(e, 'toDate')}>
                     {this.state.sortBy['toDate'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
                   </span>
                 </th>
@@ -563,6 +593,17 @@ class Seller extends Component {
                 <th>Category</th>
                 <th>Address</th>
                 <th>Status</th>
+                <th>Your Rating
+            <span className="sortIcon" onClick={(e) => this.handleSort1(e, 'rate2')}>
+                    {this.state.sortBy['rate2'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
+                  </span>
+                </th>
+                <th>Item Rating
+            <span className="sortIcon" onClick={(e) => this.handleSort1(e, 'rate1')}>
+                    {this.state.sortBy['rate1'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
+                  </span>
+                </th>
+                <th>Item Review</th>
                 <tbody> {this.renderResultRows()} </tbody>
               </table>
             </div>
@@ -576,18 +617,18 @@ class Seller extends Component {
               <th>Name</th>
               <th>Image</th>
               <th>Price
-                <span className="sortIcon" onClick={(e) => this.handleSort2(e, 'price')}>
+                        <span className="sortIcon" onClick={(e) => this.handleSort2(e, 'price')}>
                   {this.state.sortBy['price'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
                 </span>
               </th>
               <th>Description</th>
               <th>From
-                <span className="sortIcon" onClick={(e) => this.handleSort2(e, 'fromDate')}>
+            <span className="sortIcon" onClick={(e) => this.handleSort2(e, 'fromDate')}>
                   {this.state.sortBy['fromDate'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
                 </span>
               </th>
               <th>To
-                <span className="sortIcon" onClick={(e) => this.handleSort2(e, 'toDate')}>
+            <span className="sortIcon" onClick={(e) => this.handleSort2(e, 'toDate')}>
                   {this.state.sortBy['toDate'] == 'asc' ? <FontAwesomeIcon icon={faSortDown} /> : <FontAwesomeIcon icon={faSortUp} />}
                 </span>
               </th>

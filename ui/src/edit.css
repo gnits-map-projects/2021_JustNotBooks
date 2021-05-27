@@ -7,3 +7,14 @@
     box-shadow: 5px 5px 5px grey;
     opacity: 0.9;
 }
+.Date {
+    font-size: 15px;
+    color: #333;
+    height: 20px;
+    width: 50px;
+    margin-top: 10px;
+    margin-left: 10px;
+    text-align: left;
+    margin-right:15px;
+    float:left;
+}

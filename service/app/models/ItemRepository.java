@@ -21,8 +21,11 @@ public interface ItemRepository {
     CompletionStage<Stream<Item>> listDonate(String owner);
     CompletionStage<Stream<Item>> listUploaded(String owner);
     CompletionStage<Stream<Item>> listTaken(String customer);
+    public CompletionStage<Integer> addReview(String itemname,Long rate1,Long rate2,String review);
     public CompletionStage<Item> edit(Long id,Integer price,String description,String address,String category,String fromDate,String toDate);
     CompletionStage<Item> del(String owner,Long id);
     public Item details(Long id);
     public CompletionStage<Stream<Item>> getSearchItems(String search, String owner);
+    public CompletionStage<Stream<Double>> getavgrating(String owner);
+
 }

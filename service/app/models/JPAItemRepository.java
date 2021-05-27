@@ -67,6 +67,17 @@ public class JPAItemRepository implements ItemRepository {
         return items.stream();
     }
 
+    @Override
+    public CompletionStage<Integer> addReview(String itemname,Long rate1,Long rate2,String review) {
+        return supplyAsync(() -> wrap(em -> insertReview(em,itemname,rate1,rate2,review)), executionContext);
+    }
+    private int insertReview(EntityManager em,String itemname,Long rate1,Long rate2,String review)
+
+    {
+
+        int i = em.createQuery("update Item SET review =: r ,rate1=: ra ,rate2=: ra2 where itemName=:itemname").setParameter("itemname",itemname).setParameter("ra", rate1).setParameter("ra2",rate2).setParameter("r", review).executeUpdate();
+        return i;
+    }
 
     @Override
     public CompletionStage<Stream<String>> listItemNames() {
@@ -77,7 +88,15 @@ public class JPAItemRepository implements ItemRepository {
         List<String> items = em.createQuery("select distinct itemName from Item where status=:s", String.class).setParameter("s",s).getResultList();
         return items.stream();
     }
-
+    @Override
+    public CompletionStage<Stream<Double>> getavgrating(String owner) {
+        return supplyAsync(() -> wrap(em -> getavgrating(em,owner)), executionContext);
+    }
+    private Stream<Double> getavgrating(EntityManager em,String owner)
+    {
+        List<Double> items = em.createQuery("select AVG(rate2) from Item  where  owner=:owner ",Double.class).setParameter("owner",owner).getResultList();
+        return items.stream();
+    }
     @Override
     public CompletionStage<Stream<Item>> listBorrow(String owner) {
         return supplyAsync(() -> wrap(em -> listborrow(em,owner)), executionContext);
@@ -132,13 +151,13 @@ public class JPAItemRepository implements ItemRepository {
     }
 
     private Item buyItems(EntityManager em,String customer,Long id,String takenAt){
-           String s="Unavailable";
-            int foundItem = em.createQuery("update Item SET customer=:customer,status=:s where id=:id").setParameter("customer",customer).setParameter("id", id).setParameter("s", s).executeUpdate();
+        String s="Unavailable";
+        int foundItem = em.createQuery("update Item SET customer=:customer,status=:s where id=:id").setParameter("customer",customer).setParameter("id", id).setParameter("s", s).executeUpdate();
         if (foundItem != 0) {
 
             Item items = em.createQuery("select p from Item p where id=:id",Item.class).setParameter("id", id).getSingleResult();
             String trans1="{\"itemName\":\"" + items.itemName + "\",\"owner\":\""+items.owner+"\",\"customer\":\""+customer+"\",\"takenAt\":\""+takenAt+"\"}";
-           // em.createQuery("insert into Transaction(itemName,owner,customer) values(itemName,owner,customer)").setParameter("customer", customer).setParameter("owner", items.owner).setParameter("itemName", items.itemName);
+            // em.createQuery("insert into Transaction(itemName,owner,customer) values(itemName,owner,customer)").setParameter("customer", customer).setParameter("owner", items.owner).setParameter("itemName", items.itemName);
             //JsonNode transaction=JsonNode.toJson(trans1);
             transactionController.addTransaction(trans1);
             return items;
@@ -174,6 +193,7 @@ public class JPAItemRepository implements ItemRepository {
             return null;
         }
     }
+
 
     @Override
     public Item details(Long id){
@@ -238,6 +258,19 @@ public class JPAItemRepository implements ItemRepository {
 
     }
 
+
+
+    /*@Override
+    public CompletionStage<Double> getavgrating(String owner) {
+        return supplyAsync(() -> wrap(em -> getavgrating(em,owner)), executionContext);
+    }
+    private Double getavgrating(EntityManager em,String owner)
+
+    {
+
+        Double i = em.createQuery("select AVG(rate2) from Item  where  owner=:owner ",Double.class).setParameter("owner",owner).getSingleResult();
+        return i;
+    }*/
 
 
 }
